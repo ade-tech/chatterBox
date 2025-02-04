@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import { Bounce, ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,9 +24,9 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <BrowserRouter>
-      {/* <ToastContainer
+      <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}
@@ -35,7 +36,7 @@ function App() {
         pauseOnHover
         theme="light"
         transition={Bounce}
-      /> */}
+      />
       <QueryClientProvider client={queryClient}>
         <Analytics />
         <ReactQueryDevtools initialIsOpen={false} />

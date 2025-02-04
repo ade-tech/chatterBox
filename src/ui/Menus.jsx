@@ -4,8 +4,10 @@ import { NavLink } from "react-router-dom";
 import Profile from "./Profile";
 import { HiBell, HiCog, HiMoon, HiOutlineLogout, HiSun } from "react-icons/hi";
 import { useTheme } from "../contexts/ThemeContext";
+import { useLogout } from "../features/Authentication/useLogout";
 
 function Menus() {
+  const { logoutUser, isLoggingOut } = useLogout();
   const { mode, setMode } = useTheme();
   const menuStyles = "text-dark dark:text-accent-light";
   return (
@@ -66,10 +68,12 @@ function Menus() {
           )}
         </button>
         <button>
-          <HiOutlineLogout
-            size={30}
-            className={`${menuStyles} stroke-current mb-4 `}
-          />
+          <button onClick={logoutUser} disabled={isLoggingOut}>
+            <HiOutlineLogout
+              size={30}
+              className={`${menuStyles} stroke-current mb-4 cursor-pointer`}
+            />
+          </button>
         </button>
         <Profile width=" w-10" height="h-10" />
       </div>

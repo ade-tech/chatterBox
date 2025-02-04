@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-function ProfileImage({ width = "w-12", height = "h-12", image }) {
+function ProfileImage({ width = "w-12", height = "h-12", image, styles }) {
   return (
     <Link to="profile">
       <img
-        className={`block rounded-[50%] object-cover object-center ${width} ${height}`}
-        src={`${image ? `/${image}` : "/default-user.jpg"}`}
+        className={`block rounded-[50%] object-cover object-center ${width} ${height} ${styles}`}
+        src={`${image ? image : "/default-user.jpg"}`}
       />
     </Link>
   );

@@ -1,8 +1,8 @@
-import ProfileImage from "../ui/Profile";
+import ProfileContainer from "../features/profile/ProfileContainer";
 function Profile() {
   return (
-    <div className="h-full w-full rounded-2xl dark:bg-bg-dark">
-      <ProfileImage />
+    <div className="h-full w-full flex flex-col items-center pt-12">
+      <ProfileContainer />
     </div>
   );
 }

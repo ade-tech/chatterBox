@@ -1,11 +1,29 @@
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import Button from "../../ui/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormInput from "../../ui/FormInput";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useLogin } from "./useLogin";
 
 function LoginForm() {
   const [passwordType, setPasswordType] = useState("password");
+  const { register, formState, handleSubmit } = useForm();
+  const { login, isLoggingIn } = useLogin();
+  const { errors } = formState;
+  const navigate = useNavigate();
+
+  function handleSubmitFn(data) {
+    login(
+      { email: data.email, password: data.password },
+      {
+        onSuccess: () => {
+          navigate("/");
+        },
+      }
+    );
+  }
+
   return (
     <div className="basis-1/3 mx-auto py-5 flex flex-col justify-between">
       <div className="logo-side flex gap-2 items-center">
@@ -18,16 +36,26 @@ function LoginForm() {
           <h1 className="text-2xl font-extrabold mb-2">Welcome Back!</h1>
           <p>Let’s get you into the App Suuuuuuuperfast!⚡</p>
         </div>
-        <form>
+        <form onSubmit={handleSubmit(handleSubmitFn)}>
           <FormInput
             label="Email"
             placeholder="Enter your Email"
             type="email"
+            disabled={isLoggingIn}
+            error={errors?.email?.message}
+            {...register("email", {
+              required: "Enter a valid Email Address",
+            })}
           />
           <FormInput
             label="Password"
+            disabled={isLoggingIn}
             placeholder="Enter your password"
             type={passwordType}
+            error={errors?.password?.message}
+            {...register("password", {
+              required: "Password cannot be empty",
+            })}
             icon={
               <div
                 className="cursor-pointer absolute right-4 top-3.5"
@@ -51,7 +79,7 @@ function LoginForm() {
               </div>
             }
           />
-          <Button name="Login" />
+          <Button name="Login" disabled={isLoggingIn} />
         </form>
       </div>
       <div className="w-96 pb-4">

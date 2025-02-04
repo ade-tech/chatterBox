@@ -1,20 +1,35 @@
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import Button from "../../ui/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormInput from "../../ui/FormInput";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSignup } from "./useSignup";
-import { getLoggedInUser } from "../../services/LoginApi";
+import { toast } from "react-toastify";
 
 function SignupForm() {
   const { handleSubmit, reset, register, getValues, formState } = useForm();
   const { errors } = formState;
+  const navigate = useNavigate();
 
   const { signUp, isSigninUp } = useSignup();
 
   function submitSuccessFn(data) {
-    signUp({ email: data.email, password: data.password });
+    console.log(data);
+    signUp(
+      {
+        email: data.email,
+        password: data.password,
+        username: data.username,
+      },
+      {
+        onSuccess: () => {
+          navigate("/");
+          toast.success("Sign Up successful Check your email for confirmation");
+        },
+        onError: () => toast.error("Couldn't sign you up"),
+      }
+    );
     reset();
   }
 
@@ -100,7 +115,7 @@ function SignupForm() {
             placeholder="Confirm Password"
             type="password"
           />
-          <Button name="Login" />
+          <Button isLoading={isSigninUp} name="Login" disabled={isSigninUp} />
         </form>
       </div>
       <div className="w-full pb-4">

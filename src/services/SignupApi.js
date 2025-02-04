@@ -1,18 +1,25 @@
 import supabase from "./supabase";
 
-export async function emailSignup({ email, password }) {
+export async function emailSignup({ email, password, username }) {
   try {
-    let { data, error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
 
-    if (!data) throw new Error("No data retrieved");
-    if (error) throw new Error(error);
+    if (error) throw new Error(error.message);
+    const userId = data?.user?.id;
 
-    console.log(data);
+    if (!userId) throw new Error("User ID not found");
+
+    const { error: profileError } = await supabase
+      .from("profiles")
+      .insert([{ user_id: userId, username }]);
+
+    if (profileError) throw new Error(profileError.message);
+
+    return data;
   } catch (error) {
-    console.error(error.message);
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }
