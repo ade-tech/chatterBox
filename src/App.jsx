@@ -10,6 +10,7 @@ import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,7 +40,13 @@ function App() {
         <Analytics />
         <ReactQueryDevtools initialIsOpen={false} />
         <Routes>
-          <Route element={<AppLayout />}>
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Navigate to="chats" />} />
             <Route path="/chats" element={<Chats />} />
             <Route path="/chats/:id" element={<Chats />} />
