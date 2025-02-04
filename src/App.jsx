@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-
+import { Analytics } from "@vercel/analytics/react";
 import Chats from "./pages/Chats";
 import AppLayout from "./ui/AppLayout";
 import PageNotFound from "./ui/PageNotFound";
@@ -36,6 +36,7 @@ function App() {
         transition={Bounce}
       /> */}
       <QueryClientProvider client={queryClient}>
+        <Analytics />
         <ReactQueryDevtools initialIsOpen={false} />
         <Routes>
           <Route element={<AppLayout />}>
