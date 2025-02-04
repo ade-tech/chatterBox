@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-outfit: Outfit, sans-serif;
+
+  /* Light Mode */
+  --color-light: #ffffff; /* White */
+  --color-dark: #030018; /* Rich Black */
+  --color-primary-light: #6f00ff; /* Electric Indigo */
+  --color-secondary-light: #00ff7f; /* Spring Green */
+  --color-accent-light: #9e7ffb; /* Pale Lavender */
+  --color-bg-light: #dcfc7f; /* Light Lime Green */
+  --color-surface-light: #f5f5f5; /* Soft Gray */
+  --color-border-light: #e0e0e0; /* Light Gray */
+
+  /* Dark Mode */
+  --color-light-dark: #dcfc7f; /* Light Lime Green */
+  --color-dark-dark: #030018; /* Rich Black */
+  --color-primary-dark: #9e7ffb; /* Pale Lavender */
+  --color-secondary-dark: #6f00ff; /* Electric Indigo */
+  --color-accent-dark: #00ff7f; /* Spring Green */
+  --color-bg-dark: #181030; /* Dark Purple Blue */
+  --color-surface-dark: #251a4d; /* Dark Indigo */
+  --color-border-dark: #211844; /* Midnight Purple */
+
+  /* Global Background & Text */
+  --bg-light: var(--color-bg-light);
+  --bg-dark: var(--color-bg-dark);
+  --text-light: var(--color-dark);
+  --text-dark: var(--color-light-dark);
+}
+
+@layer base {
+  html {
+    font-family: "figtree";
+  }
+  input[type="search"] {
+    border-radius: calc(infinity * 1px);
+  }
+}
+
+@keyframes drawPath {
+  0% {
+    stroke-dasharray: 0, 1000;
+  }
+  100% {
+    stroke-dasharray: 1000, 0;
+  }
+}
+/* Define your animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom animation class */
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease-in-out;
+}
