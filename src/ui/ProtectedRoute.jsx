@@ -1,10 +1,9 @@
 import { BounceLoader } from "react-spinners";
 import { useCurrentUser } from "../features/Authentication/useCurrentUser";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
   const { data, isLoading } = useCurrentUser();
-  const navigate = useNavigate();
 
   if (isLoading)
     return (
@@ -13,12 +12,11 @@ function ProtectedRoute({ children }) {
       </div>
     );
 
-  if (!data.length)
-    navigate("/login", {
-      replace: true,
-    });
+  if (!data || data.role !== "authenticated") {
+    return <Navigate to="/login" replace />;
+  }
 
-  if (data.role === "authenticated") return children;
+  return children;
 }
 
 export default ProtectedRoute;
