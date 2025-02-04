@@ -1,8 +1,22 @@
-# React + Vite
+# Chatterbox
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Chatterbox is a real-time chat application powered by **Supabase** for authentication, database management, and file storage. It allows users to create chats, send messages, and share files seamlessly.
 
-Currently, two official plugins are available:
+## Features
+- 🔐 **User Authentication** (Supabase Auth)
+- 💬 **Real-time Messaging** (PostgreSQL + Supabase)
+- 📝 **User Profiles** with avatars & bios
+- 📂 **File Sharing** (Images, Videos, Audio)
+- 📢 **Group Chats** with multiple members
+- 🕒 **Message Timestamps & Last Seen**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- **Frontend**: React 
+   **Backend**: Supabase (PostgreSQL, Auth, Storage)
+- **Realtime**: Supabase Realtime
+- **Deployment**: Vercel 
+
+## Getting Started
+1. Clone the repo:
+   ```sh
+
