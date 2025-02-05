@@ -5,23 +5,22 @@ import { useLocalStorageState } from "../hooks/useLocalStorageState";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const prefersDarkMode = window.matchMedia(
-    "(prefers-color-scheme: dark)"
-  ).matches;
+  const changedMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const prefersDarkMode = changedMode;
   const [mode, setMode] = useLocalStorageState(
     prefersDarkMode ? "dark" : "light",
     "Theme"
   );
 
   useEffect(() => {
-    if (mode === "dark") {
+    if (mode === "dark" && changedMode) {
       document.documentElement.classList.add("dark");
       document.documentElement.classList.remove("light");
     } else {
       document.documentElement.classList.remove("dark");
       document.documentElement.classList.add("light");
     }
-  }, [mode]);
+  }, [mode, changedMode]);
   return (
     <ThemeContext.Provider value={{ mode, setMode }}>
       {children}
