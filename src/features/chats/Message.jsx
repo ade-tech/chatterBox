@@ -2,7 +2,7 @@ function ReceiverChat({ message, type, time }) {
   if (type === "sender")
     return (
       <div className="w-full mb-2">
-        <div className="max-w-96 w-fit ml-auto bg-primary-light py-2 px-5 rounded-3xl">
+        <div className=" max-w-80md:max-w-96 w-fit ml-auto bg-primary-light py-2 px-5 rounded-3xl">
           <p className="text-white">{message}</p>
           <p className="text-xs text-gray-400 text-left pr-3 w-full">{time}</p>
         </div>

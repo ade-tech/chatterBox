@@ -1,9 +1,15 @@
 import { MoonLoader } from "react-spinners";
 
-function Button({ name, onClick, disabled, isLoading }) {
+function Button({
+  name,
+  onClick,
+  disabled,
+  isLoading,
+  styles = "h-12 w-full",
+}) {
   return (
     <button
-      className="w-full rounded-full text-white font-medium bg-secondary-dark mt-6 h-12 cursor-pointer hover:bg-accent-light"
+      className={` ${styles} rounded-full text-white font-medium bg-secondary-dark mt-6  cursor-pointer hover:bg-accent-light`}
       onClick={onClick}
       disabled={disabled}
     >

@@ -6,12 +6,14 @@ import { HiBell, HiCog, HiMoon, HiOutlineLogout, HiSun } from "react-icons/hi";
 import { useTheme } from "../contexts/ThemeContext";
 import { useLogout } from "../features/Authentication/useLogout";
 
-function Menus() {
+function Menus({ styles }) {
   const { logoutUser, isLoggingOut } = useLogout();
   const { mode, setMode } = useTheme();
   const menuStyles = "text-dark dark:text-accent-light";
   return (
-    <aside className="flex flex-col h-full gap-4 items-center py-3 border-r-1 border-r-gray-100 dark:border-r-bg-dark">
+    <aside
+      className={` ${styles} flex flex-col h-full gap-4 items-center py-3 border-r-1 border-r-gray-100 dark:border-r-bg-dark`}
+    >
       <Logo styles="basis-1/6" />
       <ul className="w-full pl-5 flex flex-col gap-4 basis-7/10">
         <NavLink to="chats" className="w-full" role="li">

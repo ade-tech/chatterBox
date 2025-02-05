@@ -6,7 +6,7 @@ function ChatsMain() {
   const { lastChat } = useLastChat();
   if (!lastChat)
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="hidden md:flex items-center justify-center h-full">
         {lastChat ? (
           "There is a chat"
         ) : (

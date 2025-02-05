@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useContext, useEffect } from "react";
 import { createContext } from "react";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
@@ -16,11 +17,13 @@ export function ThemeProvider({ children }) {
     if (mode === "dark" && changedMode) {
       document.documentElement.classList.add("dark");
       document.documentElement.classList.remove("light");
+      setMode("dark");
     } else {
       document.documentElement.classList.remove("dark");
       document.documentElement.classList.add("light");
+      setMode("light");
     }
-  }, [mode, changedMode]);
+  }, [mode, changedMode, setMode]);
   return (
     <ThemeContext.Provider value={{ mode, setMode }}>
       {children}
