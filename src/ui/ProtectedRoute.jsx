@@ -7,7 +7,7 @@ function ProtectedRoute({ children }) {
 
   if (isLoading)
     return (
-      <div className="w-screen h-screen flex items-center justify-center">
+      <div className="w-screen h-screen flex items-center justify-center dark:bg-dark">
         <BounceLoader color="#9e7ffb" size={120} />
       </div>
     );

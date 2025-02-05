@@ -4,14 +4,26 @@ import { toast } from "react-toastify";
 
 export function useLogin() {
   const queryClient = useQueryClient();
-  const { mutate: login, isLoading: isLoggingIn } = useMutation({
+  const {
+    mutate: login,
+    isLoading: isLoggingIn,
+    error,
+    isError,
+  } = useMutation({
     mutationFn: ({ email, password }) => logInApi({ email, password }),
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data);
       toast.success("Login Success");
     },
-    onError: () => toast.error("Check your Input"),
+    onError: (error) =>
+      toast.error(
+        `${
+          error.message === "Failed to fetch"
+            ? "Check your Internet Connection"
+            : "Credentials might not be correct"
+        }`
+      ),
   });
 
-  return { login, isLoggingIn };
+  return { login, isLoggingIn, error, isError };
 }

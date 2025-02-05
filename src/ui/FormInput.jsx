@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const inputStyle =
+  "rounded-full w-full bg-gray-100 h-12 pl-10 mb-4 placeholder:text-gray-400 focus:outline-none text-gray-600";
+
 const FormInput = React.forwardRef(
   ({ icon, type, label, id, placeholder, disabled, error, ...rest }, ref) => {
     return (
-      <div className="flex flex-col gap-3 w-full">
+      <div className="flex flex-col gap-3 w-full dark:text-white">
         {label && (
           <label className="text-md font-medium" htmlFor={id}>
             {label}
@@ -18,8 +21,8 @@ const FormInput = React.forwardRef(
             placeholder={placeholder}
             className={`${
               error
-                ? "rounded-full w-full h-12 bg-gray-100 pl-10 mb-4 placeholder:text-gray-400 text-gray-600 focus:outline-none border border-red-600"
-                : "rounded-full w-full h-12 bg-gray-100 pl-10 mb-4 placeholder:text-gray-400 text-gray-600 focus:outline-none"
+                ? ` ${inputStyle} bg-red-300 placeholder:text-red-600 border border-red-600 `
+                : `${inputStyle} dark:bg-surface-dark dark:text-accent-light dark:placeholder:text-accent-light`
             }`}
             autoComplete="true"
             ref={ref}

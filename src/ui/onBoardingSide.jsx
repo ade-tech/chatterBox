@@ -2,7 +2,7 @@ import ProfileImage from "./Profile";
 
 function OnBoardingSide() {
   return (
-    <div className="basis-1/2 h-full py-5 px-12 ">
+    <div className=" hidden md:block md:basis-1/2 md:h-full py-5 px-12 ">
       <div className="w-full rounded-4xl h-full flex flex-col items-center justify-center overflow-hidden bg-gradient-to-t from-[#030018] via-[#150F33] to-[#3A2D68] relative">
         <svg
           width="654"

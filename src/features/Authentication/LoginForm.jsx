@@ -25,16 +25,20 @@ function LoginForm() {
   }
 
   return (
-    <div className="basis-1/3 mx-auto py-5 flex flex-col justify-between">
+    <div className="basis-full px-8 md:basis-1/2 mx-auto py-5 flex flex-col justify-between overflow-hidden">
       <div className="logo-side flex gap-2 items-center">
         <img src="/Asset 1.svg" className="w-10" />
-        <h1 className="text-2xl font-bold ">ChatterBox</h1>
+        <h1 className="text-2xl font-bold dark:text-white">ChatterBox</h1>
       </div>
 
-      <div className="flex flex-col gap-6 w-128">
+      <div className="flex flex-col gap-6 max-w-128">
         <div>
-          <h1 className="text-2xl font-extrabold mb-2">Welcome Back!</h1>
-          <p>Let’s get you into the App Suuuuuuuperfast!⚡</p>
+          <h1 className="text-2xl font-extrabold mb-2 dark:ext-accent-dark dark:text-accent-dark">
+            Welcome Back!
+          </h1>
+          <p className="dark:text-accent-light">
+            Let’s get you into the App Suuuuuuuperfast!⚡
+          </p>
         </div>
         <form onSubmit={handleSubmit(handleSubmitFn)}>
           <FormInput
@@ -79,11 +83,11 @@ function LoginForm() {
               </div>
             }
           />
-          <Button name="Login" disabled={isLoggingIn} />
+          <Button name="Login" disabled={isLoggingIn} isLoading={isLoggingIn} />
         </form>
       </div>
       <div className="w-96 pb-4">
-        <p className="text-center">
+        <p className="text-center dark:text-accent-dark">
           Need an account?{" "}
           <Link
             to="/signup"

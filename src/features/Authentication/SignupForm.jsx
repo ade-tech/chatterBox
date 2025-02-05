@@ -14,8 +14,8 @@ function SignupForm() {
 
   const { signUp, isSigninUp } = useSignup();
 
+  console.log(isSigninUp);
   function submitSuccessFn(data) {
-    console.log(data);
     signUp(
       {
         email: data.email,
@@ -26,25 +26,29 @@ function SignupForm() {
         onSuccess: () => {
           navigate("/");
           toast.success("Sign Up successful Check your email for confirmation");
+          reset();
         },
         onError: () => toast.error("Couldn't sign you up"),
       }
     );
-    reset();
   }
 
   const [passwordType, setPasswordType] = useState("password");
   return (
-    <div className="basis-1/3 mx-auto py-5 flex flex-col justify-between">
+    <div className="basis-full px-8 md:basis-1/2 mx-auto py-5 flex flex-col justify-between overflow-hidden">
       <div className="logo-side flex gap-2 items-center">
         <img src="/Asset 1.svg" className="w-10" />
-        <h1 className="text-2xl font-bold ">ChatterBox</h1>
+        <h1 className="text-2xl font-bold dark:text-white">ChatterBox</h1>
       </div>
 
-      <div className="flex flex-col gap-6 w-128">
+      <div className="flex flex-col gap-6 max-w-128">
         <div>
-          <h1 className="text-2xl font-extrabold mb-2">Welcome</h1>
-          <p>Fill in your details to get Started⚡</p>
+          <h1 className="text-2xl font-extrabold mb-2 dark:text-accent-dark">
+            Welcome
+          </h1>
+          <p className="dark:text-accent-light">
+            Fill in your details to get Started⚡
+          </p>
         </div>
         <form onSubmit={handleSubmit(submitSuccessFn)}>
           <FormInput
@@ -115,11 +119,11 @@ function SignupForm() {
             placeholder="Confirm Password"
             type="password"
           />
-          <Button isLoading={isSigninUp} name="Login" disabled={isSigninUp} />
+          <Button isLoading={isSigninUp} name="Sign Up" disabled={isSigninUp} />
         </form>
       </div>
       <div className="w-full pb-4">
-        <p className="text-center">
+        <p className="text-center dark:text-accent-dark">
           Already have an account?{" "}
           <Link
             to="/login"
