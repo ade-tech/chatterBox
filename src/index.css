@@ -1,10 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap");
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-outfit: Outfit, sans-serif;
+  --font-outfit: "Figtree", sans-serif;
 
   /* Light Mode */
   --color-light: #ffffff; /* White */
