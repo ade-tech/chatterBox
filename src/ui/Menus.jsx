@@ -10,6 +10,7 @@ import { GetProfileData } from "../features/profile/useProfile";
 function Menus({ styles }) {
   const { logoutUser, isLoggingOut } = useLogout();
   const { data } = GetProfileData();
+  console.log(data);
   const { mode, setMode } = useTheme();
   const menuStyles = "text-dark dark:text-accent-light";
   return (

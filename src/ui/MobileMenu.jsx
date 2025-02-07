@@ -63,7 +63,7 @@ function MobileMenu() {
       </div>
       <div className="basis-1/5 flex justify-center">
         {" "}
-        <ProfileImage width="w-12" height="h-12" image={data.avatar_url} />
+        <ProfileImage width="w-12" height="h-12" image={data?.avatar_url} />
       </div>
     </ul>
   );
