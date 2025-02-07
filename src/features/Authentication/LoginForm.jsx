@@ -45,6 +45,7 @@ function LoginForm() {
             label="Email"
             placeholder="Enter your Email"
             type="email"
+            styles="w-full"
             disabled={isLoggingIn}
             error={errors?.email?.message}
             {...register("email", {
@@ -53,6 +54,7 @@ function LoginForm() {
           />
           <FormInput
             label="Password"
+            styles="w-full"
             disabled={isLoggingIn}
             placeholder="Enter your password"
             type={passwordType}

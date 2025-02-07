@@ -54,6 +54,7 @@ function SignupForm() {
           <FormInput
             error={errors?.username?.message}
             id="username"
+            styles="w-full"
             disabled={isSigninUp}
             {...register("username", {
               required: "A username must be provided",
@@ -63,6 +64,7 @@ function SignupForm() {
           />
           <FormInput
             id="email"
+            styles="w-full"
             error={errors?.email?.message}
             {...register("email", {
               required: "Enter a valid Email Address",
@@ -73,6 +75,7 @@ function SignupForm() {
           />
           <FormInput
             id="password"
+            styles="w-full"
             error={errors?.password?.message}
             {...register("password", {
               required: "Password cannot be empty",
@@ -109,6 +112,7 @@ function SignupForm() {
           />
           <FormInput
             id="confirmPassword"
+            styles="w-full"
             disabled={isSigninUp}
             error={errors?.confirmPassword?.message}
             {...register("confirmPassword", {

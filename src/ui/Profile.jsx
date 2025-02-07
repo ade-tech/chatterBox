@@ -12,7 +12,7 @@ function ProfileImage({
       <div>
         <img
           className={`block rounded-[50%] object-cover object-center ${width} ${height} ${styles}`}
-          src={`${image ? image : "/default-user.jpg"}`}
+          src={`${image && image !== undefined ? image : "/default-user.jpg"}`}
         />
       </div>
     );

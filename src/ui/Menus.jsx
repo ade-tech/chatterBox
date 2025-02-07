@@ -5,9 +5,11 @@ import Profile from "./Profile";
 import { HiBell, HiCog, HiMoon, HiOutlineLogout, HiSun } from "react-icons/hi";
 import { useTheme } from "../contexts/ThemeContext";
 import { useLogout } from "../features/Authentication/useLogout";
+import { GetProfileData } from "../features/profile/useProfile";
 
 function Menus({ styles }) {
   const { logoutUser, isLoggingOut } = useLogout();
+  const { data, isLoading } = GetProfileData();
   const { mode, setMode } = useTheme();
   const menuStyles = "text-dark dark:text-accent-light";
   return (
@@ -77,7 +79,14 @@ function Menus({ styles }) {
             />
           </button>
         </button>
-        <Profile width=" w-10" height="h-10" />
+        <NavLink to="profile">
+          <Profile
+            width="w-10"
+            height="h-10"
+            type="image"
+            image={data?.avatar_url}
+          />
+        </NavLink>
       </div>
     </aside>
   );
