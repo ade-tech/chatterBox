@@ -2,9 +2,11 @@ import { HiBell, HiCog } from "react-icons/hi";
 import { PiChatTeardropTextFill, PiChatTeardropTextThin } from "react-icons/pi";
 import ProfileImage from "./Profile";
 import MobileNav from "./MobileNav";
+import { GetProfileData } from "../features/profile/useProfile";
 
 function MobileMenu() {
   const menuStyles = "text-dark dark:text-accent-light ";
+  const { data } = GetProfileData();
   return (
     <ul className="w-full fixed md:hidden z-[100] bottom-0 h-fit bg-light flex items-center justify-around transiton-all duration-700 pt-6 pb-4 border-t border-t-gray-200 dark:bg-dark border-surface-dark">
       <div className="basis-1/5">
@@ -61,7 +63,7 @@ function MobileMenu() {
       </div>
       <div className="basis-1/5 flex justify-center">
         {" "}
-        <ProfileImage width="w-12" height="h-12" />
+        <ProfileImage width="w-12" height="h-12" image={data.avatar_url} />
       </div>
     </ul>
   );
