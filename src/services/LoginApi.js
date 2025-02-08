@@ -8,7 +8,10 @@ export async function getLoggedInUser() {
 
   const { data, error } = await supabase.auth.getUser();
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    console.error(error.message);
+    throw new Error(error.message);
+  }
   return data?.user;
 }
 

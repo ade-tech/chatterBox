@@ -8,11 +8,7 @@ export function useLogout() {
     mutationFn: logout,
     onSuccess: () => {
       queryClient.invalidateQueries();
-      queryClient.clear();
 
-      // Clear local storage or session storage
-      localStorage.removeItem("authToken");
-      sessionStorage.removeItem("userSession");
       toast.success("Bye👋 , see you next time");
     },
   });

@@ -39,7 +39,7 @@ const FormInput = React.forwardRef(
             }`}
             autoComplete="true"
             ref={ref}
-            {...rest} // Ensures react-hook-form props are applied
+            {...rest}
           />
           {icon}
         </div>
@@ -59,6 +59,6 @@ const FormInput = React.forwardRef(
   }
 );
 
-FormInput.displayName = "FormInput"; // Helps with debugging in React DevTools
+FormInput.displayName = "FormInput";
 
 export default FormInput;

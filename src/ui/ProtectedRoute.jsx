@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
   const { data, isLoading } = useCurrentUser();
+  console.log(data);
 
   if (isLoading)
     return (
@@ -16,7 +17,7 @@ function ProtectedRoute({ children }) {
     return <Navigate to="/login" replace />;
   }
 
-  return children;
+  if (data.role === "authenticated") return children;
 }
 
 export default ProtectedRoute;

@@ -1,5 +1,6 @@
 import supabase, { supabaseUrl } from "./supabase";
 export const UpdateProfile = async ({ user_id, profileData }) => {
+  console.log(profileData);
   const hasImage =
     typeof profileData.avatar_url === "string" &&
     profileData.avatar_url.startsWith(supabaseUrl);

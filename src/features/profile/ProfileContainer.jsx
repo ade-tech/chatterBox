@@ -109,7 +109,7 @@ function ProfileContainer() {
               </label>
               <div className="h-full flex-grow ml-3 flex flex-col items-center justify-center gap-2">
                 <FormInput
-                  styles="h-10 bg-gray-50 rounded-full focus:outline-none pl-6"
+                  styles="w-56 h-10 bg-gray-50 rounded-full focus:outline-none pl-6"
                   error={errors?.fullName?.message}
                   placeholder="Full Name"
                   {...register("fullName", {
@@ -117,7 +117,7 @@ function ProfileContainer() {
                   })}
                 />
                 <FormInput
-                  styles="h-10 bg-gray-50 rounded-full focus:outline-none pl-6"
+                  styles="w-56 h-10 bg-gray-50 rounded-full focus:outline-none pl-6"
                   error={errors?.username?.message}
                   placeholder="Username"
                   {...register("username", {
@@ -131,12 +131,20 @@ function ProfileContainer() {
                 name="avatar_url"
                 rules={{
                   validate: {
-                    isImage: (file) =>
-                      (file && file.type.startsWith("image/")) ||
-                      "File must be an image",
-                    isSizeValid: (file) =>
-                      (file && file.size <= 5 * 1024 * 1024) ||
-                      "File size must be less than 5MB",
+                    isImage: (file) => {
+                      if (!file || typeof file !== "object") return true;
+                      return (
+                        file.type.startsWith("image/") ||
+                        "File must be an image"
+                      );
+                    },
+                    isSizeValid: (file) => {
+                      if (!file || typeof file !== "object") return true;
+                      return (
+                        file.size <= 5 * 1024 * 1024 ||
+                        "File size must be less than 5MB"
+                      );
+                    },
                   },
                 }}
                 render={({ field }) => {
@@ -189,7 +197,7 @@ function ProfileContainer() {
               <Button
                 name={isGettingUser ? "Editing..." : "Save Edits"}
                 disabled={!formState.isDirty || isUpdatingUser}
-                styles="w-1/4 px-4 py-2"
+                styles="w-2/6 px-4 py-2"
                 type="submit"
               />
 

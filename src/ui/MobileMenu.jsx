@@ -8,7 +8,7 @@ function MobileMenu() {
   const menuStyles = "text-dark dark:text-accent-light ";
   const { data } = GetProfileData();
   return (
-    <ul className="w-full fixed md:hidden z-[100] bottom-0 h-fit bg-light flex items-center justify-around transiton-all duration-700 pt-6 pb-4 border-t border-t-gray-200 dark:bg-dark border-surface-dark">
+    <ul className="w-full fixed md:hidden z-[100] bottom-0 h-fit bg-light flex items-center justify-around transiton-all duration-700 pt-6 pb-4 border-t border-t-gray-200 dark:bg-dark dark:border-bg-dark">
       <div className="basis-1/5">
         <MobileNav
           to="/chats"
