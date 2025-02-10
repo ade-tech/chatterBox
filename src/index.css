@@ -6,6 +6,7 @@
 
 @theme {
   --font-outfit: "Figtree", sans-serif;
+  --drop-shadow-3xl: 0 0px 15px #6f00ff;
 
   /* Light Mode */
   --color-light: #ffffff; /* White */
@@ -62,8 +63,39 @@
     transform: translateY(0);
   }
 }
+@keyframes fadeInUpAnimation {
+  0% {
+    opacity: 0;
+    bottom: -200px;
+  }
+  100% {
+    opacity: 1;
+    bottom: 0;
+  }
+}
 
-/* Custom animation class */
+.animate-fadeInUpAnimation {
+  animation: fadeInUpAnimation 0.6s ease-in-out;
+}
+
 .animate-fadeInUp {
   animation: fadeInUp 1s ease-in-out;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: #efefef;
+  border-radius: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: #8a8a8a;
+  border-radius: 10px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: #a855f7;
 }

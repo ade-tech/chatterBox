@@ -4,7 +4,6 @@ import { useUser } from "../../hooks/useUser";
 
 export function GetProfileData() {
   const { userData, isGettingUser } = useUser();
-  console.log(userData);
   const { data, isLoading } = useQuery({
     queryFn: () => getUserProfile(userData?.id),
     queryKey: ["userProfile", userData?.id],

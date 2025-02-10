@@ -1,0 +1,20 @@
+import Spinner from "../../ui/Spinner";
+import { useAllUsers } from "./UseAllUsers";
+import UserItem from "./UserItem";
+
+function UserList() {
+  const { data, error, isLoading: isFetchingUser } = useAllUsers();
+
+  if (isFetchingUser) return <Spinner />;
+
+  if (error) return <h1> Could not get Users</h1>;
+  return (
+    <ul className="flex-grow pr-2 overflow-hidden overflow-y-scroll scrollbar-custom">
+      {data.map((curUser) => (
+        <UserItem user={curUser} key={curUser.id} />
+      ))}
+    </ul>
+  );
+}
+
+export default UserList;
