@@ -1,7 +1,7 @@
 import Message from "./Message";
 function ConversationContent() {
   return (
-    <div className="pt-3 flex-grow px-4 overflow-hidden overflow-y-scroll">
+    <div className="pt-3 flex-grow px-4 overflow-hidden overflow-y-scroll  scrollbar-custom">
       <Message
         message="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt assumenda voluptatum quod ipsa rerum iste repudiandae vel aliquid qui error."
         type="sender"

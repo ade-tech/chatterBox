@@ -11,7 +11,7 @@ export function Modal({ children }) {
 
   return (
     <ModalContext.Provider value={{ curOpened, OpenModal, CloseModal }}>
-      <div className="w-full h-full relative">{children}</div>
+      {children}
     </ModalContext.Provider>
   );
 }

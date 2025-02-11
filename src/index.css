@@ -73,7 +73,19 @@
     bottom: 0;
   }
 }
-
+@keyframes fadeOutDownAnimation {
+  0% {
+    opacity: 1;
+    bottom: 0;
+  }
+  100% {
+    opacity: 0;
+    bottom: -200px;
+  }
+}
+.animate-fadeOutDownAnimation {
+  animation: fadeOutDownAnimation 0.6s ease-in-out forwards;
+}
 .animate-fadeInUpAnimation {
   animation: fadeInUpAnimation 0.6s ease-in-out;
 }

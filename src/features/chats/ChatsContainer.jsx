@@ -1,9 +1,15 @@
 import Empty from "../../ui/Empty";
 import ChatRow from "./ChatRow";
+import Spinner from "../../ui/Spinner";
+import { useAllChats } from "./useChat";
 
 function ChatsContainer() {
-  const chats = {};
-  if (!chats || chats === undefined)
+  const { data, isLoading: isFetchingChats, error } = useAllChats();
+
+  if (isFetchingChats) return <Spinner />;
+  const chats = data;
+  console.log(chats);
+  if (!chats || error || chats.length === 0)
     return (
       <Empty
         icon={
@@ -71,8 +77,10 @@ function ChatsContainer() {
     );
 
   return (
-    <div className="">
-      <ChatRow />
+    <div className="w-full flex-grow overflow-hidden hover:overflow-y-scroll scrollbar-custom">
+      {chats.map((curChat) => (
+        <ChatRow key={curChat.user_id} chatDetails={curChat} />
+      ))}
     </div>
   );
 }

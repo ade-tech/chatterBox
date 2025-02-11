@@ -1,33 +1,37 @@
 import { useNavigate } from "react-router-dom";
 import { useLastChat } from "../../hooks/useLastChat.jsx";
 import ProfileImage from "../../ui/Profile.jsx";
+import { getTime } from "../../utils/gettime.js";
 
-function ChatRow() {
+function ChatRow({ chatDetails }) {
   const navigate = useNavigate();
   const { lastChat } = useLastChat();
 
+  const time = getTime(chatDetails.lastChat.created_at);
   const chatInfo = {
-    id: 1,
+    id: chatDetails.user_id,
   };
   return (
     <div
-      onClick={() => navigate(`/chats/${1}`)}
+      onClick={() => navigate(`/chats/${chatDetails.user_id}`)}
       className={
-        chatInfo.id === Number(lastChat)
-          ? "w-full  gap-4 flex-grow overflow-y-auto flex justify-start pl-4 py-2 items-center bg-gray-50 dark:bg-bg-dark rounded-lg cursor-pointer"
-          : "w-full  gap-4 flex-grow overflow-y-auto flex justify-start pl-4 py-2 items-center cursor-pointer"
+        chatInfo.id === lastChat
+          ? "w-full  gap-4 flex justify-start pl-4 py-2 mb-2 items-center bg-gray-50 dark:bg-bg-dark rounded-lg cursor-pointer"
+          : "w-full  gap-4 mb-2  flex justify-start pl-4 py-2 items-center cursor-pointer"
       }
     >
-      <ProfileImage />
-      <div>
+      <ProfileImage image={chatDetails.profiles.avatar_url} />
+      <div className="flex-1">
         <h2 className="text-xl dark:text-white font-semibold">
-          Adelopo Abdullah
+          {chatDetails.profiles.fullName}
         </h2>
         <p className="text-xs text-gray-500  dark:text-gray-400">
-          I just sent you 5k for your school fees
+          {chatDetails.lastChat.content}
         </p>
       </div>
-      <div></div>
+      <div className="mr-5">
+        <span className="text-sm">{time}</span>
+      </div>
     </div>
   );
 }
