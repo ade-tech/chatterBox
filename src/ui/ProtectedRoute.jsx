@@ -3,13 +3,18 @@ import { useCurrentUser } from "../features/Authentication/useCurrentUser";
 import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
-  const { data, isLoading } = useCurrentUser();
-  console.log(data);
+  const { data, isLoading, error } = useCurrentUser();
 
   if (isLoading)
     return (
       <div className="w-screen h-screen flex items-center justify-center dark:bg-dark">
         <BounceLoader color="#9e7ffb" size={120} />
+      </div>
+    );
+  if (error)
+    return (
+      <div className="w-full h-full items-center justify-center">
+        No Internet
       </div>
     );
 

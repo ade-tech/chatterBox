@@ -9,28 +9,30 @@ function ChatRow({ chatDetails }) {
 
   const time = getTime(chatDetails.lastChat.created_at);
   const chatInfo = {
-    id: chatDetails.user_id,
+    id: chatDetails.profile.user_id,
   };
   return (
     <div
-      onClick={() => navigate(`/chats/${chatDetails.user_id}`)}
+      onClick={() => navigate(`/chats/${chatDetails.profile.user_id}`)}
       className={
         chatInfo.id === lastChat
           ? "w-full  gap-4 flex justify-start pl-4 py-2 mb-2 items-center bg-gray-50 dark:bg-bg-dark rounded-lg cursor-pointer"
           : "w-full  gap-4 mb-2  flex justify-start pl-4 py-2 items-center cursor-pointer"
       }
     >
-      <ProfileImage image={chatDetails.profiles.avatar_url} />
+      <ProfileImage image={chatDetails.profile.avatar_url} />
       <div className="flex-1">
         <h2 className="text-xl dark:text-white font-semibold">
-          {chatDetails.profiles.fullName}
+          {chatDetails.profile.fullName}
         </h2>
         <p className="text-xs text-gray-500  dark:text-gray-400">
           {chatDetails.lastChat.content}
         </p>
       </div>
       <div className="mr-5">
-        <span className="text-sm">{time}</span>
+        <span className="text-sm dark:text-accent-light font-light">
+          {time}
+        </span>
       </div>
     </div>
   );

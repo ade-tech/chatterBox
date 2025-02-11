@@ -1,9 +1,31 @@
+import { toast } from "react-toastify";
 import ProfileImage from "../../ui/Profile";
+import { useChatCheck, useCreateChat, useGetMessages } from "./useChat";
+import { useNavigate } from "react-router-dom";
 
 function UserItem({ user }) {
-  const user_id = user.user_id;
+  const user_id = user?.user_id;
+  const { data } = useChatCheck(user_id);
+  const { createChat } = useCreateChat();
+  const { data: messages, isLoading } = useGetMessages(user_id);
+  const navigate = useNavigate();
+
+  console.log(data);
+
   return (
-    <li className="px-2 py-1 flex gap-3 items-center  cursor-pointer hover:dark:bg-surface-dark hover:bg-gray-100 transition-all duration-500  rounded-md">
+    <li
+      className="px-2 py-1 flex gap-3 items-center  cursor-pointer hover:dark:bg-surface-dark hover:bg-gray-100 transition-all duration-500  rounded-md"
+      onClick={() => {
+        if (data.data.length > 0) {
+          navigate(`/chats/${user_id}`);
+        } else {
+          createChat(user_id, {
+            onSuccess: () => navigate(`/chats/${user_id}`),
+            onError: () => toast.error("Could not create chat!"),
+          });
+        }
+      }}
+    >
       <ProfileImage width="w-10" height="h-10" image={user.avatar_url} />
       <div className="flex-grow h-full flex flex-col justify-center border-b border-b-gray-100 py-2 dark:border-b-bg-dark">
         <h1 className="p-0 leading-4 font-bold dark:text-white">

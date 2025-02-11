@@ -17,6 +17,4 @@ export function getTime(isoString) {
   if (calendarDays === 2) return "2 days ago";
   if (calendarDays > 2 && calendarDays <= 7) return format(fromDays, "EEEE");
   if (calendarDays > 7) return format(fromDays, "MM/dd/yyyy");
-
-  console.log(isYesterday, now, elpasedHours);
 }

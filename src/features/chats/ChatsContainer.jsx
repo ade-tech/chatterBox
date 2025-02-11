@@ -5,10 +5,11 @@ import { useAllChats } from "./useChat";
 
 function ChatsContainer() {
   const { data, isLoading: isFetchingChats, error } = useAllChats();
+  console.log(data);
 
   if (isFetchingChats) return <Spinner />;
+
   const chats = data;
-  console.log(chats);
   if (!chats || error || chats.length === 0)
     return (
       <Empty
@@ -78,7 +79,7 @@ function ChatsContainer() {
 
   return (
     <div className="w-full flex-grow overflow-hidden hover:overflow-y-scroll scrollbar-custom">
-      {chats.map((curChat) => (
+      {chats?.map((curChat) => (
         <ChatRow key={curChat.user_id} chatDetails={curChat} />
       ))}
     </div>

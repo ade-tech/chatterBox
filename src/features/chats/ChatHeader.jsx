@@ -15,7 +15,7 @@ function ChatHeader({ recepient }) {
         className="flex gap-3"
         to={`/chats/${lastChat}?profile=${recepient}`}
       >
-        <ProfileImage />
+        <ProfileImage type="image" />
         <Recepient name="Adelopo Abdullah" status="Online" />
       </Link>
     </div>
