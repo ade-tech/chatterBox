@@ -21,7 +21,6 @@ function Trigger({ children, opens }) {
   return cloneElement(children, {
     onClick: () => {
       OpenModal(opens);
-      console.log("Event reach here");
     },
   });
 }

@@ -1,14 +1,31 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getUserProfile, UpdateProfile } from "../../services/ProfileApi";
-import { useUser } from "../../hooks/useUser";
+import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 
 export function GetProfileData() {
-  const { userData, isGettingUser } = useUser();
+  const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
+
+  let searchID = currentUserID;
   const { data, isLoading } = useQuery({
-    queryFn: () => getUserProfile(userData?.id),
-    queryKey: ["userProfile", userData?.id],
+    queryKey: [`userProfile--{${searchID}}`, searchID],
+    queryFn: ({ queryKey }) => {
+      const [, searchUser] = queryKey.at(0).split("--");
+      return getUserProfile(searchUser);
+    },
   });
+
   return { data, isLoading, isGettingUser };
+}
+export function GetRecepientProfile(id) {
+  const { data, isLoading } = useQuery({
+    queryKey: [`userProfile--{${id}}`, id],
+    queryFn: ({ queryKey }) => {
+      const [, searchUser] = queryKey.at(0).split("--");
+      return getUserProfile(searchUser);
+    },
+    enabled: !!id,
+  });
+  return { data, isLoading };
 }
 
 export function useUpdateUSerProfile() {

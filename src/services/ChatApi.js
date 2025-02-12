@@ -30,8 +30,6 @@ export async function getAllChats(id) {
     .select("*")
     .in("user_id", participantsID);
 
-  console.log(profileData);
-
   const profileDataAndChatID = profileData.map((curProfile) => {
     const chatEntry = participantsIDs.find((part) =>
       part.profileID.includes(curProfile.user_id)
@@ -58,8 +56,13 @@ export async function getAllChats(id) {
       const lastChat =
         lastMessages.find((message) => message.chat_id === chat.chat_id) || "";
       return { ...chat, lastChat };
-    });
-  console.log(chats);
+    })
+    .sort(
+      (a, b) =>
+        new Date(b.lastChat.created_at).getTime() -
+        new Date(a.lastChat.created_at).getTime()
+    );
+
   return chats;
 }
 
@@ -85,7 +88,17 @@ export async function createChat(current, id) {
 
   return data;
 }
-export async function getMessages(current, id) {
-  const { data, error } = await checkChat(current, id);
-  console.log(data);
+export async function getMessages(id) {
+  const { data: messages, error: messagesError } = await supabase
+    .from("messages")
+    .select("*")
+    .order("created_at", {
+      ascending: true,
+    })
+    .range(0, 9)
+    .eq("chat_id", id);
+
+  if (messagesError) throw new Error(messagesError.message);
+
+  return messages;
 }

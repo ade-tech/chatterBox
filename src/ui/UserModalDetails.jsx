@@ -10,7 +10,6 @@ function UserModalDetails({ onClose }) {
     setIsClosing(true);
     setTimeout(() => {
       onClose();
-      console.log("closed after 600ms");
     }, 600);
   }
 

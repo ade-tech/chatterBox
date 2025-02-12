@@ -1,16 +1,16 @@
 import { toast } from "react-toastify";
 import ProfileImage from "../../ui/Profile";
-import { useChatCheck, useCreateChat, useGetMessages } from "./useChat";
+import { useChatCheck, useCreateChat } from "./useChat";
 import { useNavigate } from "react-router-dom";
+import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 
 function UserItem({ user }) {
+  const { user_id: curruentUserID } = UseCurrentUserData();
   const user_id = user?.user_id;
-  const { data } = useChatCheck(user_id);
+  const { data } = useChatCheck(curruentUserID, user_id);
   const { createChat } = useCreateChat();
-  const { data: messages, isLoading } = useGetMessages(user_id);
-  const navigate = useNavigate();
 
-  console.log(data);
+  const navigate = useNavigate();
 
   return (
     <li

@@ -1,20 +1,37 @@
-function ReceiverChat({ message, type, time }) {
-  if (type === "sender")
+import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
+import Spinner from "../../ui/Spinner";
+import { getTimeSent } from "../../utils/gettime";
+
+function ReceiverChat({ message }) {
+  const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
+
+  if (isGettingUser) return <Spinner />;
+
+  const { content, type, sender_id, isReadby, created_at } = message;
+
+  const basicStyles = "max-w-72  md:max-w-96 w-fit py-2 px-5 rounded-3xl";
+  if (sender_id === currentUserID)
     return (
-      <div className="w-full mb-2">
-        <div className=" max-w-80md:max-w-96 w-fit ml-auto bg-primary-light py-2 px-5 rounded-3xl">
-          <p className="text-white">{message}</p>
-          <p className="text-xs text-gray-400 text-left pr-3 w-full">{time}</p>
+      <div className="w-full mb-3">
+        <div className={`${basicStyles} ml-auto bg-primary-light`}>
+          <p className="text-white text-sm">{content}</p>
+          <p className="text-xs text-gray-400 text-left pr-3 w-full">
+            {getTimeSent(created_at)}
+          </p>
         </div>
       </div>
     );
 
-  if (type === "receiver")
+  if (sender_id !== currentUserID)
     return (
-      <div className="w-full mb-2">
-        <div className="max-w-96 w-fit mr-auto bg-primary-transparent py-2 px-3 rounded-3xl border border-gray-200 dark:bg-bg-dark dark:border-transparent">
-          <p className="text-dark dark:text-white">{message}</p>
-          <p className="text-xs text-gray-500 text-right pr-3 w-full">{time}</p>
+      <div className="w-full mb-3">
+        <div
+          className={`${basicStyles} mr-auto bg-primary-transparent border border-gray-200 dark:bg-bg-dark dark:border-transparent`}
+        >
+          <p className="text-dark text-sm dark:text-white">{content}</p>
+          <p className="text-xs text-gray-500 text-right pr-3 w-full">
+            {getTimeSent(created_at)}
+          </p>
         </div>
       </div>
     );

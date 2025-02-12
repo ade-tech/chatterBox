@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { Bounce, ToastContainer } from "react-toastify";
+import { CurrentUserProvider } from "./contexts/CurrentUserContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,7 +45,9 @@ function App() {
           <Route
             element={
               <ProtectedRoute>
-                <AppLayout />
+                <CurrentUserProvider>
+                  <AppLayout />
+                </CurrentUserProvider>
               </ProtectedRoute>
             }
           >

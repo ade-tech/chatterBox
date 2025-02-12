@@ -3,32 +3,30 @@ import {
   checkChat,
   createChat as createChatApi,
   getAllChats,
+  getMessages,
 } from "../../services/ChatApi";
-import { useUser } from "../../hooks/useUser";
+import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 
 export function useAllChats() {
-  const { userData } = useUser();
-
+  const { user_id: currentUserID } = UseCurrentUserData();
   const { data, isLoading, error } = useQuery({
-    queryFn: () => getAllChats(userData?.id),
+    queryFn: () => getAllChats(currentUserID),
     queryKey: ["AllChats"],
-    enabled: !!userData?.id,
+    enabled: !!currentUserID,
   });
 
   return { data, isLoading, error };
 }
 
-export function useChatCheck(id) {
-  const { userData } = useUser();
-
+export function useChatCheck(current, id) {
   const { data, isLoading, error } = useQuery({
-    queryKey: [`chat--${userData?.id}--${id}`],
+    queryKey: [`chat--${current}--${id}`],
     queryFn: ({ queryKey }) => {
       const [, user_id, other_id] = queryKey.at(0).split("--");
 
       return checkChat(user_id, other_id);
     },
-    enabled: !!userData?.id && !!id,
+    enabled: !!current && !!id,
     retry: false,
   });
 
@@ -36,31 +34,28 @@ export function useChatCheck(id) {
 }
 
 export function useCreateChat() {
-  const { userData } = useUser();
+  const { user_id: currentUserID } = UseCurrentUserData();
 
   const {
     mutate: createChat,
     isLoading,
     error,
   } = useMutation({
-    mutationFn: (id) => createChatApi(userData?.id, id),
+    mutationFn: (id) => createChatApi(currentUserID, id),
   });
 
   return { createChat, isLoading, error };
 }
 
 export function useGetMessages(id) {
-  const { userData } = useUser();
   const { data, isLoading, error } = useQuery({
-    queryKey: [`messages--${userData?.id}--${id}`],
+    queryKey: [`messages--${id}`],
     queryFn: ({ queryKey }) => {
-      const [, user_id, other_id] = queryKey.at(0).split("--");
-
-      return checkChat(user_id, other_id);
+      const [, id] = queryKey.at(0).split("--");
+      return getMessages(id);
     },
-    enabled: !!userData?.id && !!id,
+    enabled: !!id,
     retry: false,
   });
-  console.log(data);
   return { isLoading, data, error };
 }

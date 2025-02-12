@@ -6,6 +6,7 @@ import { HiArrowLeft } from "react-icons/hi";
 
 function ChatHeader({ recepient }) {
   const { lastChat } = useLastChat();
+
   return (
     <div className="flex items-center gap-4 w-full flex-wrap  py-4 px-4 border-b-1 border-b-gray-100  dark:border-b-bg-dark">
       <button className="md:hidden bg-gray-200 dark:bg-surface-dark px-2 py-2 rounded-full">
@@ -13,10 +14,10 @@ function ChatHeader({ recepient }) {
       </button>
       <Link
         className="flex gap-3"
-        to={`/chats/${lastChat}?profile=${recepient}`}
+        to={`/chats/${lastChat}?profile=${recepient?.user_id}`}
       >
-        <ProfileImage type="image" />
-        <Recepient name="Adelopo Abdullah" status="Online" />
+        <ProfileImage type="image" image={recepient?.avatar_url} />
+        <Recepient name={recepient?.fullName} status="Online" />
       </Link>
     </div>
   );
