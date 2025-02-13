@@ -1,4 +1,4 @@
-import ChatHeader from "../features/chats/chatHeader";
+import ChatHeader from "../features/chats/ChatHeader";
 import ChatInputForm from "../features/chats/ChatInputForm";
 import ConversationContent from "../features/chats/ConversationContent";
 import { GetRecepientProfile } from "../features/profile/useProfile";
