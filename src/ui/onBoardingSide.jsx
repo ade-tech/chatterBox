@@ -1,5 +1,9 @@
 import ProfileImage from "./Profile";
 
+/**
+ * OnBoardingSide component for displaying the onboarding side content.
+ * @returns {JSX.Element} The OnBoardingSide component.
+ */
 function OnBoardingSide() {
   return (
     <div className=" hidden md:block md:basis-1/2 md:h-full py-5 px-12 ">

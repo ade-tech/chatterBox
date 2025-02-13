@@ -1,5 +1,14 @@
 import supabase from "./supabase";
 
+/**
+ * Signs up a new user with email, password, and username.
+ * @param {Object} param0 - The signup details.
+ * @param {string} param0.email - The user's email.
+ * @param {string} param0.password - The user's password.
+ * @param {string} param0.username - The user's username.
+ * @returns {Object} The signup response data.
+ * @throws {Error} If there is an error during signup.
+ */
 export async function emailSignup({ email, password, username }) {
   try {
     const { data, error } = await supabase.auth.signUp({

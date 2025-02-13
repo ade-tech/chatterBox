@@ -7,6 +7,10 @@ import { useForm } from "react-hook-form";
 import { useSignup } from "./useSignup";
 import { toast } from "react-toastify";
 
+/**
+ * SignupForm component handles user registration.
+ * @returns {JSX.Element} The rendered SignupForm component.
+ */
 function SignupForm() {
   const { handleSubmit, reset, register, getValues, formState } = useForm();
   const { errors } = formState;
@@ -15,6 +19,14 @@ function SignupForm() {
   const { signUp, isSigninUp } = useSignup();
 
   console.log(isSigninUp);
+
+  /**
+   * Handles the form submission success.
+   * @param {Object} data - The form data.
+   * @param {string} data.email - The user's email.
+   * @param {string} data.password - The user's password.
+   * @param {string} data.username - The user's username.
+   */
   function submitSuccessFn(data) {
     signUp(
       {
@@ -25,7 +37,7 @@ function SignupForm() {
       {
         onSuccess: () => {
           navigate("/");
-          toast.success("Sign Up successful Check your email for confirmation");
+          toast.success("Sign Up successful. Check your email for confirmation.");
           reset();
         },
         onError: () => toast.error("Couldn't sign you up"),
@@ -34,6 +46,7 @@ function SignupForm() {
   }
 
   const [passwordType, setPasswordType] = useState("password");
+
   return (
     <div className="basis-full px-8 md:basis-1/2 mx-auto py-5 flex flex-col justify-between overflow-hidden">
       <div className="logo-side flex gap-2 items-center">
@@ -118,7 +131,7 @@ function SignupForm() {
             {...register("confirmPassword", {
               required: "Password cannot be empty",
               validate: (value) =>
-                value === getValues("password") || "Input must match Passowrd",
+                value === getValues("password") || "Input must match Password",
             })}
             placeholder="Confirm Password"
             type="password"

@@ -4,6 +4,12 @@ import { useChatCheck, useCreateChat } from "./useChat";
 import { useNavigate } from "react-router-dom";
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 
+/**
+ * UserItem component for displaying a user item in the user list.
+ * @param {Object} props - The component props.
+ * @param {Object} props.user - The user details.
+ * @returns {JSX.Element} The UserItem component.
+ */
 function UserItem({ user }) {
   const { user_id: curruentUserID } = UseCurrentUserData();
   const user_id = user?.user_id;

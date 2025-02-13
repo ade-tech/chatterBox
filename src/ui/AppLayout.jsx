@@ -16,7 +16,7 @@ function AppLayout() {
         <main className=" border-r border-r-gray-100 dark:border-r-bg-dark ">
           <Outlet />
         </main>
-        <div className="">
+        <div className="hidden md:flex">
           <ChatsMain />
         </div>
       </div>

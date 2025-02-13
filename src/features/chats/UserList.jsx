@@ -2,6 +2,10 @@ import Spinner from "../../ui/Spinner";
 import { useAllUsers } from "./UseAllUsers";
 import UserItem from "./UserItem";
 
+/**
+ * UserList component for displaying a list of users.
+ * @returns {JSX.Element} The UserList component.
+ */
 function UserList() {
   const { data, error, isLoading: isFetchingUser } = useAllUsers();
 

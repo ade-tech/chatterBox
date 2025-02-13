@@ -4,6 +4,10 @@ import ProfileImage from "./Profile";
 import MobileNav from "./MobileNav";
 import { GetProfileData } from "../features/profile/useProfile";
 
+/**
+ * MobileMenu component for displaying the mobile navigation menu.
+ * @returns {JSX.Element} The MobileMenu component.
+ */
 function MobileMenu() {
   const menuStyles = "text-dark dark:text-accent-light ";
   const { data } = GetProfileData();

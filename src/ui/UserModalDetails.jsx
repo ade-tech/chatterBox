@@ -3,9 +3,18 @@ import UserList from "../features/chats/UserList";
 import { useClickOutside } from "../hooks/useClickOutside";
 import { useState } from "react";
 
+/**
+ * UserModalDetails component for displaying a modal with user details.
+ * @param {Object} props - The component props.
+ * @param {Function} props.onClose - The function to call when the modal is closed.
+ * @returns {JSX.Element} The rendered UserModalDetails component.
+ */
 function UserModalDetails({ onClose }) {
   const [isClosing, setIsClosing] = useState(false);
 
+  /**
+   * Handles the close animation and calls the onClose function after the animation.
+   */
   function handleCloseAnimation() {
     setIsClosing(true);
     setTimeout(() => {
@@ -14,6 +23,7 @@ function UserModalDetails({ onClose }) {
   }
 
   const { ref } = useClickOutside({ onClose });
+
   return (
     <div
       ref={ref}

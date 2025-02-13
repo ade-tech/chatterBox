@@ -1,5 +1,11 @@
 import supabase from "./supabase";
 
+/**
+ * Retrieves all chats for a given user ID.
+ * @param {string} id - The user ID.
+ * @returns {Array} The list of chats.
+ * @throws {Error} If there is an error retrieving the chats.
+ */
 export async function getAllChats(id) {
   const { data, error } = await supabase
     .from("chats")
@@ -66,6 +72,12 @@ export async function getAllChats(id) {
   return chats;
 }
 
+/**
+ * Checks if a chat exists between two users.
+ * @param {string} current - The current user ID.
+ * @param {string} id - The other user ID.
+ * @returns {Object} The chat data.
+ */
 export async function checkChat(current, id) {
   const { data, error } = await supabase
     .from("chats")
@@ -77,6 +89,13 @@ export async function checkChat(current, id) {
   return { data, error };
 }
 
+/**
+ * Creates a new chat between two users.
+ * @param {string} current - The current user ID.
+ * @param {string} id - The other user ID.
+ * @returns {Object} The created chat data.
+ * @throws {Error} If there is an error creating the chat.
+ */
 export async function createChat(current, id) {
   const { data, error } = await supabase.from("chats").insert([
     {
@@ -88,6 +107,13 @@ export async function createChat(current, id) {
 
   return data;
 }
+
+/**
+ * Retrieves messages for a given chat ID.
+ * @param {string} id - The chat ID.
+ * @returns {Array} The list of messages.
+ * @throws {Error} If there is an error retrieving the messages.
+ */
 export async function getMessages(id) {
   const { data: messages, error: messagesError } = await supabase
     .from("messages")

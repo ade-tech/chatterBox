@@ -14,6 +14,9 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import { Bounce, ToastContainer } from "react-toastify";
 import { CurrentUserProvider } from "./contexts/CurrentUserContext";
 
+/**
+ * Query client configuration for React Query.
+ */
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -22,6 +25,10 @@ const queryClient = new QueryClient({
   },
 });
 
+/**
+ * Main application component.
+ * @returns {JSX.Element} The App component.
+ */
 function App() {
   return (
     <BrowserRouter>
@@ -66,4 +73,5 @@ function App() {
     </BrowserRouter>
   );
 }
+
 export default App;

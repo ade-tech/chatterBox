@@ -3,6 +3,12 @@ import { createContext, useContext, useState } from "react";
 
 const ModalContext = createContext();
 
+/**
+ * Modal component for displaying modal dialogs.
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components.
+ * @returns {JSX.Element} The Modal component.
+ */
 export function Modal({ children }) {
   const [curOpened, setCurOpened] = useState("");
 
@@ -16,6 +22,13 @@ export function Modal({ children }) {
   );
 }
 
+/**
+ * Trigger component for opening a modal.
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components.
+ * @param {string} props.opens - The name of the modal to open.
+ * @returns {JSX.Element} The Trigger component.
+ */
 function Trigger({ children, opens }) {
   const { OpenModal } = useContext(ModalContext);
   return cloneElement(children, {
@@ -25,6 +38,13 @@ function Trigger({ children, opens }) {
   });
 }
 
+/**
+ * Content component for displaying modal content.
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components.
+ * @param {string} props.name - The name of the modal.
+ * @returns {JSX.Element} The Content component.
+ */
 function Content({ children, name }) {
   const { curOpened, CloseModal } = useContext(ModalContext);
 

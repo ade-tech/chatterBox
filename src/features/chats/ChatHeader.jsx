@@ -4,6 +4,12 @@ import Recepient from "../../ui/Recepient";
 import ProfileImage from "../../ui/Profile";
 import { HiArrowLeft } from "react-icons/hi";
 
+/**
+ * ChatHeader component for displaying the chat header.
+ * @param {Object} props - The component props.
+ * @param {Object} props.recepient - The recipient details.
+ * @returns {JSX.Element} The ChatHeader component.
+ */
 function ChatHeader({ recepient }) {
   const { lastChat } = useLastChat();
 

@@ -2,6 +2,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logIn as logInApi } from "../../services/LoginApi";
 import { toast } from "react-toastify";
 
+/**
+ * Custom hook to handle user login.
+ * @returns {Object} The login function, loading state, error state, and error message.
+ */
 export function useLogin() {
   const queryClient = useQueryClient();
   const {

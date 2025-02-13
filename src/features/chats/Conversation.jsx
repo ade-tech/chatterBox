@@ -7,6 +7,10 @@ import { useLastChat } from "../../hooks/useLastChat";
 import { useChatCheck, useGetMessages } from "./useChat";
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 
+/**
+ * Conversation component for displaying the chat conversation.
+ * @returns {JSX.Element} The Conversation component.
+ */
 function Conversation() {
   const { lastChat } = useLastChat();
   const { user_id, isGettingUser } = UseCurrentUserData();

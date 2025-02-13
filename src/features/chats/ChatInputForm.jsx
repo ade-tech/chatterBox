@@ -1,6 +1,10 @@
 import { HiPlus } from "react-icons/hi";
 import { IoSend } from "react-icons/io5";
 
+/**
+ * ChatInputForm component for sending messages.
+ * @returns {JSX.Element} The ChatInputForm component.
+ */
 function ChatInputForm() {
   return (
     <form className="w-full h-20 flex gap-2 items-center cursor-pointer ">

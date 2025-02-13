@@ -6,6 +6,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLogin } from "./useLogin";
 
+/**
+ * Login form component.
+ * @returns {JSX.Element} The LoginForm component.
+ */
 function LoginForm() {
   const [passwordType, setPasswordType] = useState("password");
   const { register, formState, handleSubmit } = useForm();
@@ -13,6 +17,10 @@ function LoginForm() {
   const { errors } = formState;
   const navigate = useNavigate();
 
+  /**
+   * Handles form submission.
+   * @param {Object} data - The form data.
+   */
   function handleSubmitFn(data) {
     login(
       { email: data.email, password: data.password },

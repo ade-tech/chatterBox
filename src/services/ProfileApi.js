@@ -1,4 +1,18 @@
 import supabase, { supabaseUrl } from "./supabase";
+
+/**
+ * Updates the user profile with the provided profile data.
+ * @param {Object} param0 - The profile update details.
+ * @param {string} param0.user_id - The user ID.
+ * @param {Object} param0.profileData - The profile data to update.
+ * @param {string} [param0.profileData.bio] - The user's bio.
+ * @param {string} [param0.profileData.username] - The user's username.
+ * @param {string} [param0.profileData.fullName] - The user's full name.
+ * @param {string} [param0.profileData.phoneNumber] - The user's phone number.
+ * @param {File|string} [param0.profileData.avatar_url] - The user's avatar URL or file.
+ * @returns {Object} The updated profile data.
+ * @throws {Error} If there is an error updating the profile.
+ */
 export const UpdateProfile = async ({ user_id, profileData }) => {
   console.log(profileData);
   const hasImage =
@@ -56,6 +70,12 @@ export const UpdateProfile = async ({ user_id, profileData }) => {
   return profileUpdate;
 };
 
+/**
+ * Retrieves the user profile for a given user ID.
+ * @param {string} id - The user ID.
+ * @returns {Object} The user profile data.
+ * @throws {Error} If there is an error retrieving the profile.
+ */
 export const getUserProfile = async (id) => {
   const { data, error } = await supabase
     .from("profiles")

@@ -2,6 +2,12 @@ import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 import Spinner from "../../ui/Spinner";
 import { getTimeSent } from "../../utils/gettime";
 
+/**
+ * ReceiverChat component for displaying a chat message.
+ * @param {Object} props - The component props.
+ * @param {Object} props.message - The message details.
+ * @returns {JSX.Element} The ReceiverChat component.
+ */
 function ReceiverChat({ message }) {
   const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
 

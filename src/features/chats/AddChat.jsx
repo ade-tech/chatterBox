@@ -1,3 +1,9 @@
+/**
+ * AddChat component for adding a new chat.
+ * @param {Object} props - The component props.
+ * @param {Function} props.onClick - The click handler function.
+ * @returns {JSX.Element} The AddChat component.
+ */
 function AddChat({ onClick }) {
   return (
     <button

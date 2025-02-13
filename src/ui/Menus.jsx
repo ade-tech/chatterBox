@@ -7,6 +7,12 @@ import { useTheme } from "../contexts/ThemeContext";
 import { useLogout } from "../features/Authentication/useLogout";
 import { GetProfileData } from "../features/profile/useProfile";
 
+/**
+ * Menus component for displaying the navigation menu.
+ * @param {Object} props - The component props.
+ * @param {string} props.styles - Additional styles for the menu.
+ * @returns {JSX.Element} The Menus component.
+ */
 function Menus({ styles }) {
   const { logoutUser, isLoggingOut } = useLogout();
   const { data } = GetProfileData();

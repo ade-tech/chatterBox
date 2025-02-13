@@ -7,6 +7,10 @@ import {
 } from "../../services/ChatApi";
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 
+/**
+ * Custom hook to get all chats for the current user.
+ * @returns {Object} The chat data, loading state, and error state.
+ */
 export function useAllChats() {
   const { user_id: currentUserID } = UseCurrentUserData();
   const { data, isLoading, error } = useQuery({
@@ -18,6 +22,12 @@ export function useAllChats() {
   return { data, isLoading, error };
 }
 
+/**
+ * Custom hook to check if a chat exists between two users.
+ * @param {string} current - The current user ID.
+ * @param {string} id - The other user ID.
+ * @returns {Object} The chat data, loading state, and error state.
+ */
 export function useChatCheck(current, id) {
   const { data, isLoading, error } = useQuery({
     queryKey: [`chat--${current}--${id}`],
@@ -33,6 +43,10 @@ export function useChatCheck(current, id) {
   return { data, isLoading, error };
 }
 
+/**
+ * Custom hook to create a new chat between two users.
+ * @returns {Object} The createChat function, loading state, and error state.
+ */
 export function useCreateChat() {
   const { user_id: currentUserID } = UseCurrentUserData();
 
@@ -47,6 +61,11 @@ export function useCreateChat() {
   return { createChat, isLoading, error };
 }
 
+/**
+ * Custom hook to get messages for a given chat ID.
+ * @param {string} id - The chat ID.
+ * @returns {Object} The messages data, loading state, and error state.
+ */
 export function useGetMessages(id) {
   const { data, isLoading, error } = useQuery({
     queryKey: [`messages--${id}`],

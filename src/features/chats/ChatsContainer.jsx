@@ -3,6 +3,10 @@ import ChatRow from "./ChatRow";
 import Spinner from "../../ui/Spinner";
 import { useAllChats } from "./useChat";
 
+/**
+ * ChatsContainer component fetches and displays a list of chats.
+ * @returns {JSX.Element} The rendered ChatsContainer component.
+ */
 function ChatsContainer() {
   const { data, isLoading: isFetchingChats, error } = useAllChats();
 
