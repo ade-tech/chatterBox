@@ -1,6 +1,7 @@
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 import Spinner from "../../ui/Spinner";
 import { getTimeSent } from "../../utils/gettime";
+import { useEffect } from "react";
 
 /**
  * ReceiverChat component for displaying a chat message.
@@ -9,6 +10,7 @@ import { getTimeSent } from "../../utils/gettime";
  * @returns {JSX.Element} The ReceiverChat component.
  */
 function ReceiverChat({ message }) {
+  console.log(message);
   const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
 
   if (isGettingUser) return <Spinner />;

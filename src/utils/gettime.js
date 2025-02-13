@@ -12,7 +12,7 @@ export function getTime(isoString) {
 
   if (calendarDays === 0) {
     if (subMins < 60) {
-      return "Just Now";
+      return "Just now";
     } else {
       return format(fromDays, "h:mm a");
     }
@@ -24,5 +24,10 @@ export function getTime(isoString) {
 }
 
 export function getTimeSent(isoString) {
+  if (isNaN(new Date(isoString).getTime())) {
+    console.error("Invalid Date:", isoString); // Log invalid dates for debugging
+    return "Invalid Time"; // Fallback when date is invalid
+  }
+
   return format(new Date(isoString), "h:mm a");
 }

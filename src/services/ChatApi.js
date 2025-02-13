@@ -119,12 +119,15 @@ export async function getMessages(id) {
     .from("messages")
     .select("*")
     .order("created_at", {
-      ascending: true,
+      ascending: false,
     })
-    .range(0, 9)
+    .range(0, 20)
     .eq("chat_id", id);
 
   if (messagesError) throw new Error(messagesError.message);
 
-  return messages;
+  return messages.sort(
+    (a, b) =>
+      new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+  );
 }
