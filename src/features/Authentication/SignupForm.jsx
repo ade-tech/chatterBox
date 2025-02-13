@@ -1,6 +1,6 @@
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import Button from "../../ui/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import FormInput from "../../ui/FormInput";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -12,13 +12,14 @@ import { toast } from "react-toastify";
  * @returns {JSX.Element} The rendered SignupForm component.
  */
 function SignupForm() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page") || "1";
+
   const { handleSubmit, reset, register, getValues, formState } = useForm();
   const { errors } = formState;
   const navigate = useNavigate();
 
   const { signUp, isSigninUp } = useSignup();
-
-  console.log(isSigninUp);
 
   /**
    * Handles the form submission success.
@@ -28,16 +29,21 @@ function SignupForm() {
    * @param {string} data.username - The user's username.
    */
   function submitSuccessFn(data) {
+    console.log(data);
     signUp(
       {
         email: data.email,
         password: data.password,
         username: data.username,
+        fullName: data.fullName,
+        phoneNumber: data.phoneNumber,
       },
       {
         onSuccess: () => {
           navigate("/");
-          toast.success("Sign Up successful. Check your email for confirmation.");
+          toast.success(
+            "Sign Up successful. Check your email for confirmation."
+          );
           reset();
         },
         onError: () => toast.error("Couldn't sign you up"),
@@ -64,79 +70,142 @@ function SignupForm() {
           </p>
         </div>
         <form onSubmit={handleSubmit(submitSuccessFn)}>
-          <FormInput
-            error={errors?.username?.message}
-            id="username"
-            styles="w-full"
-            disabled={isSigninUp}
-            {...register("username", {
-              required: "A username must be provided",
-            })}
-            placeholder="Enter your Preferred Username"
-            type="text"
-          />
-          <FormInput
-            id="email"
-            styles="w-full"
-            error={errors?.email?.message}
-            {...register("email", {
-              required: "Enter a valid Email Address",
-            })}
-            placeholder="Enter your Email"
-            type="email"
-            disabled={isSigninUp}
-          />
-          <FormInput
-            id="password"
-            styles="w-full"
-            error={errors?.password?.message}
-            {...register("password", {
-              required: "Password cannot be empty",
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters",
-              },
-            })}
-            placeholder="Enter your password"
-            type={passwordType}
-            disabled={isSigninUp}
-            icon={
-              <div
-                className="cursor-pointer absolute right-4 top-3.5"
-                onClick={() =>
-                  setPasswordType((type) =>
-                    type === "password" ? "text" : "password"
-                  )
+          {page === "1" && (
+            <div className="animate-fadeInLeft">
+              <FormInput
+                id="email"
+                styles="w-full"
+                error={errors?.email?.message}
+                {...register("email", {
+                  required: "Enter a valid Email Address",
+                })}
+                placeholder="Enter your Email"
+                type="email"
+                disabled={isSigninUp}
+              />
+              <FormInput
+                id="password"
+                styles="w-full"
+                error={errors?.password?.message}
+                {...register("password", {
+                  required: "Password cannot be empty",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                })}
+                placeholder="Enter your password"
+                type={passwordType}
+                disabled={isSigninUp}
+                icon={
+                  <div
+                    className="cursor-pointer absolute right-4 top-3.5"
+                    onClick={() =>
+                      setPasswordType((type) =>
+                        type === "password" ? "text" : "password"
+                      )
+                    }
+                  >
+                    {passwordType === "password" ? (
+                      <HiOutlineEye
+                        size={20}
+                        className="stroke-current text-gray-400"
+                      />
+                    ) : (
+                      <HiOutlineEyeOff
+                        size={20}
+                        className="stroke-current text-gray-400"
+                      />
+                    )}
+                  </div>
                 }
-              >
-                {passwordType === "password" ? (
-                  <HiOutlineEye
-                    size={20}
-                    className="stroke-current text-gray-400"
-                  />
-                ) : (
-                  <HiOutlineEyeOff
-                    size={20}
-                    className="stroke-current text-gray-400"
-                  />
-                )}
+              />
+              <FormInput
+                id="confirmPassword"
+                styles="w-full"
+                disabled={isSigninUp}
+                error={errors?.confirmPassword?.message}
+                {...register("confirmPassword", {
+                  required: "Password cannot be empty",
+                  validate: (value) =>
+                    value === getValues("password") ||
+                    "Input must match Password",
+                })}
+                placeholder="Confirm Password"
+                type="password"
+              />
+              <Button
+                isLoading={isSigninUp}
+                type="next"
+                name={"Next"}
+                disabled={isSigninUp}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSearchParams({ page: String(Number(page) + 1) });
+                }}
+              />
+            </div>
+          )}
+          {page === "2" && (
+            <div className="animate-fadeInRight duration-200 bg-white dark:bg-dark">
+              <FormInput
+                error={errors?.username?.message}
+                id="username"
+                styles="w-full"
+                disabled={isSigninUp}
+                {...register("username", {
+                  required: "A username must be provided",
+                })}
+                placeholder="Enter your Preferred Username"
+                type="text"
+              />
+              <FormInput
+                error={errors?.fullName?.message}
+                id="Full Name"
+                styles="w-full"
+                disabled={isSigninUp}
+                {...register("fullName", {
+                  required: "Enter your Full Name",
+                })}
+                placeholder="Enter your Real Name"
+                type="text"
+              />
+              <FormInput
+                error={errors?.phoneNumber?.message}
+                id="phoneNumber"
+                styles="w-full"
+                disabled={isSigninUp}
+                {...register("phoneNumber", {
+                  required: "Enter a Phone Number",
+                  minLength: {
+                    value: 11,
+                    message: "Enter a valid Phone Number",
+                  },
+                })}
+                placeholder="Enter your Phone Number"
+                type="text"
+              />
+              <div className="flex gap-2">
+                <Button
+                  isLoading={isSigninUp}
+                  styles="h-12 w-full basis-1/3"
+                  ButtonStyletype="secondary"
+                  name={"Back"}
+                  disabled={isSigninUp}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate(-1);
+                  }}
+                />
+                <Button
+                  isLoading={isSigninUp}
+                  type="submit"
+                  name={"Submit"}
+                  disabled={isSigninUp}
+                />
               </div>
-            }
-          />
-          <FormInput
-            id="confirmPassword"
-            styles="w-full"
-            disabled={isSigninUp}
-            error={errors?.confirmPassword?.message}
-            {...register("confirmPassword", {
-              required: "Password cannot be empty",
-              validate: (value) =>
-                value === getValues("password") || "Input must match Password",
-            })}
-            placeholder="Confirm Password"
-            type="password"
-          />
-          <Button isLoading={isSigninUp} name="Sign Up" disabled={isSigninUp} />
+            </div>
+          )}
         </form>
       </div>
       <div className="w-full pb-4">

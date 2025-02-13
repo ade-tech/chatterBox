@@ -1,6 +1,6 @@
 import { BounceLoader } from "react-spinners";
 import { useCurrentUser } from "../features/Authentication/useCurrentUser";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
   const { data, isLoading, error } = useCurrentUser();
@@ -14,7 +14,8 @@ function ProtectedRoute({ children }) {
   if (error)
     return (
       <div className="w-screen h-screen items-center justify-center">
-        No Internet
+        <p>This Page is not Valid</p>
+        <Link to={"/"}>Back to home</Link>
       </div>
     );
 

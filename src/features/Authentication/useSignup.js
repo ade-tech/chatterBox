@@ -7,8 +7,8 @@ import { emailSignup } from "../../services/SignupApi";
  */
 export function useSignup() {
   const { mutate: signUp, isLoading: isSigninUp } = useMutation({
-    mutationFn: ({ email, password, username }) =>
-      emailSignup({ email, password, username }),
+    mutationFn: ({ email, password, username, fullName, phoneNumber }) =>
+      emailSignup({ email, password, username, fullName, phoneNumber }),
   });
 
   return { signUp, isSigninUp };

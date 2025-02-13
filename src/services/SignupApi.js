@@ -9,8 +9,20 @@ import supabase from "./supabase";
  * @returns {Object} The signup response data.
  * @throws {Error} If there is an error during signup.
  */
-export async function emailSignup({ email, password, username }) {
+export async function emailSignup({
+  email,
+  password,
+  username,
+  fullName,
+  phoneNumber,
+}) {
   try {
+    const { data: checkEmailOrUserName, error: emailCheckError } =
+      await supabase.from("users").select("email").eq("email", email);
+
+    if (emailCheckError) throw new Error("Could not get Email");
+    console.log(checkEmailOrUserName);
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -23,7 +35,7 @@ export async function emailSignup({ email, password, username }) {
 
     const { error: profileError } = await supabase
       .from("profiles")
-      .insert([{ user_id: userId, username }]);
+      .insert([{ user_id: userId, username, fullName, phoneNumber }]);
 
     if (profileError) throw new Error(profileError.message);
 
