@@ -17,12 +17,6 @@ export async function emailSignup({
   phoneNumber,
 }) {
   try {
-    const { data: checkEmailOrUserName, error: emailCheckError } =
-      await supabase.from("users").select("email").eq("email", email);
-
-    if (emailCheckError) throw new Error("Could not get Email");
-    console.log(checkEmailOrUserName);
-
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
