@@ -6,7 +6,7 @@ function ChatsMain() {
   const { lastChat } = useLastChat();
   if (!lastChat)
     return (
-      <div className="hidden w-full md:flex items-center justify-center h-full">
+      <div className="hidden h-screen w-full md:flex items-center justify-center">
         <Empty
           context="Conversation"
           info="There is no active conversation Selected"
