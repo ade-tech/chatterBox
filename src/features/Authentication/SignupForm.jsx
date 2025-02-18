@@ -1,4 +1,4 @@
-import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import { HiOutlineEye, HiOutlineEyeOff, HiOutlineUpload } from "react-icons/hi";
 import Button from "../../ui/Button";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import FormInput from "../../ui/FormInput";
@@ -15,7 +15,10 @@ function SignupForm() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || "1";
 
-  const { handleSubmit, reset, register, getValues, formState } = useForm();
+  const { handleSubmit, reset, register, getValues, formState, trigger } =
+    useForm({
+      mode: "onBlur",
+    });
   const { errors } = formState;
   const navigate = useNavigate();
 
@@ -27,6 +30,8 @@ function SignupForm() {
    * @param {string} data.email - The user's email.
    * @param {string} data.password - The user's password.
    * @param {string} data.username - The user's username.
+   * @param {string} data.phone Number - The user's phone Number.
+   * @param {string} data.bio - The user's bio.
    */
   function submitSuccessFn(data) {
     console.log(data);
@@ -37,6 +42,8 @@ function SignupForm() {
         username: data.username,
         fullName: data.fullName,
         phoneNumber: data.phoneNumber,
+        bio: data.bio,
+        avatar: data.profilePic[0],
       },
       {
         onSuccess: () => {
@@ -46,7 +53,7 @@ function SignupForm() {
           );
           reset();
         },
-        onError: () => toast.error("Couldn't sign you up"),
+        onError: () => toast.error("We couldn't sign you up, Try Again"),
       }
     );
   }
@@ -73,6 +80,20 @@ function SignupForm() {
           {page === "1" && (
             <div className="animate-fadeInLeft">
               <FormInput
+                error={errors?.username?.message}
+                inputMode="text"
+                name="username"
+                autoComplete="username"
+                id="username"
+                styles="w-full"
+                disabled={isSigninUp}
+                {...register("username", {
+                  required: "A username must be provided",
+                })}
+                placeholder="Enter your Preferred Username"
+                type="text"
+              />
+              <FormInput
                 id="email"
                 styles="w-full"
                 error={errors?.email?.message}
@@ -80,11 +101,17 @@ function SignupForm() {
                   required: "Enter a valid Email Address",
                 })}
                 placeholder="Enter your Email"
+                inputMode="email"
+                name="email"
+                autoComplete="email"
                 type="email"
                 disabled={isSigninUp}
               />
               <FormInput
                 id="password"
+                inputMode="text"
+                name="password"
+                autoComplete="password-new"
                 styles="w-full"
                 error={errors?.password?.message}
                 {...register("password", {
@@ -122,6 +149,8 @@ function SignupForm() {
               />
               <FormInput
                 id="confirmPassword"
+                inputMode="text"
+                name="confirm-password"
                 styles="w-full"
                 disabled={isSigninUp}
                 error={errors?.confirmPassword?.message}
@@ -139,9 +168,18 @@ function SignupForm() {
                 type="next"
                 name={"Next"}
                 disabled={isSigninUp}
-                onClick={(e) => {
+                onClick={async (e) => {
                   e.preventDefault();
-                  setSearchParams({ page: String(Number(page) + 1) });
+                  const isValid = await trigger([
+                    "confirmPassword",
+                    "password",
+                    "email",
+                    "username",
+                  ]);
+
+                  if (isValid) {
+                    setSearchParams({ page: String(Number(page) + 1) });
+                  }
                 }}
               />
             </div>
@@ -149,18 +187,22 @@ function SignupForm() {
           {page === "2" && (
             <div className="animate-fadeInRight duration-200 bg-white dark:bg-dark">
               <FormInput
-                error={errors?.username?.message}
-                id="username"
+                error={errors?.bio?.message}
+                inputMode="text"
+                name="bio"
+                autoComplete="bio"
+                id="bio"
                 styles="w-full"
                 disabled={isSigninUp}
-                {...register("username", {
-                  required: "A username must be provided",
-                })}
-                placeholder="Enter your Preferred Username"
+                {...register("bio")}
+                placeholder="Enter your bio"
                 type="text"
               />
               <FormInput
                 error={errors?.fullName?.message}
+                inputMode="text"
+                name="name"
+                autoComplete="name"
                 id="Full Name"
                 styles="w-full"
                 disabled={isSigninUp}
@@ -173,6 +215,9 @@ function SignupForm() {
               <FormInput
                 error={errors?.phoneNumber?.message}
                 id="phoneNumber"
+                inputMode="tel"
+                name="tel"
+                autoComplete="tel"
                 styles="w-full"
                 disabled={isSigninUp}
                 {...register("phoneNumber", {
@@ -184,6 +229,24 @@ function SignupForm() {
                 })}
                 placeholder="Enter your Phone Number"
                 type="text"
+              />
+              <FormInput
+                error={errors?.profilePic?.message}
+                id="profilePic"
+                styles="w-full"
+                disabled={isSigninUp}
+                {...register("profilePic", {
+                  validate: (fileList) => {
+                    const file = fileList?.[0];
+                    if (!file || typeof file !== "object") return true;
+                    if (file && file.size > 4 * 1024 * 1024)
+                      return "File size exceeds 4MB";
+                    if (file && !file.type.startsWith("image"))
+                      return "Upload an image";
+                  },
+                })}
+                type="file"
+                icon={<HiOutlineUpload size={25} />}
               />
               <div className="flex gap-2">
                 <Button

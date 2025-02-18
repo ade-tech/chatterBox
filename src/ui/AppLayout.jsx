@@ -10,7 +10,7 @@ function AppLayout() {
   console.log(id);
   return (
     <ChatProvider>
-      <div className="md:grid w-full h-screen transition-all duration-700 md:grid-cols-[0.5fr_3fr_6fr] relative  dark:bg-dark">
+      <div className="md:grid w-full h-[100dvh] transition-all duration-700 md:grid-cols-[0.5fr_3fr_6fr] relative  dark:bg-dark">
         <div>
           <MobileMenu />
           <Menus styles="hidden md:flex" />

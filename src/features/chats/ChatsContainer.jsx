@@ -1,7 +1,7 @@
 import Empty from "../../ui/Empty";
 import ChatRow from "./ChatRow";
-import Spinner from "../../ui/Spinner";
 import { useAllChats } from "./useChat";
+import ChatPreloader from "../../ui/ChatPreloader";
 
 /**
  * ChatsContainer component fetches and displays a list of chats.
@@ -10,7 +10,16 @@ import { useAllChats } from "./useChat";
 function ChatsContainer() {
   const { data, isLoading: isFetchingChats, error } = useAllChats();
 
-  if (isFetchingChats) return <Spinner />;
+  if (isFetchingChats)
+    return (
+      <>
+        {Array.from({
+          length: 3,
+        }).map((_, i) => (
+          <ChatPreloader key={i} />
+        ))}
+      </>
+    );
 
   const chats = data;
   if (!chats || error || chats.length === 0)

@@ -28,11 +28,15 @@ function Button({
   if (ButtonStyletype === "secondary")
     return (
       <button
-        className={`${styles} ${commonStyles} text-dark bg-white border hover:bg-gray-50`}
+        className={
+          isLoading
+            ? `bg-accent-light`
+            : `${styles} ${commonStyles} text-dark bg-white border hover:bg-gray-50`
+        }
         onClick={!disabled ? onClick : undefined}
         disabled={disabled}
       >
-        {isLoading ? <MoonLoader size={30} color="#9e7ffb" /> : name}
+        {isLoading ? "Loading..." : name}
       </button>
     );
 }

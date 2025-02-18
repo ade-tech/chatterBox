@@ -13,8 +13,6 @@ function ReceiverChat({ message }) {
   console.log(message);
   const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
 
-  if (isGettingUser) return <Spinner />;
-
   const { content, type, sender_id, isReadby, created_at } = message;
 
   const basicStyles = "max-w-72  md:max-w-96 w-fit py-2 px-5 rounded-3xl";

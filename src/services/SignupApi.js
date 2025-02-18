@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase, { supabaseUrl } from "./supabase";
 
 /**
  * Signs up a new user with email, password, and username.
@@ -15,6 +15,7 @@ export async function emailSignup({
   username,
   fullName,
   phoneNumber,
+  avatar,
 }) {
   try {
     const { data, error } = await supabase.auth.signUp({
@@ -22,17 +23,33 @@ export async function emailSignup({
       password,
     });
 
+    const fileName = `${crypto.randomUUID()}`;
+    const filePath = `${supabaseUrl}/storage/v1/object/public/userProfile/${fileName}`;
+
     if (error) throw new Error(error.message);
     const userId = data?.user?.id;
 
     if (!userId) throw new Error("User ID not found");
 
+    const { error: uploadError } = await supabase.storage
+      .from("userProfile")
+      .upload(fileName, avatar);
+
+    if (uploadError) throw new Error("could not upload image");
+
     const { error: profileError } = await supabase
       .from("profiles")
-      .insert([{ user_id: userId, username, fullName, phoneNumber }]);
+      .insert([
+        {
+          user_id: userId,
+          username,
+          fullName,
+          phoneNumber,
+          avatar_url: filePath,
+        },
+      ]);
 
     if (profileError) throw new Error(profileError.message);
-
     return data;
   } catch (error) {
     throw new Error(error.message);

@@ -7,7 +7,12 @@ import Spinner from "../ui/Spinner";
 function Login() {
   const { data, isLoading } = useCurrentUser();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <div className="w-screen h-screen">
+        <Spinner />
+      </div>
+    );
 
   if (data && data.role === "authenticated") {
     return <Navigate to="/" replace />;

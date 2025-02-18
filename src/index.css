@@ -68,6 +68,9 @@
     opacity: 0;
     bottom: -200px;
   }
+  40% {
+    opacity: 0.8;
+  }
   100% {
     opacity: 1;
     bottom: 0;

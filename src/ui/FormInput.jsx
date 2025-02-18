@@ -15,10 +15,37 @@ const FormInput = React.forwardRef(
       styles,
       disabled,
       error,
+      name,
+      inputMode = "text",
+      autoComplete = "text",
       ...rest
     },
     ref
   ) => {
+    if (type === "file") {
+      return (
+        <>
+          <div className="flex items-center">
+            <label
+              htmlFor="uploadProfile"
+              className="w-full h-12 relative text-white rounded-full bg-primary-light items-center justify-center gap-2 flex"
+            >
+              {icon} Upload Profile Image
+            </label>
+            <input
+              type="file"
+              id="uploadProfile"
+              accept="image/*"
+              className="hidden"
+              name={name}
+              ref={ref}
+              {...rest}
+            />
+          </div>
+          {error && <p className="mt-2 mb-2 text-sm text-red-500">{error}</p>}
+        </>
+      );
+    }
     return (
       <div className="flex flex-col gap-3 w-full dark:text-white">
         {label && (
@@ -32,12 +59,14 @@ const FormInput = React.forwardRef(
             type={type}
             disabled={disabled}
             placeholder={placeholder}
+            inputMode={inputMode}
+            name={name}
+            autoComplete={autoComplete}
             className={`${
               error
                 ? `${styles} ${inputStyle} bg-red-300 placeholder:text-red-600 border border-red-600 `
                 : `${styles} ${inputStyle} dark:bg-surface-dark dark:text-accent-light dark:placeholder:text-accent-light`
             }`}
-            autoComplete="true"
             ref={ref}
             {...rest}
           />
