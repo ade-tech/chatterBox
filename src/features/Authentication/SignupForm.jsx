@@ -24,6 +24,8 @@ function SignupForm() {
 
   const { signUp, isSigninUp } = useSignup();
 
+  console.log(isSigninUp);
+
   /**
    * Handles the form submission success.
    * @param {Object} data - The form data.
@@ -34,7 +36,6 @@ function SignupForm() {
    * @param {string} data.bio - The user's bio.
    */
   function submitSuccessFn(data) {
-    console.log(data);
     signUp(
       {
         email: data.email,

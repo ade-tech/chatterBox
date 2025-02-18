@@ -21,7 +21,7 @@ function Button({
         disabled={disabled}
         type={type}
       >
-        {isLoading ? "Loading..." : name}
+        {isLoading ? <MoonLoader size={30} color="#9e7ffb" /> : name}
       </button>
     );
 

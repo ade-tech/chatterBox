@@ -37,17 +37,15 @@ export async function emailSignup({
 
     if (uploadError) throw new Error("could not upload image");
 
-    const { error: profileError } = await supabase
-      .from("profiles")
-      .insert([
-        {
-          user_id: userId,
-          username,
-          fullName,
-          phoneNumber,
-          avatar_url: filePath,
-        },
-      ]);
+    const { error: profileError } = await supabase.from("profiles").insert([
+      {
+        user_id: userId,
+        username,
+        fullName,
+        phoneNumber,
+        avatar_url: filePath,
+      },
+    ]);
 
     if (profileError) throw new Error(profileError.message);
     return data;
