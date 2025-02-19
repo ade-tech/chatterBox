@@ -79,10 +79,10 @@ function ChatInputForm({ chatID, currentID, otherUserID, typingState }) {
     if (error) {
       toast.error("Could not send message check your internet");
     } else {
+      if (typingChannelRef.current)
+        await typingChannelRef.current.track({ typing: false });
       setNewMessage("");
     }
-    if (typingChannelRef.current)
-      await typingChannelRef.current.track({ typing: false });
   };
 
   async function handleTyping(e) {

@@ -23,8 +23,8 @@ function Menus({ styles }) {
       className={` ${styles} flex flex-col h-full gap-4 items-center py-3 border-r-1 border-r-gray-100 dark:border-r-bg-dark`}
     >
       <Logo styles="basis-1/6" />
-      <ul className="w-full pl-5 flex flex-col gap-4 basis-7/10">
-        <NavLink to="chats" className="w-full" role="li">
+      <ul className="w-full items-center flex flex-col gap-4 basis-7/10">
+        <NavLink to="chats" role="li">
           {({ isActive }) =>
             isActive ? (
               <PiChatTeardropTextFill
@@ -39,7 +39,7 @@ function Menus({ styles }) {
             )
           }
         </NavLink>
-        <NavLink to="notifications" className="w-full" role="li">
+        <NavLink to="notifications" role="li">
           {({ isActive }) =>
             isActive ? (
               <HiBell size={30} className={`${menuStyles} fill-current `} />
@@ -51,7 +51,7 @@ function Menus({ styles }) {
             )
           }
         </NavLink>
-        <NavLink to="settings" className="w-full" role="li">
+        <NavLink to="settings" role="li">
           {({ isActive }) =>
             isActive ? (
               <HiCog size={30} className={`${menuStyles} fill-current `} />
