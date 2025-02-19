@@ -4,6 +4,7 @@ import Recepient from "../../ui/Recepient";
 import ProfileImage from "../../ui/Profile";
 import { HiArrowLeft } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import { ChatHeaderpreloader } from "../../ui/ChatPreloader";
 
 /**
  * ChatHeader component for displaying the chat header.
@@ -11,9 +12,16 @@ import { useNavigate } from "react-router-dom";
  * @param {Object} props.recepient - The recipient details.
  * @returns {JSX.Element} The ChatHeader component.
  */
-function ChatHeader({ recepient }) {
+function ChatHeader({ recepient, isLoading }) {
   const { lastChat } = useLastChat();
   const navigate = useNavigate();
+
+  if (isLoading)
+    return (
+      <div className="flex items-center gap-4 w-full flex-wrap  py-4 px-4 border-b-1 border-b-gray-100  dark:border-b-bg-dark">
+        <ChatHeaderpreloader />
+      </div>
+    );
 
   return (
     <div className="flex items-center gap-4 w-full flex-wrap  py-4 px-4 border-b-1 border-b-gray-100  dark:border-b-bg-dark">

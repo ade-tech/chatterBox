@@ -22,5 +22,25 @@ export function ChatHeaderpreloader() {
     </div>
   );
 }
+const basicStyles = "w-64 , h-14 py-2 px-5 rounded-3xl";
+
+export function MessagePreLoader() {
+  return (
+    <>
+      <div className="w-full animate-pulse">
+        <div className="w-full mb-3">
+          <div className={`${basicStyles} ml-auto bg-primary-light`}></div>
+        </div>
+      </div>
+      <div className="w-full">
+        <div className="w-full mb-3">
+          <div
+            className={`${basicStyles} mr-auto bg-gray-100 dark:bg-bg-dark dark:border-transparent`}
+          ></div>
+        </div>
+      </div>
+    </>
+  );
+}
 
 export default ChatPreloader;

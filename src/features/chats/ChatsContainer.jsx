@@ -22,6 +22,7 @@ function ChatsContainer() {
     );
 
   const chats = data;
+
   if (!chats || error || chats.length === 0)
     return (
       <Empty
@@ -91,9 +92,11 @@ function ChatsContainer() {
 
   return (
     <div className="w-full flex-grow overflow-hidden hover:overflow-y-scroll scrollbar-custom">
-      {chats?.map((curChat) => (
-        <ChatRow key={curChat.profile.user_id} chatDetails={curChat} />
-      ))}
+      {chats
+        ?.filter((curChat) => curChat.lastChat !== "")
+        .map((chat) => (
+          <ChatRow key={chat.profile.user_id} chatDetails={chat} />
+        ))}
     </div>
   );
 }

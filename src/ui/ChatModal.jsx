@@ -8,6 +8,7 @@ import { useChatCheck, useGetMessages } from "../features/chats/useChat";
 import { UseCurrentUserData } from "../contexts/CurrentUserContext";
 import { useState, useEffect } from "react";
 import supabase from "../services/supabase";
+import { MessagePreLoader } from "./ChatPreloader";
 
 /**
  * ChatsModal component for displaying the chat modal.
@@ -55,10 +56,14 @@ function ChatModal() {
   }, [messages, chat]);
 
   if (isLoading || isGettingUser || isCheckingChat || !chat?.data?.at(0)?.id)
-    return <Spinner />;
+    return (
+      <div className="fixed top-0 w-full  md:hidden z-[100000] flex flex-col h-screen bg-white dark:bg-dark ">
+        <MessagePreLoader />
+      </div>
+    );
   return (
     <div className="fixed top-0 w-full  md:hidden z-[100000] flex flex-col h-screen bg-white dark:bg-dark ">
-      <ChatHeader recepient={data} />
+      <ChatHeader recepient={data} isLoading={isCheckingChat} />
       <ConversationContent messages={messages} key={chat?.data?.at(0).id} />
       <ChatInputForm chatID={chat?.data?.at(0)?.id} currentID={user_id} />
     </div>

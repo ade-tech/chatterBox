@@ -10,7 +10,6 @@ import { useEffect } from "react";
  * @returns {JSX.Element} The ReceiverChat component.
  */
 function ReceiverChat({ message }) {
-  console.log(message);
   const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
 
   const { content, type, sender_id, isReadby, created_at } = message;

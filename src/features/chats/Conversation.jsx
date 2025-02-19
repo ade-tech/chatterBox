@@ -17,14 +17,16 @@ function Conversation() {
   const { lastChat } = useLastChat();
   const { user_id, isGettingUser } = UseCurrentUserData();
   const { data, isLoading } = GetRecepientProfile(lastChat);
+  const [isTyping, setIsTyping] = useState(false);
 
   const { data: chat, isLoading: isCheckingChat } = useChatCheck(
     user_id,
     data?.user_id
   );
 
-  console.log(chat);
-  const { data: initalMessages } = useGetMessages(chat?.data?.at(0)?.id);
+  const { data: initalMessages, isLoading: isGettingMessages } = useGetMessages(
+    chat?.data?.at(0)?.id
+  );
   const [messages, setMessages] = useState(initalMessages || []);
 
   useEffect(() => {
@@ -47,6 +49,7 @@ function Conversation() {
           setMessages((curMessages) => [...curMessages, payload.new]);
         }
       )
+
       .subscribe();
 
     return () => {
@@ -54,17 +57,28 @@ function Conversation() {
     };
   }, [messages, chat]);
 
-  if (isLoading || isGettingUser || isCheckingChat || !chat?.data?.at(0)?.id)
-    return (
-      <div className="w-full h-full flex items-center justify-center">
-        <Spinner />
-      </div>
-    );
   return (
     <div className="flex flex-col h-screen ">
-      <ChatHeader recepient={data} />
-      <ConversationContent messages={messages} key={chat?.data?.at(0).id} />
-      <ChatInputForm chatID={chat?.data?.at(0)?.id} currentID={user_id} />
+      <ChatHeader
+        recepient={data}
+        isLoading={isCheckingChat || isLoading || isGettingUser}
+      />
+      <ConversationContent
+        isLoading={
+          isGettingMessages || isCheckingChat || isLoading || isGettingUser
+        }
+        typingState={isTyping}
+        messages={messages}
+        key={chat?.data?.at(0)?.id}
+      />
+      {data?.user_id && (
+        <ChatInputForm
+          chatID={chat?.data?.at(0)?.id}
+          currentID={user_id}
+          otherUserID={data.user_id}
+          typingState={setIsTyping}
+        />
+      )}
     </div>
   );
 }
