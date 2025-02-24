@@ -29,7 +29,7 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
   const isADocument = ["pdf", "doc", "docx", "xls", "xlsx"].some(
     (doc) => doc === fileExtension
   );
-  const isAVideo = fileExtension.startsWith("video");
+  const isAVideo = preview.name.startsWith("video");
 
   function handleClose() {
     setCaption("");
@@ -39,7 +39,7 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
   const handleClick = async () => {
     setIsSubmitting(true);
     try {
-      const imageName = `${crypto.randomUUID()}--${preview?.name}`.replaceAll(
+      const imageName = `${crypto.randomUUID()}.${fileExtension}`.replaceAll(
         " ",
         ""
       );

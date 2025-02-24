@@ -28,7 +28,7 @@ function ReceiverChat({ message }) {
       <div className="w-full mb-3">
         <div className={`${basicStyles} ml-auto bg-primary-light`}>
           <p className="text-white text-sm">{content}</p>
-          <p className="text-xs text-gray-400 text-left pr-3 w-full">
+          <p className="text-xs text-gray-300 text-left pr-3 w-full">
             {getTimeSent(created_at)}
           </p>
         </div>
@@ -58,7 +58,7 @@ function ReceiverChat({ message }) {
         >
           <img src={content} className="mb-2 rounded-2xl mt-2" />
           {caption && <p className="text-sm text-white">{caption}</p>}
-          <p className="text-xs text-gray-400 text-right pr-3 w-full">
+          <p className="text-xs text-gray-300 text-right pr-3 w-full">
             {getTimeSent(created_at)}
           </p>
         </div>
@@ -87,16 +87,17 @@ function ReceiverChat({ message }) {
     );
   }
   if (sender_id === currentUserID && type === "video") {
+    console.log(content);
     return (
       <div className="w-full mb-3">
         <div
           className={`${
             caption ? "bg-primary-light" : "bg-transparent"
-          } ${basicStyles} ml-auto bg-primary-transparent`}
+          } ${basicStyles} ml-auto py-2 bg-primary-light`}
         >
-          <video controls src={content} className="mb-2 rounded-2xl mt-2" />
+          <video src={content} controls className="mb-2 rounded-2xl mt-2" />
           {caption && <p className="text-sm text-white">{caption}</p>}
-          <p className="text-xs text-gray-500 text-right pr-3 w-full">
+          <p className="text-xs text-gray-300 text-right pr-3 w-full">
             {getTimeSent(created_at)}
           </p>
         </div>
@@ -111,7 +112,7 @@ function ReceiverChat({ message }) {
             caption ? "border-1 border-gray-200" : "bg-transparent"
           } ${basicStyles} mr-auto bg-primary-transparent`}
         >
-          <video controls src={content} className="mb-2 rounded-2xl mt-2" />
+          <video src={content} controls className="mb-2 rounded-2xl mt-2" />
           {caption && <p className="text-sm text-black">{caption}</p>}
           <p className="text-xs text-gray-500 text-right pr-3 w-full">
             {getTimeSent(created_at)}
