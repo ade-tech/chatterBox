@@ -2,6 +2,7 @@ import Message from "./Message";
 import { useRef, useEffect } from "react";
 import { MessagePreLoader } from "../../ui/ChatPreloader";
 import Typing from "../../ui/Typing";
+import { format, isSameDay, isToday, isYesterday } from "date-fns";
 
 /**
  * ConversationContent component for displaying the chat messages.
@@ -19,7 +20,7 @@ function ConversationContent({ messages, isLoading, typingState }) {
   if (isLoading)
     return (
       <div className="pt-3 h-[80vh] px-4 overflow-auto scroll-snap-y-container scrollbar-custom">
-        {Array.from({ length: 2 }).map((_, i) => (
+        {Array.from({ length: 3 }).map((_, i) => (
           <MessagePreLoader key={i} />
         ))}
       </div>
@@ -27,9 +28,36 @@ function ConversationContent({ messages, isLoading, typingState }) {
 
   return (
     <div className="pt-3 h-[80vh] px-4 overflow-auto scroll-snap-y-container scrollbar-custom">
-      {messages?.map((curMessage) => (
-        <Message message={curMessage} key={curMessage.id} />
-      ))}
+      {messages?.map((curMessage, i) => {
+        const curmessageTIme = new Date(curMessage?.created_at);
+        const prevmessageTIme = new Date(messages[i - 1]?.created_at);
+
+        let formatTime;
+
+        if (
+          isYesterday(curmessageTIme, prevmessageTIme) &&
+          curmessageTIme === isToday(curmessageTIme)
+        ) {
+          formatTime = "Today";
+        } else if (isYesterday(curmessageTIme, prevmessageTIme)) {
+          formatTime = "Yesterday";
+        } else if (!isSameDay(curmessageTIme, prevmessageTIme)) {
+          formatTime = format(curmessageTIme, "PP");
+        }
+        const showHeader = formatTime || null;
+        return (
+          <>
+            {showHeader && (
+              <div className="w-full flex items-center">
+                <span className=" inline-block text-xs mx-auto py-2 px-3 rounded-md bg-gray-50 dark:bg-surface-dark text-white">
+                  {formatTime}
+                </span>
+              </div>
+            )}
+            <Message message={curMessage} key={curMessage.id} />
+          </>
+        );
+      })}
       {typingState && <Typing />}
       <div ref={ref}> </div>
     </div>

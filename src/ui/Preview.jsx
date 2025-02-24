@@ -29,6 +29,7 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
   const isADocument = ["pdf", "doc", "docx", "xls", "xlsx"].some(
     (doc) => doc === fileExtension
   );
+  const isAVideo = fileExtension.startsWith("video");
 
   function handleClose() {
     setCaption("");
@@ -65,9 +66,11 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
             sender_id,
             created_at: new Date().toISOString(),
             content: imagePath,
-            type: "image/video",
+            type: isADocument ? "document" : isAVideo ? "video" : "image",
             isReadby: false,
             caption: caption ? caption : null,
+            filename: preview.name,
+            filesize: preview.size,
           },
         ]);
 
