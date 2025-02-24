@@ -12,10 +12,10 @@ import { useEffect } from "react";
 function ReceiverChat({ message }) {
   const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
 
-  const { content, type, sender_id, isReadby, created_at } = message;
+  const { content, type, sender_id, isReadby, created_at, caption } = message;
 
   const basicStyles = "max-w-72  md:max-w-96 w-fit py-2 px-5 rounded-3xl";
-  if (sender_id === currentUserID)
+  if (sender_id === currentUserID && type === "text")
     return (
       <div className="w-full mb-3">
         <div className={`${basicStyles} ml-auto bg-primary-light`}>
@@ -27,7 +27,7 @@ function ReceiverChat({ message }) {
       </div>
     );
 
-  if (sender_id !== currentUserID)
+  if (sender_id !== currentUserID && type === "text")
     return (
       <div className="w-full mb-3">
         <div
@@ -40,6 +40,23 @@ function ReceiverChat({ message }) {
         </div>
       </div>
     );
+  if (sender_id === currentUserID && type === "image/video") {
+    return (
+      <div className="w-full mb-3">
+        <div
+          className={`${
+            caption ? "bg-primary-light" : "bg-transparent"
+          } ${basicStyles} ml-auto bg-primary-transparent border `}
+        >
+          <img src={content} className="mb-2 rounded-2xl mt-2" />
+          {caption && <p className="text-sm text-white">{caption}</p>}
+          <p className="text-xs text-gray-500 text-right pr-3 w-full">
+            {getTimeSent(created_at)}
+          </p>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default ReceiverChat;

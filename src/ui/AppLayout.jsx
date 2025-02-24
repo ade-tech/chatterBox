@@ -7,7 +7,6 @@ import ChatModal from "./ChatModal.jsx";
 
 function AppLayout() {
   const { id } = useParams() || null;
-  console.log(id);
   return (
     <ChatProvider>
       <div className="md:grid w-full h-[100dvh] transition-all duration-700 md:grid-cols-[0.5fr_3fr_6fr] relative  dark:bg-dark">

@@ -2,7 +2,6 @@ import ChatHeader from "../features/chats/ChatHeader";
 import ChatInputForm from "../features/chats/ChatInputForm";
 import ConversationContent from "../features/chats/ConversationContent";
 import { GetRecepientProfile } from "../features/profile/useProfile";
-import Spinner from "../ui/Spinner";
 import { useLastChat } from "../hooks/useLastChat";
 import { useChatCheck, useGetMessages } from "../features/chats/useChat";
 import { UseCurrentUserData } from "../contexts/CurrentUserContext";
@@ -24,7 +23,6 @@ function ChatModal() {
     data?.user_id
   );
 
-  console.log(chat);
   const { data: initalMessages } = useGetMessages(chat?.data?.at(0)?.id);
   const [messages, setMessages] = useState(initalMessages || []);
 

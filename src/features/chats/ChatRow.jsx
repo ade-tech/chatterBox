@@ -40,7 +40,9 @@ function ChatRow({ chatDetails }) {
           {chatDetails.profile.fullName}
         </h2>
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          {chatDetails.lastChat.content}
+          {chatDetails.lastChat.content.startsWith("https")
+            ? "Image"
+            : chatDetails.lastChat.content}
         </p>
       </div>
       <div className="mr-5">

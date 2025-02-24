@@ -87,14 +87,14 @@
   }
 }
 .animate-fadeOutDownAnimation {
-  animation: fadeOutDownAnimation 0.6s ease-in-out forwards;
+  animation: fadeOutDownAnimation 0.3s ease-in-out forwards;
 }
 .animate-fadeInUpAnimation {
-  animation: fadeInUpAnimation 0.6s ease-in-out;
+  animation: fadeInUpAnimation 0.3s ease-in-out;
 }
 
 .animate-fadeInUp {
-  animation: fadeInUp 1s ease-in-out;
+  animation: fadeInUp 0.3s ease-in-out;
 }
 
 .scrollbar-custom::-webkit-scrollbar {

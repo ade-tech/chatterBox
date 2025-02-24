@@ -19,7 +19,7 @@ function UserModalDetails({ onClose }) {
     setIsClosing(true);
     setTimeout(() => {
       onClose();
-    }, 600);
+    }, 300);
   }
 
   const { ref } = useClickOutside({ onClose });

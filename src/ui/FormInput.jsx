@@ -22,7 +22,7 @@ const FormInput = React.forwardRef(
     },
     ref
   ) => {
-    if (type === "file") {
+    if (type === "file" && id !== "image-upload") {
       return (
         <>
           <div className="flex items-center">

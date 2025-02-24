@@ -1,3 +1,4 @@
+import ChatPreloader from "../../ui/ChatPreloader";
 import Spinner from "../../ui/Spinner";
 import { useAllUsers } from "./UseAllUsers";
 import UserItem from "./UserItem";
@@ -9,7 +10,7 @@ import UserItem from "./UserItem";
 function UserList() {
   const { data, error, isLoading: isFetchingUser } = useAllUsers();
 
-  if (isFetchingUser) return <Spinner />;
+  if (isFetchingUser) return <ChatPreloader />;
 
   if (error) return <h1> Could not get Users</h1>;
   return (

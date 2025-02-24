@@ -6,13 +6,13 @@ export const useClickOutside = ({ onClose }) => {
   useEffect(() => {
     function handleClick(e) {
       if (ref.current && !ref.current.contains(e.target)) {
+        console.log("Outside");
         onClose();
-        console.log(e.target);
       }
     }
-    document.addEventListener("click", handleClick);
+    document.addEventListener("click", handleClick, true);
 
-    return () => document.removeEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick, true);
   }, [onClose]);
 
   return ref;
