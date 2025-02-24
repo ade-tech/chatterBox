@@ -49,7 +49,7 @@ function ConversationContent({ messages, isLoading, typingState }) {
           <>
             {showHeader && (
               <div className="w-full flex items-center">
-                <span className=" inline-block text-xs mx-auto py-2 px-3 rounded-md bg-gray-50 dark:bg-surface-dark text-white">
+                <span className=" inline-block text-xs mx-auto py-2 px-3 rounded-md bg-gray-50 dark:bg-surface-dark dark:text-white">
                   {formatTime}
                 </span>
               </div>

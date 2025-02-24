@@ -151,7 +151,7 @@ function ReceiverChat({ message }) {
           >
             <HiOutlineDocumentDownload
               size={35}
-              className="stroke-current stroke-1 text-primary-light"
+              className="stroke-current stroke-1  dark:text-primary-dark"
             />
           </button>
         </div>
