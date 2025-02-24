@@ -39,7 +39,7 @@ function Window({ children }) {
     <div className="w-screen h-screen left-0 flex justify-center fixed top-0  bg-transparent">
       <div
         ref={ref}
-        className="w-52 h-45 dark:bg-surface-dark rounded-xl bg-gray-100 absolute bottom-18 left-[580px] drop-shadow-xl pt-2"
+        className="w-52 h-45 dark:bg-surface-dark rounded-xl bg-gray-100 absolute bottom-18 left-145 drop-shadow-xl pt-2"
       >
         {React.Children.map(children, (child) => {
           return cloneElement(child, { onClose: CloseFn });
