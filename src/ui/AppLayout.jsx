@@ -23,11 +23,7 @@ function AppLayout() {
           </main>
           <div>
             <div className="md:hidden absolute z-[500] top-0 w-full bg-white dark:bg-dark ">
-              <ChatProvider>
-                <OnlineProvider>
-                  {id && isMobile && <ChatsMain />}
-                </OnlineProvider>
-              </ChatProvider>
+              {id && isMobile && <ChatsMain />}
             </div>
             <div className="hidden md:flex">
               <ChatsMain />

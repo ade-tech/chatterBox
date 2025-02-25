@@ -17,6 +17,7 @@ function ChatHeader({ recepient, isLoading }) {
   const { lastChat } = useLastChat();
   const navigate = useNavigate();
   const { onlineUsers, isGettingUser } = UseOnlineUsers();
+  console.log(onlineUsers);
 
   if (isLoading || isGettingUser)
     return (
