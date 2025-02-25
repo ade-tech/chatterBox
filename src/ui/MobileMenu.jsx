@@ -3,16 +3,41 @@ import { PiChatTeardropTextFill, PiChatTeardropTextThin } from "react-icons/pi";
 import ProfileImage from "./Profile";
 import MobileNav from "./MobileNav";
 import { GetProfileData } from "../features/profile/useProfile";
+import { useEffect, useRef } from "react";
 
 /**
  * MobileMenu component for displaying the mobile navigation menu.
  * @returns {JSX.Element} The MobileMenu component.
  */
-function MobileMenu() {
+function MobileMenu({ mobileState }) {
   const menuStyles = "text-dark dark:text-accent-light ";
   const { data } = GetProfileData();
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = function (entries) {
+      const entry = entries.at(0);
+
+      if (entry.isIntersecting) {
+        mobileState(true);
+      }
+    };
+    const menuObserver = new IntersectionObserver(observer, {
+      threshold: 0.5,
+    });
+
+    menuObserver.observe(ref?.current);
+    const object = ref.current;
+
+    return () => {
+      menuObserver.unobserve(object);
+    };
+  }, [mobileState]);
   return (
-    <ul className="w-full fixed md:hidden z-[100] bottom-0 h-fit bg-light flex items-center justify-around transiton-all duration-700 pt-6 pb-4 border-t border-t-gray-200 dark:bg-dark dark:border-bg-dark">
+    <ul
+      ref={ref}
+      className="w-full fixed md:hidden z-[100] bottom-0 h-fit bg-light flex items-center justify-around transiton-all duration-700 pt-6 pb-4 border-t border-t-gray-200 dark:bg-dark dark:border-bg-dark"
+    >
       <div className="basis-1/5">
         <MobileNav
           to="/chats"

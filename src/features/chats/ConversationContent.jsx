@@ -21,7 +21,7 @@ function ConversationContent({ messages, isLoading, typingState }) {
     );
 
   return (
-    <div className="pt-3 h-[80vh] px-4 overflow-auto scroll-snap-y-container scrollbar-custom">
+    <div className="pt-3 h-[100vh] px-4 overflow-auto scroll-snap-y-container scrollbar-custom">
       {messages?.map((curMessage, i) => {
         const curmessageTIme = new Date(curMessage?.created_at);
         const prevmessageTIme = new Date(messages[i - 1]?.created_at);
@@ -33,7 +33,10 @@ function ConversationContent({ messages, isLoading, typingState }) {
           isToday(curmessageTIme)
         ) {
           formatTime = "Today";
-        } else if (isYesterday(curmessageTIme)) {
+        } else if (
+          !isSameDay(curmessageTIme, prevmessageTIme) &&
+          isYesterday(curmessageTIme)
+        ) {
           formatTime = "Yesterday";
         } else if (!isSameDay(curmessageTIme, prevmessageTIme)) {
           formatTime = format(curmessageTIme, "PP");

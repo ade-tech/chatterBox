@@ -5,6 +5,7 @@ import ProfileImage from "../../ui/Profile";
 import { HiArrowLeft } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { ChatHeaderpreloader } from "../../ui/ChatPreloader";
+import { UseOnlineUsers } from "../../contexts/OnlineContext";
 
 /**
  * ChatHeader component for displaying the chat header.
@@ -15,8 +16,9 @@ import { ChatHeaderpreloader } from "../../ui/ChatPreloader";
 function ChatHeader({ recepient, isLoading }) {
   const { lastChat } = useLastChat();
   const navigate = useNavigate();
+  const { onlineUsers, isGettingUser } = UseOnlineUsers();
 
-  if (isLoading)
+  if (isLoading || isGettingUser)
     return (
       <div className="flex items-center gap-4 w-full flex-wrap  py-4 px-4 border-b-1 border-b-gray-100  dark:border-b-bg-dark">
         <ChatHeaderpreloader />
@@ -36,7 +38,14 @@ function ChatHeader({ recepient, isLoading }) {
         to={`/chats/${lastChat}?profile=${recepient?.user_id}`}
       >
         <ProfileImage type="image" image={recepient?.avatar_url} />
-        <Recepient name={recepient?.fullName} status="Online" />
+        <Recepient
+          name={recepient?.fullName}
+          status={
+            onlineUsers?.includes(recepient?.user_id)
+              ? "Online"
+              : "Last seen recently"
+          }
+        />
       </Link>
     </div>
   );
