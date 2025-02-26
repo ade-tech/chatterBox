@@ -41,8 +41,7 @@ export const UpdateProfile = async ({ user_id, profileData }) => {
   const { data: profileUpdate, error: profileError } = await supabase
     .from("profiles")
     .update({ avatar_url: imagePath, ...profileUploadData })
-    .eq("user_id", user_id)
-    .select();
+    .eq("user_id", user_id);
   console.log(imageName, profileUpdate);
 
   if (profileError)
@@ -84,6 +83,19 @@ export const getUserProfile = async (id) => {
     .single();
 
   if (error) throw new Error("Could not get your profile");
+
+  return data;
+};
+
+export const updateLastSeen = async ({ id, lastSeen }) => {
+  console.log(id, lastSeen);
+  const { data, error } = await supabase
+    .from("profiles")
+    .update({ last_seen: lastSeen })
+    .eq("user_id", id)
+    .select();
+
+  if (error) throw new Error("Could not update the last Seen");
 
   return data;
 };

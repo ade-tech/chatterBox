@@ -7,7 +7,6 @@ import AddMedia from "../../ui/AddMedia";
 import SpecialInputs from "./SpecialInputs";
 import { FaFileImage, FaFilePdf, FaFileVideo } from "react-icons/fa";
 import UploadModal from "./UploadModal";
-import { useForm } from "react-hook-form";
 import Preview from "../../ui/Preview";
 
 /**

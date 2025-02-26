@@ -1,6 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getUserProfile, UpdateProfile } from "../../services/ProfileApi";
+import {
+  getUserProfile,
+  UpdateProfile,
+  updateLastSeen as updateLastSeenApi,
+} from "../../services/ProfileApi";
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
+import { toast } from "react-toastify";
 
 export function GetProfileData() {
   const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
@@ -39,4 +44,12 @@ export function useUpdateUSerProfile() {
   });
 
   return { updateUser, isUpdatingUser };
+}
+export function UseLastSeen() {
+  const { mutate: updateLastSeen, isLoading: isUpdating } = useMutation({
+    mutationFn: ({ id, last_seen }) =>
+      updateLastSeenApi({ id, lastSeen: last_seen }),
+  });
+
+  return { updateLastSeen, isUpdating };
 }

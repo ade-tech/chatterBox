@@ -1,13 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "../services/supabase";
 import { UseCurrentUserData } from "./CurrentUserContext";
+import { UseLastSeen } from "../features/profile/useProfile";
 
 const onlineContext = createContext();
 
 export const OnlineProvider = function ({ children }) {
   const { user_id, isGettingUser } = UseCurrentUserData();
   const [onlineUsers, setIsOnlineUsers] = useState([]);
-
+  const { updateLastSeen } = UseLastSeen();
   useEffect(() => {
     if (isGettingUser || !user_id) return;
     const onlineChannel = supabase.channel("ChatterBoxonlinePresence", {
@@ -42,6 +43,7 @@ export const OnlineProvider = function ({ children }) {
       });
 
       onlineChannel.on("presence", { event: "leave" }, ({ key }) => {
+        updateLastSeen({ id: key, last_seen: new Date().toISOString() });
         console.log(key);
         setIsOnlineUsers((curOnline) => curOnline.filter((cur) => cur !== key));
       });

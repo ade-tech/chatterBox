@@ -16,7 +16,9 @@ function Button({
   if (ButtonStyletype === "default")
     return (
       <button
-        className={`${styles} ${commonStyles} text-white bg-secondary-dark hover:bg-accent-light`}
+        className={`${styles} ${
+          disabled ? "opacity-50 cursor-not-allowed" : ""
+        } ${commonStyles} text-white bg-secondary-dark hover:bg-accent-light`}
         onClick={!disabled ? onClick : undefined}
         disabled={disabled}
         type={type}
@@ -31,7 +33,9 @@ function Button({
         className={
           isLoading
             ? `bg-accent-light`
-            : `${styles} ${commonStyles} text-dark bg-white border hover:bg-gray-50`
+            : `${styles} ${commonStyles} ${
+                disabled ? "opacity-50 cursor-not-allowed" : ""
+              } text-dark bg-white border hover:bg-gray-50`
         }
         onClick={!disabled ? onClick : undefined}
         disabled={disabled}

@@ -2,7 +2,6 @@ import ChatHeader from "./ChatHeader";
 import ChatInputForm from "./ChatInputForm";
 import ConversationContent from "./ConversationContent";
 import { GetRecepientProfile } from "../profile/useProfile";
-import Spinner from "../../ui/Spinner";
 import { useLastChat } from "../../hooks/useLastChat";
 import { useChatCheck, useGetMessages } from "./useChat";
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
@@ -18,12 +17,15 @@ function Conversation() {
   const { user_id, isGettingUser } = UseCurrentUserData();
   const { data, isLoading } = GetRecepientProfile(lastChat);
   const [isTyping, setIsTyping] = useState(false);
+  const [lastSeen, setLastSeen] = useState(null);
 
   const { data: chat, isLoading: isCheckingChat } = useChatCheck(
     user_id,
     data?.user_id
   );
-
+  useEffect(() => {
+    setLastSeen(data?.last_seen);
+  }, [data]);
   const { data: initalMessages, isLoading: isGettingMessages } = useGetMessages(
     chat?.data?.at(0)?.id
   );
@@ -49,17 +51,32 @@ function Conversation() {
           setMessages((curMessages) => [...curMessages, payload.new]);
         }
       )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "profiles",
+          filter: `user_id=eq.${data?.user_id}`,
+        },
+        (payload) => {
+          setLastSeen(payload.new.last_seen);
+        }
+      )
 
       .subscribe();
 
     return () => {
       supabase.removeChannel(messages);
     };
-  }, [messages, chat]);
+  }, [messages, chat, data]);
+
+  console.log(lastSeen, data);
 
   return (
     <div className="flex flex-col h-screen ">
       <ChatHeader
+        lastSeen={lastSeen}
         recepient={data}
         isLoading={isCheckingChat || isLoading || isGettingUser}
       />

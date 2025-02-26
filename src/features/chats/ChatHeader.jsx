@@ -6,6 +6,7 @@ import { HiArrowLeft } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { ChatHeaderpreloader } from "../../ui/ChatPreloader";
 import { UseOnlineUsers } from "../../contexts/OnlineContext";
+import { getTime } from "../../utils/gettime";
 
 /**
  * ChatHeader component for displaying the chat header.
@@ -13,10 +14,10 @@ import { UseOnlineUsers } from "../../contexts/OnlineContext";
  * @param {Object} props.recepient - The recipient details.
  * @returns {JSX.Element} The ChatHeader component.
  */
-function ChatHeader({ recepient, isLoading }) {
+function ChatHeader({ recepient, isLoading, lastSeen }) {
   const { lastChat } = useLastChat();
   const navigate = useNavigate();
-  const { onlineUsers, isGettingUser } = UseOnlineUsers();
+  const { onlineUsers, isGettingUser } = UseOnlineUsers() || {};
   console.log(onlineUsers);
 
   if (isLoading || isGettingUser)
@@ -44,7 +45,11 @@ function ChatHeader({ recepient, isLoading }) {
           status={
             onlineUsers?.includes(recepient?.user_id)
               ? "Online"
-              : "Last seen recently"
+              : `${
+                  getTime(lastSeen) === undefined
+                    ? "Offline"
+                    : `Last seen ${getTime(lastSeen)}`
+                }`
           }
         />
       </Link>

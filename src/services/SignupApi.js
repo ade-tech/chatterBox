@@ -48,6 +48,12 @@ export async function emailSignup({
     ]);
 
     if (profileError) throw new Error(profileError.message);
+
+    const { error: settingsError } = await supabase
+      .from("settings")
+      .insert([{ user_id: userId }]);
+
+    if (settingsError) return;
     return data;
   } catch (error) {
     throw new Error(error.message);

@@ -9,7 +9,7 @@ import { HiOutlineDocumentDownload } from "react-icons/hi";
  * @returns {JSX.Element} The ReceiverChat component.
  */
 function ReceiverChat({ message }) {
-  const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
+  const { user_id: currentUserID, } = UseCurrentUserData();
 
   const {
     content,

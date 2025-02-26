@@ -12,12 +12,12 @@ export function getTime(isoString) {
 
   if (calendarDays === 0) {
     if (subMins < 60) {
-      return "Just now";
+      return "just now";
     } else {
       return format(fromDays, "h:mm a");
     }
   }
-  if (calendarDays === 1) return "Yesterday";
+  if (calendarDays === 1) return "yesterday";
   if (calendarDays === 2) return "2 days ago";
   if (calendarDays > 2 && calendarDays <= 7) return format(fromDays, "EEEE");
   if (calendarDays > 7) return format(fromDays, "MM/dd/yyyy");

@@ -2,10 +2,10 @@ import Logo from "./Logo";
 import { PiChatTeardropTextFill, PiChatTeardropTextThin } from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 import Profile from "./Profile";
-import { HiBell, HiCog, HiMoon, HiOutlineLogout, HiSun } from "react-icons/hi";
+import { HiBell, HiCog, HiMoon, HiSun } from "react-icons/hi";
 import { useTheme } from "../contexts/ThemeContext";
-import { useLogout } from "../features/Authentication/useLogout";
 import { GetProfileData } from "../features/profile/useProfile";
+import Logout from "./Logout";
 
 /**
  * Menus component for displaying the navigation menu.
@@ -14,9 +14,9 @@ import { GetProfileData } from "../features/profile/useProfile";
  * @returns {JSX.Element} The Menus component.
  */
 function Menus({ styles }) {
-  const { logoutUser, isLoggingOut } = useLogout();
   const { data } = GetProfileData();
   const { mode, setMode } = useTheme();
+
   const menuStyles = "text-dark dark:text-accent-light";
   return (
     <aside
@@ -77,14 +77,8 @@ function Menus({ styles }) {
             <HiMoon size={30} className={`${menuStyles} fill-current `} />
           )}
         </button>
-        <button>
-          <button onClick={logoutUser} disabled={isLoggingOut}>
-            <HiOutlineLogout
-              size={30}
-              className={`${menuStyles} stroke-current mb-4 cursor-pointer`}
-            />
-          </button>
-        </button>
+
+        <Logout />
         <NavLink to="profile">
           <Profile
             width="w-10"
