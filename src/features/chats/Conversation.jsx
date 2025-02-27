@@ -71,8 +71,6 @@ function Conversation() {
     };
   }, [messages, chat, data]);
 
-  console.log(lastSeen, data);
-
   return (
     <div className="flex flex-col h-screen ">
       <ChatHeader

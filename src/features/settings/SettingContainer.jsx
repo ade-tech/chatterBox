@@ -1,17 +1,29 @@
+import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 import ToggleButton from "../../ui/ToggleButton";
+import { useUpdateUser, useUserSettings } from "./useSettings";
 
 function SettingContainer() {
+  const { user_id, user_email } = UseCurrentUserData();
+  const { data, isLoading } = useUserSettings(user_id);
+  const { updateUser, isUpdatingSttings } = useUpdateUser();
+
   return (
     <div className="mt-8">
+      {isLoading && <p>Loading...</p>}
       <div className="Profile mb-8">
         <h1 className="text-2xl font-medium mb-3 dark:text-accent-light">
           Privacy
         </h1>
         <div className="w-full bg-gray-100 py-2.5 rounded-lg px-4 dark:bg-bg-dark flex justify-between items-center">
           <p className="text-gray-600 text-sm dark:text-white">
-            Eveyone see that your online status
+            Nobody see that your online status
           </p>
-          <ToggleButton />
+          <ToggleButton
+            id={user_id}
+            field="isPrivate"
+            defaultState={data?.at(0)?.isPrivate}
+            clickAction={updateUser}
+          />
         </div>
       </div>
       <div className="Profile mb-24">
@@ -22,7 +34,12 @@ function SettingContainer() {
           <p className="text-gray-600 text-sm dark:text-white">
             Receive notifications
           </p>
-          <ToggleButton />
+          <ToggleButton
+            id={user_id}
+            field="enable_Notification"
+            defaultState={data?.at(0)?.enable_Notification}
+            clickAction={updateUser}
+          />
         </div>
       </div>
       <div className="Profile">

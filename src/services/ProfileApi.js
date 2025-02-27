@@ -14,7 +14,6 @@ import supabase, { supabaseUrl } from "./supabase";
  * @throws {Error} If there is an error updating the profile.
  */
 export const UpdateProfile = async ({ user_id, profileData }) => {
-  console.log(profileData);
   const hasImage =
     typeof profileData.avatar_url === "string" &&
     profileData.avatar_url.startsWith(supabaseUrl);
@@ -37,12 +36,10 @@ export const UpdateProfile = async ({ user_id, profileData }) => {
     ? profileData.avatar_url
     : `${supabaseUrl}/storage/v1/object/public/userProfile/${imageName}`;
 
-  console.log(imageName);
   const { data: profileUpdate, error: profileError } = await supabase
     .from("profiles")
     .update({ avatar_url: imagePath, ...profileUploadData })
     .eq("user_id", user_id);
-  console.log(imageName, profileUpdate);
 
   if (profileError)
     throw new Error("Could not Update your profile, try again later");
@@ -63,8 +60,6 @@ export const UpdateProfile = async ({ user_id, profileData }) => {
   const { data: urlData } = supabase.storage
     .from("userProfile")
     .getPublicUrl(imageName);
-
-  console.log(urlData);
 
   return profileUpdate;
 };
@@ -88,7 +83,6 @@ export const getUserProfile = async (id) => {
 };
 
 export const updateLastSeen = async ({ id, lastSeen }) => {
-  console.log(id, lastSeen);
   const { data, error } = await supabase
     .from("profiles")
     .update({ last_seen: lastSeen })

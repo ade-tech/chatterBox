@@ -13,7 +13,13 @@ export function CurrentUserProvider({ children }) {
   const { userData, isGettingUser } = useUser();
 
   return (
-    <userContext.Provider value={{ user_id: userData?.id, isGettingUser }}>
+    <userContext.Provider
+      value={{
+        user_id: userData?.id,
+        user_email: userData?.email,
+        isGettingUser,
+      }}
+    >
       {children}
     </userContext.Provider>
   );

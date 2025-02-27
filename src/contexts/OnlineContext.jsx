@@ -20,22 +20,18 @@ export const OnlineProvider = function ({ children }) {
     });
     onlineChannel.subscribe(async (status) => {
       if (status === "SUBSCRIBED") {
-        console.log("i am online");
         await onlineChannel.track({ isOnline: true });
         const onlinePresence = onlineChannel.presenceState();
         const onlineUsers = Object.keys(onlinePresence);
         setIsOnlineUsers(onlineUsers);
-        console.log("Initial Presence:", onlinePresence);
       }
       onlineChannel.on("presence", { event: "sync" }, () => {
         const onlinePresence = onlineChannel.presenceState();
         const onlineUsers = Object.keys(onlinePresence);
         setIsOnlineUsers(onlineUsers);
-        console.log(onlinePresence);
       });
 
       onlineChannel.on("presence", { event: "join" }, ({ key }) => {
-        console.log(key);
         setIsOnlineUsers((curOnline) => {
           if (!curOnline.includes(key)) return [...curOnline, key];
           return curOnline;
@@ -44,7 +40,6 @@ export const OnlineProvider = function ({ children }) {
 
       onlineChannel.on("presence", { event: "leave" }, ({ key }) => {
         updateLastSeen({ id: key, last_seen: new Date().toISOString() });
-        console.log(key);
         setIsOnlineUsers((curOnline) => curOnline.filter((cur) => cur !== key));
       });
     });
