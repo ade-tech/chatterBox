@@ -1,15 +1,26 @@
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 import ToggleButton from "../../ui/ToggleButton";
 import { useUpdateUser, useUserSettings } from "./useSettings";
+import Spinner from "../../ui/Spinner";
 
 function SettingContainer() {
   const { user_id, user_email } = UseCurrentUserData();
   const { data, isLoading } = useUserSettings(user_id);
   const { updateUser, isUpdatingSttings } = useUpdateUser();
+  const [username, domain] =
+    typeof user_email === "string"
+      ? user_email.split("@")
+      : ["Invalid", "email"];
+  if (isLoading) return <Spinner />;
 
+  console.log(data);
   return (
     <div className="mt-8">
-      {isLoading && <p>Loading...</p>}
+      {isLoading && isUpdatingSttings && (
+        <p className="text-center mx-auto dark:text-white">
+          {isLoading ? "Loading..." : "Updating..."}
+        </p>
+      )}
       <div className="Profile mb-8">
         <h1 className="text-2xl font-medium mb-3 dark:text-accent-light">
           Privacy
@@ -21,6 +32,7 @@ function SettingContainer() {
           <ToggleButton
             id={user_id}
             field="isPrivate"
+            updating={isUpdatingSttings}
             defaultState={data?.at(0)?.isPrivate}
             clickAction={updateUser}
           />
@@ -36,6 +48,7 @@ function SettingContainer() {
           </p>
           <ToggleButton
             id={user_id}
+            updating={isUpdatingSttings}
             field="enable_Notification"
             defaultState={data?.at(0)?.enable_Notification}
             clickAction={updateUser}
@@ -47,9 +60,15 @@ function SettingContainer() {
           Advanced
         </h1>
         <div className="w-full mb-4 bg-gray-100 py-2.5 rounded-lg px-4 dark:bg-bg-dark flex justify-between items-center">
-          <p className="text-gray-600 text-sm dark:text-white">
-            adel*****e@gmail.com
-          </p>
+          {isLoading && (
+            <div className="w-52 h-6 animate-pulse bg-gray-200 duration-300 dark:bg-surface-dark"></div>
+          )}
+          {!isLoading && (
+            <p className="text-gray-600 text-sm dark:text-white">{`${username.slice(
+              0,
+              3
+            )}****${username.slice(-1)}@${domain}`}</p>
+          )}
           <button className="text-sm text-red-600 cursor-pointer focus:outline-0">
             Change my Email
           </button>

@@ -9,7 +9,7 @@ import { HiOutlineDocumentDownload } from "react-icons/hi";
  * @returns {JSX.Element} The ReceiverChat component.
  */
 function ReceiverChat({ message }) {
-  const { user_id: currentUserID, } = UseCurrentUserData();
+  const { user_id: currentUserID } = UseCurrentUserData();
 
   const {
     content,
@@ -129,14 +129,14 @@ function ReceiverChat({ message }) {
             sender_id === currentUserID ? "ml-auto" : "mr-auto"
           } self-start flex max-w-72 md:max-w-96  p-2 rounded-lg gap-2 items-center bg-gray-100 dark:bg-bg-dark`}
         >
-          <div className="w-16 h-18 items-center rounded-xl justify-center font-bold text-white flex bg-primary-light">
+          <div className="w-30 px-4 h-18 items-center rounded-xl justify-center font-bold text-white flex bg-primary-light">
             {" "}
             .{filename.split(".").pop()}
           </div>
           <div className="pr-4 dark:text-white">
-            <p>{filename}</p>
+            <p className="text-sm/3.5to line">{filename}</p>
             <div className="flex justify-between items-end">
-              <span>
+              <span className="text-xs">
                 {filesize > 1 * 1024 * 1024
                   ? `${Math.round(filesize / (1024 * 1024))} MB`
                   : `${Math.round(filesize / 1024)} KB`}

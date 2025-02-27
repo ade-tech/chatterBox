@@ -1,19 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function ToggleButton({ id, defaultState, field, clickAction, updating }) {
-  const [settingState, setSettingState] = useState(null);
+  const [settingState, setSettingState] = useState(defaultState);
 
-  useEffect(() => {
-    if (!defaultState) return;
-    setSettingState(defaultState);
-  }, [defaultState]);
   return (
     <button
-      disabled={updating}
+      disabled={updating || settingState === null}
       onClick={() => {
-        if (updating) return;
-        setSettingState((curState) => !curState);
-        clickAction({ id, data: { field, value: settingState } });
+        setSettingState((prevState) => {
+          const newState = !prevState;
+          clickAction({ id, data: { field, value: newState } });
+          return newState;
+        });
       }}
       className={`${updating ? "opacity-50 cursor-not-allowed" : ""} ${
         settingState ? "bg-accent-dark" : "bg-gray-300 dark:bg-surface-dark"
@@ -21,7 +19,7 @@ function ToggleButton({ id, defaultState, field, clickAction, updating }) {
     >
       <div
         className={`${
-          settingState ? "translate-x-0" : "translate-x-5"
+          settingState ? "translate-x-5" : "translate-x-0"
         } w-4 h-4 rounded-full bg-white drop-shadow-md transition-all duration-300 ease-in-out `}
       ></div>
     </button>

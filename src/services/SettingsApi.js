@@ -11,11 +11,18 @@ export async function getSettings(id) {
   return data;
 }
 
-export async function updateSettings({ id, data }) {
-  const { error } = await supabase
+export async function updateSettings({ id, data: inputData }) {
+  const { data, error } = await supabase
     .from("settings")
-    .update(data.field, data.value)
-    .eq("user_id", id);
+    .update({ [inputData.field]: inputData.value })
+    .eq("user_id", id)
+    .select();
 
-  if (error) throw new Error(error.messages);
+  if (error) {
+    console.error(error.message);
+    throw new Error(error.messages);
+  }
+
+  console.log(data);
+  return data;
 }
