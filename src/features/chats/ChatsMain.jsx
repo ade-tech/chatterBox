@@ -1,10 +1,15 @@
 import Empty from "../../ui/Empty";
 import { useLastChat } from "../../hooks/useLastChat.jsx";
 import Conversation from "./Conversation.jsx";
+import { useParams } from "react-router-dom";
 
-function ChatsMain() {
+function ChatsMain({ isMobile }) {
   const { lastChat } = useLastChat();
-  if (!lastChat)
+  const { id } = useParams() || null;
+  const activeChat = isMobile ? id : lastChat;
+
+  console.log(isMobile);
+  if (!activeChat)
     return (
       <div className="hidden h-screen w-full md:flex items-center justify-center">
         <Empty
@@ -63,7 +68,11 @@ function ChatsMain() {
       </div>
     );
   return (
-    <div className="flex flex-col h-full w-full px-4">
+    <div
+      className={`${
+        isMobile ? "absolute z-[500] top-0 bg-white dark:bg-dark" : "relative"
+      } flex flex-col h-full w-full px-4`}
+    >
       <Conversation />
     </div>
   );

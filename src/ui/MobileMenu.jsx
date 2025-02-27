@@ -20,6 +20,8 @@ function MobileMenu({ mobileState }) {
 
       if (entry.isIntersecting) {
         mobileState(true);
+      } else {
+        mobileState(false);
       }
     };
     const menuObserver = new IntersectionObserver(observer, {

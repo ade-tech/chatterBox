@@ -7,7 +7,6 @@ import { OnlineProvider } from "../contexts/OnlineContext.jsx";
 import { useState } from "react";
 
 function AppLayout() {
-  const { id } = useParams() || null;
   const [isMobile, setIsMobile] = useState(false);
 
   return (
@@ -21,14 +20,8 @@ function AppLayout() {
           <main className="border-r border-r-gray-100 dark:border-r-bg-dark ">
             <Outlet />
           </main>
-          <div>
-            <div className="md:hidden absolute z-[500] top-0 w-full bg-white dark:bg-dark ">
-              {id && isMobile && <ChatsMain />}
-            </div>
-            <div className="hidden md:flex">
-              <ChatsMain />
-            </div>
-          </div>
+
+          <ChatsMain isMobile={isMobile} />
         </div>
       </OnlineProvider>
     </ChatProvider>
