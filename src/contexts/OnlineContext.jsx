@@ -48,7 +48,7 @@ export const OnlineProvider = function ({ children }) {
       onlineChannel
         .unsubscribe()
         .then(() => supabase.removeChannel(onlineChannel));
-  }, [user_id, isGettingUser]);
+  }, [user_id, isGettingUser, updateLastSeen]);
 
   return (
     <onlineContext.Provider value={{ onlineUsers, isGettingUser }}>
