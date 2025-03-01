@@ -11,7 +11,7 @@ function ChatsMain({ isMobile }) {
   console.log(isMobile);
   if (!activeChat)
     return (
-      <div className="hidden h-screen w-full md:flex items-center justify-center">
+      <div className="hidden h-[100dvh] md:h-screen w-full md:flex items-center justify-center">
         <Empty
           context="Conversation"
           info="There is no active conversation Selected"
@@ -70,8 +70,8 @@ function ChatsMain({ isMobile }) {
   return (
     <div
       className={`${
-        isMobile ? "absolute z-[500] top-0 bg-white dark:bg-dark" : "relative"
-      } flex flex-col h-full w-full px-4`}
+        isMobile ? "absolute z-[1000] top-0 bg-white dark:bg-dark" : "relative"
+      } flex flex-col h-[100dvh] w-full px-4`}
     >
       <Conversation />
     </div>

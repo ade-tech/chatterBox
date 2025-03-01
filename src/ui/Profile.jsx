@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 function ProfileImage({
-  width = "w-12",
-  height = "h-12",
+  width = "w-10 md:w-12",
+  height = "h-10 md:h-12",
   image,
   styles,
   type = "link",
