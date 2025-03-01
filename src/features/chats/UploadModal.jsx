@@ -36,7 +36,7 @@ function Window({ children }) {
   if (!openModal) return;
 
   return createPortal(
-    <div className="w-screen h-screen left-0  z-[700] flex justify-center items-center fixed top-0  bg-[#0300189b] bg-opacity-50">
+    <div className="w-screen h-screen left-0  z-[20000] flex justify-center items-center fixed top-0  bg-[#0300189b] bg-opacity-50">
       <div
         ref={ref}
         className=" dark:bg-surface-dark rounded-xl bg-gray-100 drop-shadow-xl relative "
