@@ -24,7 +24,7 @@ function ConversationContent({
   }, [messages, chat, user_id, typingState]);
   if (isLoading)
     return (
-      <div className="pt-3 h-[80vh] px-4 overflow-auto scroll-snap-y-container scrollbar-custom">
+      <div className="pt-3 h-[80dvh] px-4 overflow-auto scroll-snap-y-container scrollbar-custom">
         {Array.from({ length: 3 }).map((_, i) => (
           <MessagePreLoader key={i} />
         ))}
