@@ -1,29 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Close from "./close";
 import supabase, { supabaseUrl } from "../services/supabase";
 import { toast } from "react-toastify";
-
-function checkSize({ width, height }) {
-  const maxWidth = window.innerWidth * 0.8;
-  const maxHeight = window.innerHeight * 0.7;
-
-  let imageWidth = width;
-  let imageHeight = height;
-
-  if (width > maxWidth || height > maxHeight) {
-    const scale = Math.min(maxWidth / width, maxHeight / height);
-    imageWidth = width * scale;
-    imageHeight = height * scale;
-  }
-
-  return { width: imageWidth, height: imageHeight };
-}
+import useSize from "../utils/useSize";
 
 const Preview = ({ onClose, preview, sender_id, chat_id }) => {
-  const [prev, setPrev] = useState(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [caption, setCaption] = useState("");
+
+  const {
+    imageSource,
+    containerSize: { width, height },
+  } = useSize({ preview });
 
   const fileExtension = preview.name.split(".").pop();
   const isADocument = ["pdf", "doc", "docx", "xls", "xlsx"].some(
@@ -91,53 +79,14 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
     }
   };
 
-  useEffect(() => {
-    if (!preview) {
-      setPrev(null);
-      setDimensions({ width: 0, height: 0 });
-      return;
-    }
-
-    const objectUrl = URL.createObjectURL(preview);
-    setPrev(objectUrl);
-
-    if (preview.type.startsWith("image")) {
-      const img = new Image();
-      img.src = objectUrl;
-
-      img.onload = () => {
-        const { width, height } = checkSize({
-          width: img.width,
-          height: img.height,
-        });
-        setDimensions({ width, height });
-        URL.revokeObjectURL(objectUrl);
-      };
-    } else if (preview.type.startsWith("video")) {
-      const video = document.createElement("video");
-      video.src = objectUrl;
-      video.preload = "metadata";
-
-      video.onloadedmetadata = () => {
-        const { width, height } = checkSize({
-          width: video.videoWidth,
-          height: video.videoHeight,
-        });
-        setDimensions({ width, height });
-        URL.revokeObjectURL(objectUrl);
-      };
-    }
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [preview]);
-
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <Close onClose={handleClose} />
       <div
         className="flex items-center justify-center overflow-hidden"
         style={{
-          width: `${dimensions.width ? `${dimensions.width}px` : "100%"}`,
-          height: `${dimensions.height ? `${dimensions.height}px` : "auto"}`,
+          width: `${width ? `${width}px` : "100%"}`,
+          height: `${height ? `${height}px` : "auto"}`,
           maxWidth: "80vw",
           maxHeight: "70vh",
         }}
@@ -160,13 +109,13 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
         )}
         {preview?.type?.startsWith("image") ? (
           <img
-            src={prev}
+            src={imageSource}
             className="max-w-full max-h-full object-contain rounded-2xl"
             alt="Preview"
           />
         ) : preview?.type?.startsWith("video") ? (
           <video
-            src={prev}
+            src={imageSource}
             className="max-w-full max-h-full object-contain rounded-2xl"
             controls
           />

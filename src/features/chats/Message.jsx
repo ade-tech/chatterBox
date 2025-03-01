@@ -3,6 +3,7 @@ import { UseOnlineUsers } from "../../contexts/OnlineContext";
 import { getTimeSent } from "../../utils/gettime";
 import { HiOutlineDocumentDownload } from "react-icons/hi";
 import { BiCheck, BiCheckDouble } from "react-icons/bi";
+import useSize from "../../utils/useSize";
 
 /**
  * ReceiverChat component for displaying a chat message.
@@ -24,6 +25,10 @@ function ReceiverChat({ message, otherUser }) {
     filename,
     filesize,
   } = message;
+  const {
+    imageSource,
+    containerSize: { width, height },
+  } = useSize({ prevUrl: content, maxHeightScale: 0.55, maxWidthScale: 0.45 });
 
   const isDelivered = onlineUsers.includes(otherUser) && !isReadby;
   const isSeen =
@@ -71,20 +76,35 @@ function ReceiverChat({ message, otherUser }) {
     return (
       <div className="w-full mb-3">
         <div
+          style={{
+            width: `${width ? `${width}px` : "auto"}`,
+            height: `${height ? `${height}px` : "auto"}`,
+          }}
           className={`${
-            caption ? "bg-primary-light" : "bg-transparent"
-          } ${basicStyles} ml-auto bg-primary-transparent`}
+            caption
+              ? " bg-primary-light py-2 px-5 rounded-3xl"
+              : "bg-transparent"
+          } max-w-72 md:max-w-96 w-fit rounded-3xl ml-auto`}
         >
-          <img src={content} className="mb-2 rounded-2xl mt-2" />
+          <img src={imageSource} className="mb-1 rounded-2xl mt-2" />
           {caption && <p className="text-sm text-white">{caption}</p>}
           <div className="flex">
-            <p className="text-xs inline w-fit text-gray-300 text-left pr-1">
+            <p
+              className={`${
+                !caption && "text-gray-500 dark:text-gray-300"
+              } text-xs inline w-fit text-gray-300 text-left pr-1`}
+            >
               {getTimeSent(created_at)}
             </p>
             {isDelivered || isSeen ? (
-              <BiCheckDouble className={textSender} size={15} />
+              <BiCheckDouble className={`${textSender}`} size={15} />
             ) : (
-              <BiCheck className={textSender} size={15} />
+              <BiCheck
+                className={`${textSender} ${
+                  !caption && " darK:fill-current dark:fill-white fill-gray-600"
+                }`}
+                size={15}
+              />
             )}
           </div>
         </div>
@@ -93,15 +113,19 @@ function ReceiverChat({ message, otherUser }) {
   }
   if (sender_id !== currentUserID && type === "image") {
     return (
-      <div className="w-full mb-3">
+      <div className="w-full mb-3 pb-2">
         <div
+          style={{
+            width: `${width ? `${width}px` : "auto"}`,
+            height: `${height ? `${height}px` : "auto"}`,
+          }}
           className={`${
             caption
-              ? "border border-gray-200 dark:border-transparent dark:bg-bg-dark"
+              ? "border border-gray-200 dark:border-transparent dark:bg-bg-dark py-2 px-5 rounded-3xl"
               : "bg-transparent"
-          } ${basicStyles} mr-auto bg-primary-transparent`}
+          }max-w-72  md:max-w-96 w-fit rounded-3xl mr-auto`}
         >
-          <img src={content} className="mb-2 rounded-2xl mt-2" />
+          <img src={imageSource} className="mb-2 rounded-2xl mt-2" />
           {caption && (
             <p className="text-sm text-black dark:text-white">{caption}</p>
           )}
@@ -160,14 +184,14 @@ function ReceiverChat({ message, otherUser }) {
         <div
           className={`${
             sender_id === currentUserID ? "ml-auto" : "mr-auto"
-          } self-start flex max-w-72 md:max-w-96  p-2 rounded-lg gap-2 items-center bg-gray-100 dark:bg-bg-dark`}
+          } self-start flex max-w-64 md:max-w-78  p-2 rounded-lg gap-2 items-center bg-gray-100 dark:bg-bg-dark`}
         >
-          <div className="w-30 px-4 h-18 items-center rounded-xl justify-center font-bold text-white flex bg-primary-light">
+          <div className="w-20 h-18 items-center rounded-xl justify-center font-bold text-white flex bg-primary-light">
             {" "}
             .{filename.split(".").pop()}
           </div>
           <div className="pr-4 dark:text-white">
-            <p className="text-sm/3.5to line">{filename}</p>
+            <p className="text-sm/3.5">{filename}</p>
             <div className="flex justify-between items-end">
               <span className="text-xs">
                 {filesize > 1 * 1024 * 1024
