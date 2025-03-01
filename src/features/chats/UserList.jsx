@@ -1,5 +1,4 @@
 import ChatPreloader from "../../ui/ChatPreloader";
-import Spinner from "../../ui/Spinner";
 import { useAllUsers } from "./UseAllUsers";
 import UserItem from "./UserItem";
 
