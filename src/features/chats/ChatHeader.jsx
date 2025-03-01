@@ -29,7 +29,7 @@ function ChatHeader({ recepient, isLoading, lastSeen }) {
   return (
     <div className="flex items-center gap-4 w-full flex-wrap  py-4 px-4 border-b-1 border-b-gray-100  dark:border-b-bg-dark">
       <button
-        className="md:hidden bg-gray-200 dark:bg-surface-dark px-2 py-2 rounded-full"
+        className="md:hidden bg-gray-200 dark:bg-surface-dark px-2 py-2 rounded-full -translate-x-5"
         onClick={() => navigate(`/chats`)}
       >
         <HiArrowLeft size={15} className="text-white" />

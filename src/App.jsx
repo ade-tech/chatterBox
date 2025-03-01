@@ -47,7 +47,7 @@ function App() {
       />
       <QueryClientProvider client={queryClient}>
         <Analytics />
-        <ReactQueryDevtools initialIsOpen={false} buttonPosition="top-left" />
+        {/* <ReactQueryDevtools initialIsOpen={false} buttonPosition="top-left" /> */}
         <Routes>
           <Route
             element={
