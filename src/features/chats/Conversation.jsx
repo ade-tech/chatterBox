@@ -73,7 +73,7 @@ function Conversation() {
   }, [messages, chat, data]);
 
   return (
-    <div className="flex flex-col h-screen ">
+    <div className="flex flex-col h-[100dvh] ">
       <ChatHeader
         lastSeen={lastSeen}
         recepient={data}
