@@ -10,7 +10,7 @@ function Logout({ type }) {
       disabled={isLoggingOut}
       className={`${
         type === "long" &&
-        "flex bg-red-500 gap-1 items-center justify-center px-4 rounded-2xl mt-3 md:mt-16 py-2 cursor-pointer"
+        "flex bg-red-500 gap-1 items-center justify-center px-4 rounded-2xl mt-3 md:mt-10 py-2 cursor-pointer"
       }`}
     >
       <HiOutlineLogout

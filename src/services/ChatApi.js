@@ -131,3 +131,11 @@ export async function getMessages(id) {
       new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
   );
 }
+
+export async function markAsRead(id, currentID) {
+  await supabase
+    .from("messages")
+    .update({ isReadby: true })
+    .eq("chat_id", id)
+    .neq("sender_id", currentID);
+}

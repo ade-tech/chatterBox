@@ -1,4 +1,4 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Menus from "./Menus";
 import ChatsMain from "../features/chats/ChatsMain";
 import { ChatProvider } from "../hooks/useLastChat.jsx";

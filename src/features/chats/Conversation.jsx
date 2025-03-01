@@ -23,6 +23,7 @@ function Conversation() {
     user_id,
     data?.user_id
   );
+
   useEffect(() => {
     setLastSeen(data?.last_seen);
   }, [data]);
@@ -82,9 +83,12 @@ function Conversation() {
         isLoading={
           isGettingMessages || isCheckingChat || isLoading || isGettingUser
         }
+        otherUser={data?.user_id}
         typingState={isTyping}
         messages={messages}
         key={chat?.data?.at(0)?.id}
+        chat={chat?.data?.at(0)?.id}
+        user_id={user_id}
       />
       {data?.user_id && (
         <ChatInputForm

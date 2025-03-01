@@ -2,8 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useLastChat } from "../../hooks/useLastChat.jsx";
 import ProfileImage from "../../ui/Profile.jsx";
 import { getTime } from "../../utils/gettime.js";
-import { useEffect } from "react";
-import supabase from "../../services/supabase.js";
 
 /**
  * ChatRow component represents a single row in a chat list.

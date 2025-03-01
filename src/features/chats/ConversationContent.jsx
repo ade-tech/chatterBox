@@ -3,14 +3,25 @@ import { useRef, useEffect } from "react";
 import { MessagePreLoader } from "../../ui/ChatPreloader";
 import Typing from "../../ui/Typing";
 import { format, isSameDay, isToday, isYesterday } from "date-fns";
+import { markAsRead } from "../../services/ChatApi";
 
-function ConversationContent({ messages, isLoading, typingState }) {
+function ConversationContent({
+  messages,
+  chat,
+  isLoading,
+  typingState,
+  otherUser,
+  user_id,
+}) {
   const ref = useRef(null);
 
   useEffect(() => {
-    ref?.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, typingState]); // ✅ Added typingState for better reactivity
-
+    if (!ref.current) return;
+    setTimeout(() => {
+      ref.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }, 300);
+    markAsRead(chat, user_id);
+  }, [messages, chat, user_id, typingState]);
   if (isLoading)
     return (
       <div className="pt-3 h-[80vh] px-4 overflow-auto scroll-snap-y-container scrollbar-custom">
@@ -53,7 +64,7 @@ function ConversationContent({ messages, isLoading, typingState }) {
                 </span>
               </div>
             )}
-            <Message message={curMessage} />
+            <Message message={curMessage} otherUser={otherUser} />
           </div>
         );
       })}

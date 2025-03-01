@@ -1,6 +1,8 @@
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
+import { UseOnlineUsers } from "../../contexts/OnlineContext";
 import { getTimeSent } from "../../utils/gettime";
 import { HiOutlineDocumentDownload } from "react-icons/hi";
+import { BiCheck, BiCheckDouble } from "react-icons/bi";
 
 /**
  * ReceiverChat component for displaying a chat message.
@@ -8,8 +10,9 @@ import { HiOutlineDocumentDownload } from "react-icons/hi";
  * @param {Object} props.message - The message details.
  * @returns {JSX.Element} The ReceiverChat component.
  */
-function ReceiverChat({ message }) {
+function ReceiverChat({ message, otherUser }) {
   const { user_id: currentUserID } = UseCurrentUserData();
+  const { onlineUsers } = UseOnlineUsers();
 
   const {
     content,
@@ -22,15 +25,31 @@ function ReceiverChat({ message }) {
     filesize,
   } = message;
 
+  const isDelivered = onlineUsers.includes(otherUser) && !isReadby;
+  const isSeen =
+    (!onlineUsers.includes(otherUser) && isReadby) ||
+    (onlineUsers.includes(otherUser) && isReadby);
+  const isSent = !onlineUsers.includes(otherUser) && !isReadby;
+  const textSender = ` ${(isDelivered || isSent) && " text-white"} ${
+    isSeen && "text-accent-dark"
+  } text-xs fill-current`;
+
   const basicStyles = "max-w-72  md:max-w-96 w-fit py-2 px-5 rounded-3xl";
   if (sender_id === currentUserID && type === "text")
     return (
       <div className="w-full mb-3">
         <div className={`${basicStyles} ml-auto bg-primary-light`}>
           <p className="text-white text-sm">{content}</p>
-          <p className="text-xs text-gray-300 text-left pr-3 w-full">
-            {getTimeSent(created_at)}
-          </p>
+          <div className="flex">
+            <p className="text-xs inline w-fit text-gray-300 text-left pr-1">
+              {getTimeSent(created_at)}
+            </p>
+            {isDelivered || isSeen ? (
+              <BiCheckDouble className={textSender} size={15} />
+            ) : (
+              <BiCheck className={textSender} size={15} />
+            )}
+          </div>
         </div>
       </div>
     );
@@ -58,9 +77,16 @@ function ReceiverChat({ message }) {
         >
           <img src={content} className="mb-2 rounded-2xl mt-2" />
           {caption && <p className="text-sm text-white">{caption}</p>}
-          <p className="text-xs text-gray-300 text-right pr-3 w-full">
-            {getTimeSent(created_at)}
-          </p>
+          <div className="flex">
+            <p className="text-xs inline w-fit text-gray-300 text-left pr-1">
+              {getTimeSent(created_at)}
+            </p>
+            {isDelivered || isSeen ? (
+              <BiCheckDouble className={textSender} size={15} />
+            ) : (
+              <BiCheck className={textSender} size={15} />
+            )}
+          </div>
         </div>
       </div>
     );
@@ -97,9 +123,16 @@ function ReceiverChat({ message }) {
         >
           <video src={content} controls className="mb-2 rounded-2xl mt-2" />
           {caption && <p className="text-sm text-white">{caption}</p>}
-          <p className="text-xs text-gray-300 text-right pr-3 w-full">
-            {getTimeSent(created_at)}
-          </p>
+          <div className="flex">
+            <p className="text-xs inline w-fit text-gray-300 text-left pr-1">
+              {getTimeSent(created_at)}
+            </p>
+            {isDelivered || isSeen ? (
+              <BiCheckDouble className={textSender} size={15} />
+            ) : (
+              <BiCheck className={textSender} size={15} />
+            )}
+          </div>
         </div>
       </div>
     );
@@ -141,9 +174,21 @@ function ReceiverChat({ message }) {
                   ? `${Math.round(filesize / (1024 * 1024))} MB`
                   : `${Math.round(filesize / 1024)} KB`}
               </span>
-              <p className="text-xs text-gray-500 inline-block text-right pr-3">
-                {getTimeSent(created_at)}
-              </p>
+              <div className="flex">
+                <p className="text-xs inline w-fit text-gray-400 text-left pr-1">
+                  {getTimeSent(created_at)}
+                </p>
+                {sender_id === currentUserID ? (
+                  isDelivered || isSeen ? (
+                    <BiCheckDouble
+                      className={`${isSeen ? textSender : "text-gray-400"}`}
+                      size={15}
+                    />
+                  ) : (
+                    <BiCheck className={textSender} size={15} />
+                  )
+                ) : null}
+              </div>
             </div>
           </div>
           <button
