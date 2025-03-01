@@ -7,7 +7,7 @@ import UserModalDetails from "../ui/UserModalDetails.jsx";
 
 function Chats() {
   return (
-    <div className="h-screen w-full flex flex-col pt-6 px-4 gap-3 relative overflow-hidden">
+    <div className="h-[100dvh] w-full flex flex-col pt-6 px-4 gap-3 relative overflow-hidden">
       <Modal>
         <div className="">
           <Heading>Chats</Heading>

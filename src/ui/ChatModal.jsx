@@ -55,12 +55,12 @@ function ChatModal() {
 
   if (isLoading || isGettingUser || isCheckingChat || !chat?.data?.at(0)?.id)
     return (
-      <div className="fixed top-0 w-full  md:hidden z-[100] flex flex-col h-screen bg-white dark:bg-dark ">
+      <div className="fixed top-0 w-full  md:hidden z-[100] flex flex-col h-[100dvh] bg-white dark:bg-dark ">
         <MessagePreLoader />
       </div>
     );
   return (
-    <div className="fixed top-0 w-full  md:hidden z-[100] flex flex-col h-screen bg-white dark:bg-dark ">
+    <div className="fixed top-0 w-full  md:hidden z-[100] flex flex-col h-[100dvh] bg-white dark:bg-dark ">
       <ChatHeader recepient={data} isLoading={isCheckingChat} />
       <ConversationContent messages={messages} key={chat?.data?.at(0).id} />
       <ChatInputForm chatID={chat?.data?.at(0)?.id} currentID={user_id} />

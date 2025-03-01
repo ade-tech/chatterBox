@@ -9,7 +9,7 @@ function Login() {
 
   if (isLoading)
     return (
-      <div className="w-screen h-screen">
+      <div className="w-screen h-[100vh]">
         <Spinner />
       </div>
     );
@@ -19,7 +19,7 @@ function Login() {
   }
 
   return (
-    <div className="w-full h-screen flex dark:bg-dark">
+    <div className="w-full h-[100dvh] flex dark:bg-dark">
       <OnBoardingSide />
       <LoginForm />
     </div>
