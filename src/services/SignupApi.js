@@ -59,3 +59,14 @@ export async function emailSignup({
     throw new Error(error.message);
   }
 }
+
+const 
+
+export async function GetIn({ email, token }) {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("email", email);
+
+    if()
+}
