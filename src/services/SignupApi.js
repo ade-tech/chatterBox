@@ -60,13 +60,11 @@ export async function emailSignup({
   }
 }
 
-const 
-
 export async function GetIn({ email, token }) {
   const { data, error } = await supabase
     .from("profiles")
-    .select("id")
-    .eq("email", email);
+    .select("users(email)") // Assuming the FK is called "user_id"
+    .eq("users.email", "adelopoadekunle@gmail.com");
 
-    if()
+  return data;
 }
