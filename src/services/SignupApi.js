@@ -60,11 +60,34 @@ export async function emailSignup({
   }
 }
 
-export async function GetIn({ email, token }) {
+export async function sendOTP(email) {
+  const { data, error } = await supabase.auth.signInWithOtp({
+    email,
+  });
+
+  return { error };
+}
+
+export async function GetInWithOTP({ email, token }) {
+  console.log(token);
+  const { data, error: verifyError } = await supabase.auth.verifyOtp({
+    email,
+    token,
+    type: "email",
+  });
+
+  if (verifyError) throw new Error(verifyError.message);
+
+  return data;
+}
+
+export async function checkUserExistence(id) {
+  if (!id) return;
   const { data, error } = await supabase
     .from("profiles")
-    .select("users(email)") // Assuming the FK is called "user_id"
-    .eq("users.email", "adelopoadekunle@gmail.com");
+    .select("*")
+    .eq("user_id", id);
+  if (error) throw new Error(error.message);
 
   return data;
 }

@@ -1,11 +1,12 @@
-import { HiOutlineEye, HiOutlineEyeOff, HiOutlineUpload } from "react-icons/hi";
 import Button from "../../ui/Button";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import FormInput from "../../ui/FormInput";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { useSignup } from "./useSignup";
+import { useGetIn } from "./useSignup";
 import { toast } from "react-toastify";
+import { sendOTP } from "../../services/SignupApi";
+import { checkUserExistence } from "../../services/SignupApi";
 
 /**
  * SignupForm component handles user registration.
@@ -13,6 +14,7 @@ import { toast } from "react-toastify";
  */
 function SignupForm() {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const page = searchParams.get("page") || "1";
   const inputRefs = [
     useRef(null),
@@ -24,10 +26,10 @@ function SignupForm() {
   ];
   const {
     handleSubmit,
-    reset,
     register,
     setValue,
     formState,
+    watch,
     setFocus,
     trigger,
   } = useForm({
@@ -35,8 +37,9 @@ function SignupForm() {
   });
   const { errors } = formState;
   const navigate = useNavigate();
+  const email = watch("email");
 
-  const { signUp, isSigninUp } = useSignup();
+  const { getIn, isGettingIn } = useGetIn();
 
   const handlePaste = (e) => {
     e.preventDefault();
@@ -57,26 +60,27 @@ function SignupForm() {
    * @param {string} data.phone Number - The user's phone Number.
    * @param {string} data.bio - The user's bio.
    */
-  function submitSuccessFn(data) {
-    signUp(
+  async function submitSuccessFn(data) {
+    const code = Object.values(data)
+      .filter((val) => val.length === 1)
+      .join("");
+    if (!data.email) navigate(-1);
+
+    getIn(
+      { email: data.email, token: code },
       {
-        email: data.email,
-        password: data.password,
-        username: data.username,
-        fullName: data.fullName,
-        phoneNumber: data.phoneNumber,
-        bio: data.bio,
-        avatar: data.profilePic[0],
-      },
-      {
-        onSuccess: () => {
-          navigate("/");
-          toast.success(
-            "Sign Up successful. Check your email for confirmation."
-          );
-          reset();
+        onSuccess: async (userData) => {
+          toast.success("Welcome");
+          const hasProfile = await checkUserExistence(userData.user.id);
+          if (hasProfile.length > 0) {
+            console.log("tiggered cha");
+            navigate("/chats");
+          } else {
+            console.log("tiggered by onb");
+            navigate("/onboarding");
+          }
         },
-        onError: () => toast.error("We couldn't sign you up, Try Again"),
+        onError: () => toast.error("Code entered is not correct"),
       }
     );
   }
@@ -112,20 +116,21 @@ function SignupForm() {
                 name="email"
                 autoComplete="email"
                 type="email"
-                disabled={isSigninUp}
+                disabled={isGettingIn}
               />
 
               <Button
-                isLoading={isSigninUp}
+                isLoading={isGettingIn}
                 type="next"
                 name={"Next"}
-                disabled={isSigninUp}
+                disabled={isGettingIn}
                 onClick={async (e) => {
                   e.preventDefault();
                   const isValid = await trigger(["email"]);
 
                   if (isValid) {
                     setSearchParams({ page: String(Number(page) + 1) });
+                    sendOTP(email);
                   }
                 }}
               />
@@ -155,21 +160,21 @@ function SignupForm() {
                 </div>
                 <div className="flex gap-2">
                   <Button
-                    isLoading={isSigninUp}
+                    isLoading={isGettingIn}
                     styles="h-12 w-full basis-1/3"
                     ButtonStyletype="secondary"
                     name={"Back"}
-                    disabled={isSigninUp}
+                    disabled={isGettingIn}
                     onClick={(e) => {
                       e.preventDefault();
                       navigate(-1);
                     }}
                   />
                   <Button
-                    isLoading={isSigninUp}
+                    isLoading={isGettingIn}
                     type="submit"
                     name={"Submit"}
-                    disabled={isSigninUp}
+                    disabled={isGettingIn}
                   />
                 </div>
               </div>
@@ -179,7 +184,7 @@ function SignupForm() {
       </div>
       <div className="w-full pb-4">
         <p className="text-center dark:text-accent-dark">
-          Already have an account?{" "}
+          Already have an account?
           <Link
             to="/login"
             className="font-semibold underline text-secondary-dark"

@@ -1,5 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
-import { emailSignup } from "../../services/SignupApi";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  checkUserExistence,
+  emailSignup,
+  GetInWithOTP,
+} from "../../services/SignupApi";
 
 /**
  * Custom hook to handle user signup.
@@ -19,4 +23,12 @@ export function useSignup() {
   });
 
   return { signUp, isSigninUp };
+}
+
+export function useGetIn() {
+  const { mutate: getIn, isLoading: isGettingIn } = useMutation({
+    mutationFn: ({ email, token }) => GetInWithOTP({ email, token }),
+  });
+
+  return { getIn, isGettingIn };
 }

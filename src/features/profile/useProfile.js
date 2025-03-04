@@ -5,7 +5,6 @@ import {
   updateLastSeen as updateLastSeenApi,
 } from "../../services/ProfileApi";
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
-import { toast } from "react-toastify";
 
 export function GetProfileData() {
   const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
@@ -17,6 +16,7 @@ export function GetProfileData() {
       const [, searchUser] = queryKey.at(0).split("--");
       return getUserProfile(searchUser);
     },
+    enabled: !!searchID,
   });
 
   return { data, isLoading, isGettingUser };

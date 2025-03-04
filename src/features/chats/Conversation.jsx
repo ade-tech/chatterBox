@@ -7,7 +7,6 @@ import { useChatCheck, useGetMessages } from "./useChat";
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 import { useState, useEffect } from "react";
 import supabase from "../../services/supabase";
-import { GetIn } from "../../services/SignupApi";
 
 /**
  * Conversation component for displaying the chat conversation.
@@ -32,16 +31,6 @@ function Conversation() {
     chat?.data?.at(0)?.id
   );
   const [messages, setMessages] = useState(initalMessages || []);
-
-  const check = GetIn({
-    email: "adelopoadekunle@gmail.com",
-    token: "1222",
-  }).then((data) => {
-    console.log(data);
-    return data;
-  });
-
-  console.log(check);
 
   useEffect(() => {
     setMessages(initalMessages);

@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * SignupForm component handles user registration.
  * @returns {JSX.Element} The rendered SignupForm component.
  */
-function SignupForm() {
+function Onboarding() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || "1";
 
@@ -62,7 +62,7 @@ function SignupForm() {
   const [passwordType, setPasswordType] = useState("password");
 
   return (
-    <div className="basis-full px-8 md:basis-1/2 mx-auto py-5 flex flex-col justify-between overflow-hidden">
+    <div className="w-screen h-[100dvh] px-8 md:basis-1/2 mx-auto py-5 flex flex-col justify-between overflow-hidden">
       <div className="logo-side flex gap-2 items-center">
         <img src="/Asset 1.svg" className="w-10" />
         <h1 className="text-2xl font-bold dark:text-white">ChatterBox</h1>
@@ -287,4 +287,4 @@ function SignupForm() {
   );
 }
 
-export default SignupForm;
+export default Onboarding;
