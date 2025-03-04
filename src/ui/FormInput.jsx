@@ -7,6 +7,7 @@ const inputStyle =
 const FormInput = React.forwardRef(
   (
     {
+      validating,
       icon,
       type = "text",
       label,
@@ -42,7 +43,13 @@ const FormInput = React.forwardRef(
               {...rest}
             />
           </div>
-          {error && <p className="mt-2 mb-2 text-sm text-red-500">{error}</p>}
+          {error ? (
+            <p className="mt-2 mb-2 text-sm text-red-500">{error}</p>
+          ) : (
+            validating && (
+              <p className="mt-2 mb-2 text-sm text-green-500">Validating...</p>
+            )
+          )}
         </>
       );
     }
@@ -53,7 +60,7 @@ const FormInput = React.forwardRef(
             {label}
           </label>
         )}
-        <div className="flex items-center relative">
+        <div className="flex items-center justify-center relative">
           <input
             id={id}
             type={type}
@@ -72,8 +79,12 @@ const FormInput = React.forwardRef(
           />
           {icon}
         </div>
-        {error && (
-          <p className="mt-[-25px] mb-2 text-sm text-red-500">{error}</p>
+        {error ? (
+          <p className="mt-2 mb-2 text-sm text-red-500">{error}</p>
+        ) : (
+          validating && (
+            <p className="mt-2 mb-2 text-sm text-green-500">Validating...</p>
+          )
         )}
         {type === "password" && label && (
           <Link

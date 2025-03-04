@@ -35,7 +35,7 @@ function Button({
             ? `bg-accent-light`
             : `${styles} ${commonStyles} ${
                 disabled ? "opacity-50 cursor-not-allowed" : ""
-              } text-dark bg-white border hover:bg-gray-50`
+              } text-dark bg-white border border-gray-400 hover:bg-gray-50`
         }
         onClick={!disabled ? onClick : undefined}
         disabled={disabled}

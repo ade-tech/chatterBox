@@ -9,11 +9,11 @@ import Notifications from "./pages/Notifications";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
+import Onboarding from "./pages/Onboarding";
 import Signup from "./pages/Signup";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { Bounce, ToastContainer } from "react-toastify";
 import { CurrentUserProvider } from "./contexts/CurrentUserContext";
-import Onboarding from "./features/Authentication/Onbording";
 
 /**
  * Query client configuration for React Query.
@@ -64,8 +64,8 @@ function App() {
               <Route path="/notifications" element={<Notifications />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/onboarding" element={<Onboarding />} />
             </Route>
+            <Route path="/onboarding" element={<Onboarding />} />
             <Route path="*" element={<PageNotFound />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
