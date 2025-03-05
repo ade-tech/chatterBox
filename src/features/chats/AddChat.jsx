@@ -7,7 +7,7 @@
 function AddChat({ onClick }) {
   return (
     <button
-      className="absolute bottom-26 md:bottom-4 right-6 text-4xl font-medium bg-primary-light cursor-pointer px-3 text-white py-1 rounded-full drop-shadow-3xl"
+      className="bg-primary-light drop-shadow-3xl absolute right-6 bottom-26 cursor-pointer rounded-full px-3 py-1 text-4xl font-medium text-white md:bottom-4"
       onClick={onClick}
     >
       +

@@ -5,10 +5,10 @@ function AddMedia({ onOpen, isOpen }) {
     <div
       className={` ${
         isOpen ? "rotate-45" : "rotate-0"
-      } bg-gray-200 transition-transform duration-100 py-3 px-3 rounded-full dark:bg-surface-dark dark:text-accent-light dark:placeholder:text-accent-light cursor-pointer`}
+      } dark:bg-surface-dark dark:text-accent-light dark:placeholder:text-accent-light cursor-pointer rounded-full bg-gray-200 px-3 py-3 transition-transform duration-100`}
       onClick={onOpen}
     >
-      <HiPlus size={20} className="fill-gray-500 dark:fill-accent-light" />
+      <HiPlus size={20} className="dark:fill-accent-light fill-gray-500" />
     </div>
   );
 }

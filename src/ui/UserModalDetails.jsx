@@ -29,15 +29,15 @@ function UserModalDetails({ onClose }) {
       ref={ref}
       className={`${
         isClosing ? "animate-fadeOutDownAnimation" : "animate-fadeInUpAnimation"
-      } w-full h-3/4 bg-white dark:bg-dark rounded-x-2xl mx-auto fixed rounded-t-3xl py-5 px-5 bottom-0 flex flex-col  duration-1000`}
+      } dark:bg-dark rounded-x-2xl fixed bottom-0 mx-auto flex h-3/4 w-full flex-col rounded-t-3xl bg-white px-5 py-5 duration-1000`}
     >
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl inline-block font-bold ml-4 dark:text-accent-dark">
+      <div className="mb-4 flex items-center justify-between">
+        <h1 className="dark:text-accent-dark ml-4 inline-block text-xl font-bold">
           New Chat
         </h1>
         <button
           onClick={handleCloseAnimation}
-          className="dark:bg-surface-dark dark:text-white hover:bg-accent-light transition-all duration-300 rounded-full p-1 bg-gray-100 hover:text-white"
+          className="dark:bg-surface-dark hover:bg-accent-light rounded-full bg-gray-100 p-1 transition-all duration-300 hover:text-white dark:text-white"
         >
           <HiXMark size={20} />
         </button>

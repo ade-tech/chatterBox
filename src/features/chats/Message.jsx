@@ -42,11 +42,11 @@ function ReceiverChat({ message, otherUser }) {
   const basicStyles = "max-w-72  md:max-w-96 w-fit py-2 px-5 rounded-3xl";
   if (sender_id === currentUserID && type === "text")
     return (
-      <div className="w-full mb-3">
-        <div className={`${basicStyles} ml-auto bg-primary-light`}>
-          <p className="text-white text-sm">{content}</p>
+      <div className="mb-3 w-full">
+        <div className={`${basicStyles} bg-primary-light ml-auto`}>
+          <p className="text-sm text-white">{content}</p>
           <div className="flex">
-            <p className="text-xs inline w-fit text-gray-300 text-left pr-1">
+            <p className="inline w-fit pr-1 text-left text-xs text-gray-300">
               {getTimeSent(created_at)}
             </p>
             {isDelivered || isSeen ? (
@@ -61,12 +61,12 @@ function ReceiverChat({ message, otherUser }) {
 
   if (sender_id !== currentUserID && type === "text")
     return (
-      <div className="w-full mb-3">
+      <div className="mb-3 w-full">
         <div
-          className={`${basicStyles} mr-auto bg-primary-transparent border border-gray-200 dark:bg-bg-dark dark:border-transparent`}
+          className={`${basicStyles} bg-primary-transparent dark:bg-bg-dark mr-auto border border-gray-200 dark:border-transparent`}
         >
           <p className="text-dark text-sm dark:text-white">{content}</p>
-          <p className="text-xs text-gray-500 text-right pr-3 w-full">
+          <p className="w-full pr-3 text-right text-xs text-gray-500">
             {getTimeSent(created_at)}
           </p>
         </div>
@@ -74,7 +74,7 @@ function ReceiverChat({ message, otherUser }) {
     );
   if (sender_id === currentUserID && type === "image") {
     return (
-      <div className="w-full mb-3">
+      <div className="mb-3 w-full">
         <div
           style={{
             width: `${width ? `${width}px` : "auto"}`,
@@ -82,17 +82,17 @@ function ReceiverChat({ message, otherUser }) {
           }}
           className={`${
             caption
-              ? " bg-primary-light py-2 px-5 rounded-3xl"
+              ? "bg-primary-light rounded-3xl px-5 py-2"
               : "bg-transparent"
-          } max-w-72 md:max-w-96 w-fit rounded-3xl ml-auto`}
+          } ml-auto w-fit max-w-72 rounded-3xl md:max-w-96`}
         >
-          <img src={imageSource} className="mb-1 rounded-2xl mt-2" />
+          <img src={imageSource} className="mt-2 mb-1 rounded-2xl" />
           {caption && <p className="text-sm text-white">{caption}</p>}
           <div className="flex">
             <p
               className={`${
                 !caption && "text-gray-500 dark:text-gray-300"
-              } text-xs inline w-fit text-gray-300 text-left pr-1`}
+              } inline w-fit pr-1 text-left text-xs text-gray-300`}
             >
               {getTimeSent(created_at)}
             </p>
@@ -101,7 +101,7 @@ function ReceiverChat({ message, otherUser }) {
             ) : (
               <BiCheck
                 className={`${textSender} ${
-                  !caption && " darK:fill-current dark:fill-white fill-gray-600"
+                  !caption && "darK:fill-current fill-gray-600 dark:fill-white"
                 }`}
                 size={15}
               />
@@ -113,7 +113,7 @@ function ReceiverChat({ message, otherUser }) {
   }
   if (sender_id !== currentUserID && type === "image") {
     return (
-      <div className="w-full mb-3 pb-2">
+      <div className="mb-3 w-full pb-2">
         <div
           style={{
             width: `${width ? `${width}px` : "auto"}`,
@@ -121,15 +121,15 @@ function ReceiverChat({ message, otherUser }) {
           }}
           className={`${
             caption
-              ? "border border-gray-200 dark:border-transparent dark:bg-bg-dark py-2 px-5 rounded-3xl"
+              ? "dark:bg-bg-dark rounded-3xl border border-gray-200 px-5 py-2 dark:border-transparent"
               : "bg-transparent"
-          }max-w-72  md:max-w-96 w-fit rounded-3xl mr-auto`}
+          }max-w-72 mr-auto w-fit rounded-3xl md:max-w-96`}
         >
-          <img src={imageSource} className="mb-2 rounded-2xl mt-2" />
+          <img src={imageSource} className="mt-2 mb-2 rounded-2xl" />
           {caption && (
             <p className="text-sm text-black dark:text-white">{caption}</p>
           )}
-          <p className="text-xs text-gray-500 text-right pr-3 w-full">
+          <p className="w-full pr-3 text-right text-xs text-gray-500">
             {getTimeSent(created_at)}
           </p>
         </div>
@@ -139,16 +139,16 @@ function ReceiverChat({ message, otherUser }) {
   if (sender_id === currentUserID && type === "video") {
     console.log(content);
     return (
-      <div className="w-full mb-3">
+      <div className="mb-3 w-full">
         <div
           className={`${
             caption ? "bg-primary-light" : "bg-transparent"
-          } ${basicStyles} ml-auto py-2 bg-primary-light`}
+          } ${basicStyles} bg-primary-light ml-auto py-2`}
         >
-          <video src={content} controls className="mb-2 rounded-2xl mt-2" />
+          <video src={content} controls className="mt-2 mb-2 rounded-2xl" />
           {caption && <p className="text-sm text-white">{caption}</p>}
           <div className="flex">
-            <p className="text-xs inline w-fit text-gray-300 text-left pr-1">
+            <p className="inline w-fit pr-1 text-left text-xs text-gray-300">
               {getTimeSent(created_at)}
             </p>
             {isDelivered || isSeen ? (
@@ -163,15 +163,15 @@ function ReceiverChat({ message, otherUser }) {
   }
   if (sender_id !== currentUserID && type === "video") {
     return (
-      <div className="w-full mb-3">
+      <div className="mb-3 w-full">
         <div
           className={`${
             caption ? "border-1 border-gray-200" : "bg-transparent"
-          } ${basicStyles} mr-auto bg-primary-transparent`}
+          } ${basicStyles} bg-primary-transparent mr-auto`}
         >
-          <video src={content} controls className="mb-2 rounded-2xl mt-2" />
+          <video src={content} controls className="mt-2 mb-2 rounded-2xl" />
           {caption && <p className="text-sm text-black">{caption}</p>}
-          <p className="text-xs text-gray-500 text-right pr-3 w-full">
+          <p className="w-full pr-3 text-right text-xs text-gray-500">
             {getTimeSent(created_at)}
           </p>
         </div>
@@ -180,26 +180,26 @@ function ReceiverChat({ message, otherUser }) {
   }
   if (type === "document") {
     return (
-      <div className="w-full mb-3">
+      <div className="mb-3 w-full">
         <div
           className={`${
             sender_id === currentUserID ? "ml-auto" : "mr-auto"
-          } self-start flex max-w-64 md:max-w-78  p-2 rounded-lg gap-2 items-center bg-gray-100 dark:bg-bg-dark`}
+          } dark:bg-bg-dark flex max-w-64 items-center gap-2 self-start rounded-lg bg-gray-100 p-2 md:max-w-78`}
         >
-          <div className="w-20 h-18 items-center rounded-xl justify-center font-bold text-white flex bg-primary-light">
+          <div className="bg-primary-light flex h-18 w-20 items-center justify-center rounded-xl font-bold text-white">
             {" "}
             .{filename.split(".").pop()}
           </div>
           <div className="pr-4 dark:text-white">
             <p className="text-sm/3.5">{filename}</p>
-            <div className="flex justify-between items-end">
+            <div className="flex items-end justify-between">
               <span className="text-xs">
                 {filesize > 1 * 1024 * 1024
                   ? `${Math.round(filesize / (1024 * 1024))} MB`
                   : `${Math.round(filesize / 1024)} KB`}
               </span>
               <div className="flex">
-                <p className="text-xs inline w-fit text-gray-400 text-left pr-1">
+                <p className="inline w-fit pr-1 text-left text-xs text-gray-400">
                   {getTimeSent(created_at)}
                 </p>
                 {sender_id === currentUserID ? (
@@ -216,12 +216,12 @@ function ReceiverChat({ message, otherUser }) {
             </div>
           </div>
           <button
-            className="cursor-pointer mr-3"
+            className="mr-3 cursor-pointer"
             onClick={() => window.open(content, "_blank")}
           >
             <HiOutlineDocumentDownload
               size={35}
-              className="stroke-current stroke-1  dark:text-primary-dark"
+              className="dark:text-primary-dark stroke-current stroke-1"
             />
           </button>
         </div>

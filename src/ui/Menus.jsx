@@ -20,21 +20,21 @@ function Menus({ styles }) {
   const menuStyles = "text-dark dark:text-accent-light";
   return (
     <aside
-      className={` ${styles} flex flex-col h-full gap-4 items-center py-3 border-r-1 border-r-gray-100 dark:border-r-bg-dark`}
+      className={` ${styles} dark:border-r-bg-dark flex h-full flex-col items-center gap-4 border-r-1 border-r-gray-100 py-3`}
     >
       <Logo styles="basis-1/6" />
-      <ul className="w-full items-center flex flex-col gap-4 basis-7/10">
+      <ul className="flex w-full basis-7/10 flex-col items-center gap-4">
         <NavLink to="chats" role="li">
           {({ isActive }) =>
             isActive ? (
               <PiChatTeardropTextFill
                 size={30}
-                className={`${menuStyles} fill-current `}
+                className={`${menuStyles} fill-current`}
               />
             ) : (
               <PiChatTeardropTextThin
                 size={30}
-                className={`${menuStyles} stroke-current `}
+                className={`${menuStyles} stroke-current`}
               />
             )
           }
@@ -42,10 +42,10 @@ function Menus({ styles }) {
         <NavLink to="notifications" role="li">
           {({ isActive }) =>
             isActive ? (
-              <HiBell size={30} className={`${menuStyles} fill-current `} />
+              <HiBell size={30} className={`${menuStyles} fill-current`} />
             ) : (
               <HiBell
-                className={`${menuStyles} fill-transparent stroke-1 stroke-current `}
+                className={`${menuStyles} fill-transparent stroke-current stroke-1`}
                 size={30}
               />
             )
@@ -54,10 +54,10 @@ function Menus({ styles }) {
         <NavLink to="settings" role="li">
           {({ isActive }) =>
             isActive ? (
-              <HiCog size={30} className={`${menuStyles} fill-current `} />
+              <HiCog size={30} className={`${menuStyles} fill-current`} />
             ) : (
               <HiCog
-                className={`${menuStyles} fill-transparent stroke-1 stroke-current `}
+                className={`${menuStyles} fill-transparent stroke-current stroke-1`}
                 size={30}
               />
             )
@@ -66,15 +66,15 @@ function Menus({ styles }) {
       </ul>
       <div className="flex flex-col items-center gap-3">
         <button
-          className="cursor-pointer border-b pb-3 border-b-gray-200 dark:border-b-bg-dark"
+          className="dark:border-b-bg-dark cursor-pointer border-b border-b-gray-200 pb-3"
           onClick={() =>
             setMode((curMode) => (curMode === "dark" ? "light" : "dark"))
           }
         >
           {mode === "dark" ? (
-            <HiSun size={30} className={`${menuStyles} fill-current `} />
+            <HiSun size={30} className={`${menuStyles} fill-current`} />
           ) : (
-            <HiMoon size={30} className={`${menuStyles} fill-current `} />
+            <HiMoon size={30} className={`${menuStyles} fill-current`} />
           )}
         </button>
 

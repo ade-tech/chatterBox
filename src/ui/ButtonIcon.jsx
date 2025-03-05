@@ -14,7 +14,7 @@ import { MoonLoader } from "react-spinners";
   if (ButtonStyletype === "default")
     return (
       <button
-        className={`${styles} ${commonStyles} text-white bg-secondary-dark hover:bg-accent-light`}
+        className={`${styles} ${commonStyles} bg-secondary-dark hover:bg-accent-light text-white`}
         onClick={!disabled ? onClick : undefined}
         disabled={disabled}
         type={type}
@@ -26,7 +26,7 @@ import { MoonLoader } from "react-spinners";
   if (ButtonStyletype === "secondary")
     return (
       <button
-        className={`${styles} ${commonStyles} text-dark bg-white border hover:bg-gray-50`}
+        className={`${styles} ${commonStyles} text-dark border bg-white hover:bg-gray-50`}
         onClick={!disabled ? onClick : undefined}
         disabled={disabled}
       >

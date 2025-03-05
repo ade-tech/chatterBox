@@ -6,7 +6,7 @@
  */
 function Heading({ children }) {
   return (
-    <h1 className="ml-2 font-bold  text-3xl text-bg-dark dark:text-accent-dark mb-3">
+    <h1 className="text-bg-dark dark:text-accent-dark mb-3 ml-2 text-3xl font-bold">
       {children}
     </h1>
   );

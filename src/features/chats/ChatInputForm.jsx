@@ -98,9 +98,9 @@ function ChatInputForm({ chatID, currentID, otherUserID, typingState }) {
   }
 
   return (
-    <div className="w-full h-20 flex gap-2 items-center">
+    <div className="flex h-20 w-full items-center gap-2">
       <Menu>
-        <form onSubmit={handleSubmit} className="flex-1 flex gap-2">
+        <form onSubmit={handleSubmit} className="flex flex-1 gap-2">
           <Menu.Trigger>
             <AddMedia />
           </Menu.Trigger>
@@ -110,11 +110,11 @@ function ChatInputForm({ chatID, currentID, otherUserID, typingState }) {
             type="text"
             value={newMessage}
             onChange={handleTyping}
-            className="basis-11/12 bg-gray-200  h-11 pl-6 focus:outline-none text-bg-dark dark:bg-surface-dark dark:text-accent-light dark:placeholder:text-accent-light rounded-full "
+            className="text-bg-dark dark:bg-surface-dark dark:text-accent-light dark:placeholder:text-accent-light h-11 basis-11/12 rounded-full bg-gray-200 pl-6 focus:outline-none"
           />
           <button
             type="submit"
-            className="bg-primary-light py-3 px-3 rounded-full"
+            className="bg-primary-light rounded-full px-3 py-3"
           >
             <IoSend size={20} className="fill-white" />
           </button>
@@ -131,7 +131,7 @@ function ChatInputForm({ chatID, currentID, otherUserID, typingState }) {
                 icon={
                   <FaFileImage
                     size={20}
-                    className="mr-1 fill-current text-gray-600  dark:text-primary-dark"
+                    className="dark:text-primary-dark mr-1 fill-current text-gray-600"
                   />
                 }
               />
@@ -144,7 +144,7 @@ function ChatInputForm({ chatID, currentID, otherUserID, typingState }) {
                 icon={
                   <FaFileVideo
                     size={20}
-                    className="mr-1 fill-current text-gray-600  dark:text-primary-dark"
+                    className="dark:text-primary-dark mr-1 fill-current text-gray-600"
                   />
                 }
               />
@@ -157,7 +157,7 @@ function ChatInputForm({ chatID, currentID, otherUserID, typingState }) {
                 icon={
                   <FaFilePdf
                     size={20}
-                    className="mr-1 fill-current text-gray-600 dark:text-primary-dark"
+                    className="dark:text-primary-dark mr-1 fill-current text-gray-600"
                   />
                 }
               />

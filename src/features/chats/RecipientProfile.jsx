@@ -12,7 +12,7 @@ function RecipientProfile({ recepient }) {
   return (
     <Link
       to={`/chats/${lastChat}?profile=${recepient}`}
-      className="w-full h-12 px-5"
+      className="h-12 w-full px-5"
     >
       <img src="/default-user.jpg" />
     </Link>

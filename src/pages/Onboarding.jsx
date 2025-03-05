@@ -2,7 +2,7 @@ import OnboardingForm from "../features/Authentication/OnbordingForm";
 
 function Onboarding() {
   return (
-    <div className="w-screen justify-center dark:bg-dark items-center flex h-[100dvh]">
+    <div className="dark:bg-dark flex h-[100dvh] w-screen items-center justify-center">
       <OnboardingForm />
     </div>
   );

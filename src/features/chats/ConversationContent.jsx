@@ -24,7 +24,7 @@ function ConversationContent({
   }, [messages, chat, user_id, typingState]);
   if (isLoading)
     return (
-      <div className="pt-3 h-[80dvh] px-4 overflow-auto scroll-snap-y-container scrollbar-custom">
+      <div className="scroll-snap-y-container scrollbar-custom h-[80dvh] overflow-auto px-4 pt-3">
         {Array.from({ length: 3 }).map((_, i) => (
           <MessagePreLoader key={i} />
         ))}
@@ -32,7 +32,7 @@ function ConversationContent({
     );
 
   return (
-    <div className="pt-3 h-[100vh] px-4 overflow-auto scroll-snap-y-container scrollbar-custom">
+    <div className="scroll-snap-y-container scrollbar-custom h-[100vh] overflow-auto px-4 pt-3">
       {messages?.map((curMessage, i) => {
         const curmessageTIme = new Date(curMessage?.created_at);
         const prevmessageTIme = new Date(messages[i - 1]?.created_at);
@@ -58,8 +58,8 @@ function ConversationContent({
         return (
           <div key={curMessage.id}>
             {showHeader && (
-              <div className="w-full flex items-center">
-                <span className="inline-block text-xs mx-auto py-2 px-3 rounded-md bg-gray-50 dark:bg-surface-dark dark:text-white">
+              <div className="flex w-full items-center">
+                <span className="dark:bg-surface-dark mx-auto inline-block rounded-md bg-gray-50 px-3 py-2 text-xs dark:text-white">
                   {formatTime}
                 </span>
               </div>

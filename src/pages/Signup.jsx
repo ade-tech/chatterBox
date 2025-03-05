@@ -3,7 +3,7 @@ import OnBoardingSide from "../ui/onBoardingSide";
 
 function Signup() {
   return (
-    <div className="w-full h-[100dvh] flex dark:bg-dark">
+    <div className="dark:bg-dark flex h-[100dvh] w-full">
       <SignupForm />
       <OnBoardingSide />
     </div>

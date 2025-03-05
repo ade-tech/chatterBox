@@ -19,8 +19,8 @@ function MobileNav({ to, LinkStyles, activeIcon, staleIcon, text }) {
           <span
             className={
               isActive
-                ? "font-bold text-sm text-dark dark:text-accent-light text-primary"
-                : "text-dark text-sm font-medium dark:text-accent-light"
+                ? "text-dark dark:text-accent-light text-primary text-sm font-bold"
+                : "text-dark dark:text-accent-light text-sm font-medium"
             }
           >
             {text}

@@ -21,7 +21,7 @@ const FormInput = React.forwardRef(
       autoComplete = "text",
       ...rest
     },
-    ref
+    ref,
   ) => {
     if (type === "file" && id !== "image-upload") {
       return (
@@ -29,7 +29,7 @@ const FormInput = React.forwardRef(
           <div className="flex items-center">
             <label
               htmlFor="uploadProfile"
-              className="w-full h-12 relative text-white rounded-full bg-primary-light items-center justify-center gap-2 flex"
+              className="bg-primary-light relative flex h-12 w-full items-center justify-center gap-2 rounded-full text-white"
             >
               {icon} Upload Profile Image
             </label>
@@ -54,13 +54,13 @@ const FormInput = React.forwardRef(
       );
     }
     return (
-      <div className="flex flex-col gap-3 w-full dark:text-white">
+      <div className="flex w-full flex-col gap-3 dark:text-white">
         {label && (
           <label className="text-md font-medium" htmlFor={id}>
             {label}
           </label>
         )}
-        <div className="flex items-center justify-center relative">
+        <div className="relative flex items-center justify-center">
           <input
             id={id}
             type={type}
@@ -71,7 +71,7 @@ const FormInput = React.forwardRef(
             autoComplete={autoComplete}
             className={`${
               error
-                ? `${styles} ${inputStyle} bg-red-300 placeholder:text-red-600 border border-red-600 `
+                ? `${styles} ${inputStyle} border border-red-600 bg-red-300 placeholder:text-red-600`
                 : `${styles} ${inputStyle} dark:bg-surface-dark dark:text-accent-light dark:placeholder:text-accent-light`
             }`}
             ref={ref}
@@ -88,7 +88,7 @@ const FormInput = React.forwardRef(
         )}
         {type === "password" && label && (
           <Link
-            className="text-right text-sm font-semibold mt-[-22px] text-secondary-dark"
+            className="text-secondary-dark mt-[-22px] text-right text-sm font-semibold"
             to="/auth/forgot-pass"
           >
             Forgot Password?
@@ -96,7 +96,7 @@ const FormInput = React.forwardRef(
         )}
       </div>
     );
-  }
+  },
 );
 
 FormInput.displayName = "FormInput";

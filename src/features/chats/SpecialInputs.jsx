@@ -6,7 +6,7 @@ const SpecialInputs = React.forwardRef(
       <div className="mb-1">
         <label
           htmlFor={label}
-          className="cursor-pointer w-full flex items-center justify-start pl-4 h-12 text-lg hover:bg-gray-200 dark:hover:bg-border-dark transition-colors duration-400 ease-in-out text-gray-600  dark:text-primary-dark font-medium"
+          className="dark:hover:bg-border-dark dark:text-primary-dark flex h-12 w-full cursor-pointer items-center justify-start pl-4 text-lg font-medium text-gray-600 transition-colors duration-400 ease-in-out hover:bg-gray-200"
         >
           {icon}
           {label}
@@ -26,7 +26,7 @@ const SpecialInputs = React.forwardRef(
         />
       </div>
     );
-  }
+  },
 );
 
 SpecialInputs.displayName = "SpecialInputs";

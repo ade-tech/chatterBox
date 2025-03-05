@@ -25,7 +25,7 @@ function Trigger({ children }) {
   const { open } = useContext(uploadModalContext);
 
   return React.Children.map(children, (child) =>
-    cloneElement(child, { onClick: open })
+    cloneElement(child, { onClick: open }),
   );
 }
 
@@ -36,17 +36,17 @@ function Window({ children }) {
   if (!openModal) return;
 
   return createPortal(
-    <div className="w-screen h-screen left-0  z-[20000] flex justify-center items-center fixed top-0  bg-[#0300189b] bg-opacity-50">
+    <div className="bg-opacity-50 fixed top-0 left-0 z-[20000] flex h-screen w-screen items-center justify-center bg-[#0300189b]">
       <div
         ref={ref}
-        className=" dark:bg-surface-dark rounded-xl bg-gray-100 drop-shadow-xl relative "
+        className="dark:bg-surface-dark relative rounded-xl bg-gray-100 drop-shadow-xl"
       >
         {cloneElement(children, {
           onClose: close,
         })}
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }
 

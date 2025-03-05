@@ -21,15 +21,15 @@ function ChatHeader({ recepient, isLoading, lastSeen }) {
 
   if (isLoading || isGettingUser)
     return (
-      <div className="flex items-center gap-4 w-full flex-wrap  py-4 px-4 border-b-1 border-b-gray-100  dark:border-b-bg-dark">
+      <div className="dark:border-b-bg-dark flex w-full flex-wrap items-center gap-4 border-b-1 border-b-gray-100 px-4 py-4">
         <ChatHeaderpreloader />
       </div>
     );
 
   return (
-    <div className="flex items-center gap-4 w-full flex-wrap  py-4 px-4 border-b-1 border-b-gray-100  dark:border-b-bg-dark">
+    <div className="dark:border-b-bg-dark flex w-full flex-wrap items-center gap-4 border-b-1 border-b-gray-100 px-4 py-4">
       <button
-        className="md:hidden bg-gray-200 dark:bg-surface-dark px-2 py-2 rounded-full -translate-x-5"
+        className="dark:bg-surface-dark -translate-x-5 rounded-full bg-gray-200 px-2 py-2 md:hidden"
         onClick={() => navigate(`/chats`)}
       >
         <HiArrowLeft size={15} className="text-white" />

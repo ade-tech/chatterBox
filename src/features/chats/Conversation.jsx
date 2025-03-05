@@ -21,14 +21,14 @@ function Conversation() {
 
   const { data: chat, isLoading: isCheckingChat } = useChatCheck(
     user_id,
-    data?.user_id
+    data?.user_id,
   );
 
   useEffect(() => {
     setLastSeen(data?.last_seen);
   }, [data]);
   const { data: initalMessages, isLoading: isGettingMessages } = useGetMessages(
-    chat?.data?.at(0)?.id
+    chat?.data?.at(0)?.id,
   );
   const [messages, setMessages] = useState(initalMessages || []);
 
@@ -50,7 +50,7 @@ function Conversation() {
         },
         (payload) => {
           setMessages((curMessages) => [...curMessages, payload.new]);
-        }
+        },
       )
       .on(
         "postgres_changes",
@@ -62,7 +62,7 @@ function Conversation() {
         },
         (payload) => {
           setLastSeen(payload.new.last_seen);
-        }
+        },
       )
 
       .subscribe();
@@ -73,7 +73,7 @@ function Conversation() {
   }, [messages, chat, data]);
 
   return (
-    <div className="flex flex-col h-[100dvh] ">
+    <div className="flex h-[100dvh] flex-col">
       <ChatHeader
         lastSeen={lastSeen}
         recepient={data}

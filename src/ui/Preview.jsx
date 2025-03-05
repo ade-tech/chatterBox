@@ -15,7 +15,7 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
 
   const fileExtension = preview.name.split(".").pop();
   const isADocument = ["pdf", "doc", "docx", "xls", "xlsx"].some(
-    (doc) => doc === fileExtension
+    (doc) => doc === fileExtension,
   );
   const isAVideo = preview.name.startsWith("video");
 
@@ -29,7 +29,7 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
     try {
       const imageName = `${crypto.randomUUID()}.${fileExtension}`.replaceAll(
         " ",
-        ""
+        "",
       );
       const imagePath = `${supabaseUrl}/storage/v1/object/public/chatFiles/${imageName}`;
 
@@ -41,7 +41,7 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
         console.error("Supabase storage upload error:", uploadError);
         toast.error(
           uploadError.message ||
-            "File upload failed. Please check your network and file size."
+            "File upload failed. Please check your network and file size.",
         );
         return;
       }
@@ -66,7 +66,7 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
         console.error("Supabase message insert error:", messageInsertError);
         toast.error(
           messageInsertError.message ||
-            "Could not send message. Please check your internet connection."
+            "Could not send message. Please check your internet connection.",
         );
         return;
       }
@@ -92,8 +92,8 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
         }}
       >
         {isADocument && (
-          <div className="self-start flex gap-2 items-center ">
-            <div className="w-16 h-18 items-center rounded-xl justify-center font-bold text-white flex bg-primary-light ">
+          <div className="flex items-center gap-2 self-start">
+            <div className="bg-primary-light flex h-18 w-16 items-center justify-center rounded-xl font-bold text-white">
               {" "}
               .{fileExtension}
             </div>
@@ -110,27 +110,27 @@ const Preview = ({ onClose, preview, sender_id, chat_id }) => {
         {preview?.type?.startsWith("image") ? (
           <img
             src={imageSource}
-            className="max-w-full max-h-full object-contain rounded-2xl"
+            className="max-h-full max-w-full rounded-2xl object-contain"
             alt="Preview"
           />
         ) : preview?.type?.startsWith("video") ? (
           <video
             src={imageSource}
-            className="max-w-full max-h-full object-contain rounded-2xl"
+            className="max-h-full max-w-full rounded-2xl object-contain"
             controls
           />
         ) : null}
       </div>
-      <div className="w-full flex justify-center items-center mt-4">
+      <div className="mt-4 flex w-full items-center justify-center">
         <input
           placeholder="Caption..."
-          className="border-b border-gray-400 h-12 pl-3 dark:border-secondary-dark flex-1 mx-3 dark:placeholder:text-primary-dark outline-none dark:text-primary-dark"
+          className="dark:border-secondary-dark dark:placeholder:text-primary-dark dark:text-primary-dark mx-3 h-12 flex-1 border-b border-gray-400 pl-3 outline-none"
           onChange={(e) => setCaption(e.target.value)}
         />
         <button
           className={`${
             isSubmitting ? "bg-accent-light" : "bg-primary-light"
-          } cursor-pointer  h-12 px-5 py-2 rounded-lg text-white`}
+          } h-12 cursor-pointer rounded-lg px-5 py-2 text-white`}
           onClick={handleClick}
           disabled={isSubmitting}
         >

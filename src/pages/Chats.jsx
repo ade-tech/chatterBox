@@ -7,14 +7,14 @@ import UserModalDetails from "../ui/UserModalDetails.jsx";
 
 function Chats() {
   return (
-    <div className="h-[100dvh] w-full flex flex-col pt-6 px-4 gap-3 relative overflow-hidden">
+    <div className="relative flex h-[100dvh] w-full flex-col gap-3 overflow-hidden px-4 pt-6">
       <Modal>
         <div className="">
           <Heading>Chats</Heading>
           <SearchBar context="chats" />
         </div>
 
-        <div className="flex-1 overflow-hidden flex flex-col">
+        <div className="flex flex-1 flex-col overflow-hidden">
           <ChatsContainer />
         </div>
         <Modal.Trigger opens="allChats">

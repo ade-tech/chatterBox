@@ -38,7 +38,7 @@ function MobileMenu({ mobileState }) {
   return (
     <ul
       ref={ref}
-      className="w-full fixed md:hidden z-[100] bottom-0 h-fit bg-light flex items-center justify-around transiton-all duration-700 pt-6 pb-4 border-t border-t-gray-200 dark:bg-dark dark:border-bg-dark"
+      className="bg-light transiton-all dark:bg-dark dark:border-bg-dark fixed bottom-0 z-[100] flex h-fit w-full items-center justify-around border-t border-t-gray-200 pt-6 pb-4 duration-700 md:hidden"
     >
       <div className="basis-1/5">
         <MobileNav
@@ -64,11 +64,11 @@ function MobileMenu({ mobileState }) {
           to="notifications"
           LinkStyles="basis-1/4 flex flex-col items-center"
           activeIcon={
-            <HiBell size={25} className={`${menuStyles} fill-current `} />
+            <HiBell size={25} className={`${menuStyles} fill-current`} />
           }
           staleIcon={
             <HiBell
-              className={`${menuStyles} fill-transparent stroke-1 stroke-current `}
+              className={`${menuStyles} fill-transparent stroke-current stroke-1`}
               size={25}
             />
           }
@@ -81,18 +81,18 @@ function MobileMenu({ mobileState }) {
           to="settings"
           LinkStyles="basis-1/4 flex flex-col items-center"
           activeIcon={
-            <HiCog size={25} className={`${menuStyles} fill-current `} />
+            <HiCog size={25} className={`${menuStyles} fill-current`} />
           }
           staleIcon={
             <HiCog
-              className={`${menuStyles} fill-transparent stroke-1 stroke-current `}
+              className={`${menuStyles} fill-transparent stroke-current stroke-1`}
               size={25}
             />
           }
           text="Settings"
         />
       </div>
-      <div className="basis-1/5 flex justify-center">
+      <div className="flex basis-1/5 justify-center">
         {" "}
         <ProfileImage width="w-12" height="h-12" image={data?.avatar_url} />
       </div>

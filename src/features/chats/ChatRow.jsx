@@ -29,13 +29,13 @@ function ChatRow({ chatDetails }) {
       onClick={() => navigate(`/chats/${chatDetails.profile.user_id}`)}
       className={
         chatInfo.id === lastChat
-          ? "w-full gap-4 flex justify-start pl-4 py-2 mb-2 items-center bg-gray-50 dark:bg-bg-dark rounded-lg cursor-pointer"
-          : "w-full gap-4 mb-2 flex justify-start pl-4 py-2 items-center cursor-pointer"
+          ? "dark:bg-bg-dark mb-2 flex w-full cursor-pointer items-center justify-start gap-4 rounded-lg bg-gray-50 py-2 pl-4"
+          : "mb-2 flex w-full cursor-pointer items-center justify-start gap-4 py-2 pl-4"
       }
     >
       <ProfileImage image={chatDetails.profile.avatar_url} />
       <div className="flex-1">
-        <h2 className="text-xl dark:text-white font-semibold">
+        <h2 className="text-xl font-semibold dark:text-white">
           {chatDetails.profile.fullName}
         </h2>
         <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -45,7 +45,7 @@ function ChatRow({ chatDetails }) {
         </p>
       </div>
       <div className="mr-5">
-        <span className="text-sm dark:text-accent-light font-light">
+        <span className="dark:text-accent-light text-sm font-light">
           {time}
         </span>
       </div>

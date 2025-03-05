@@ -6,8 +6,8 @@ import ProfileImage from "./Profile";
  */
 function OnBoardingSide() {
   return (
-    <div className=" hidden md:block md:basis-1/2 md:h-full py-5 px-12 ">
-      <div className="w-full rounded-4xl h-full flex flex-col items-center justify-center overflow-hidden bg-gradient-to-t from-[#030018] via-[#150F33] to-[#3A2D68] relative">
+    <div className="hidden px-12 py-5 md:block md:h-full md:basis-1/2">
+      <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-4xl bg-gradient-to-t from-[#030018] via-[#150F33] to-[#3A2D68]">
         <svg
           width="654"
           height="584"
@@ -22,43 +22,45 @@ function OnBoardingSide() {
           />
         </svg>
 
-        <div className="w-96 h-24 rounded-4xl bg-primary-dark z-20 rotate-[-3.14deg] pl-4 flex items-center gap-3 drop-shadow-[0_15px_10px_#33275e75]  animate-fadeInUp">
+        <div className="bg-primary-dark animate-fadeInUp z-20 flex h-24 w-96 rotate-[-3.14deg] items-center gap-3 rounded-4xl pl-4 drop-shadow-[0_15px_10px_#33275e75]">
           <ProfileImage image="001.png" width="w-16" height="h-16" />
           <div>
-            <h2 className="text-2xl font-bold text-white p-0 m-0">
+            <h2 className="m-0 p-0 text-2xl font-bold text-white">
               Abdone 💘💘
             </h2>
-            <p className="p-0 m-0 text-md text-[#EDE7FF]">
+            <p className="text-md m-0 p-0 text-[#EDE7FF]">
               I got you the bag...
             </p>
           </div>
         </div>
-        <div className="w-md h-24 mt-2  mb-4 rounded-4xl bg-white  rotate-[3.14deg] pl-4 flex items-center gap-3 animate-fadeInUp">
+        <div className="animate-fadeInUp mt-2 mb-4 flex h-24 w-md rotate-[3.14deg] items-center gap-3 rounded-4xl bg-white pl-4">
           <ProfileImage image="002.png" width="w-16" height="h-16" />
           <div>
-            <h2 className="text-2xl font-bold text-bg-dark p-0 m-0">
+            <h2 className="text-bg-dark m-0 p-0 text-2xl font-bold">
               My Wife 🔒💖
             </h2>
-            <p className="p-0 m-0 text-md text-bg-dark">
+            <p className="text-md text-bg-dark m-0 p-0">
               I am going to the market, do you...
             </p>
           </div>
         </div>
-        <div className="w-96 h-24  animate-fadeInUp  rounded-4xl bg-accent-dark  rotate-[-1.15deg] pl-4 flex items-center gap-3   ">
+        <div className="animate-fadeInUp bg-accent-dark flex h-24 w-96 rotate-[-1.15deg] items-center gap-3 rounded-4xl pl-4">
           <ProfileImage image="003.png" width="w-16" height="h-16" />
           <div>
-            <h2 className="text-2xl font-bold text-dark p-0 m-0">Captain 🫡🫡</h2>
-            <p className="p-0 m-0 text-md text-bg-dark">I got you the bag...</p>
+            <h2 className="text-dark m-0 p-0 text-2xl font-bold">
+              Captain 🫡🫡
+            </h2>
+            <p className="text-md text-bg-dark m-0 p-0">I got you the bag...</p>
           </div>
         </div>
-        <div className="mt-20 z-20 text-center">
+        <div className="z-20 mt-20 text-center">
           <p className="text-5xl font-medium text-white">
-            <span className="font-extrabold bg-gradient-to-l from-[#6F00FF] to-[#00FF7F] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-l from-[#6F00FF] to-[#00FF7F] bg-clip-text font-extrabold text-transparent">
               Chatting
             </span>{" "}
             made easy!
           </p>
-          <p className="text-white font-light mt-4 text-lg/tight">
+          <p className="mt-4 text-lg/tight font-light text-white">
             Connect and chat with friend, collegues and family
             <br />
             seamlessly with chatterbox.

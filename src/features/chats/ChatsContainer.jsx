@@ -32,7 +32,7 @@ function ChatsContainer() {
             height="150px"
             viewBox="0 0 129 98"
             fill="none"
-            className="stroke-1 stroke-bg-dark dark:stroke-accent-dark"
+            className="stroke-bg-dark dark:stroke-accent-dark stroke-1"
             xmlns="http://www.w3.org/2000/svg"
             strokeWidth="2"
             strokeLinecap="round"
@@ -91,7 +91,7 @@ function ChatsContainer() {
     );
 
   return (
-    <div className="w-full flex-grow overflow-hidden hover:overflow-y-scroll scrollbar-custom">
+    <div className="scrollbar-custom w-full flex-grow overflow-hidden hover:overflow-y-scroll">
       {chats
         ?.filter((curChat) => curChat.lastChat !== "")
         .map((chat) => (

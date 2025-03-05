@@ -48,14 +48,14 @@ function ProfileContainer() {
           toast.success("User Profile updated");
           setIsEditting(false);
         },
-      }
+      },
     );
   }
   if (isLoading || isGettingUser) return <Spinner />;
 
   return (
     <>
-      <div className="w-full flex items-center justify-center flex-col">
+      <div className="flex w-full flex-col items-center justify-center">
         {!isEditting && (
           <>
             <ProfileImage
@@ -65,52 +65,52 @@ function ProfileContainer() {
               type="image"
               image={avatar_url}
             />
-            <h1 className="text-xl font-semibold dark:text-accent-light">
+            <h1 className="dark:text-accent-light text-xl font-semibold">
               {fullName ? fullName : "No Username"}
             </h1>
-            <p className="text-gray-500 dark:text-accent-dark">@{username}</p>
+            <p className="dark:text-accent-dark text-gray-500">@{username}</p>
           </>
         )}
         {!isEditting && (
           <button
             onClick={() => setIsEditting(true)}
-            className="cursor-pointer flex items-center mt-6 bg-primary-light text-white px-4 py-2 rounded-full"
+            className="bg-primary-light mt-6 flex cursor-pointer items-center rounded-full px-4 py-2 text-white"
           >
-            <HiOutlinePencil className="mr-1.5 " /> Edit Profile
+            <HiOutlinePencil className="mr-1.5" /> Edit Profile
           </button>
         )}
         <form
-          className="w-full mt-8 flex flex-col justify-center items-center"
+          className="mt-8 flex w-full flex-col items-center justify-center"
           onSubmit={handleSubmit(submitFn)}
         >
           {isEditting && (
             <>
-              <div className="flex w-full gap-1 px-10 mb-8 relative">
+              <div className="relative mb-8 flex w-full gap-1 px-10">
                 <label
                   htmlFor="image-upload"
-                  className="relative cursor-pointer flex items-center"
+                  className="relative flex cursor-pointer items-center"
                 >
                   <div
-                    className={`w-24 h-24 rounded-full overflow-hidden dark:text-accent-light border ${
+                    className={`dark:text-accent-light h-24 w-24 overflow-hidden rounded-full border ${
                       selectedFile
                         ? "border-green-500"
                         : errors?.avatar_url?.message
-                        ? "border-red-500"
-                        : "border-gray-300"
+                          ? "border-red-500"
+                          : "border-gray-300"
                     }`}
                   >
-                    <span className="absolute top-12 font-semibold text-sm left-6 text-center">
+                    <span className="absolute top-12 left-6 text-center text-sm font-semibold">
                       Upload <br />
                       Image
                     </span>
                     <img
                       src={preview || "/default-user.jpg"}
                       alt="Profile"
-                      className="w-full h-full opacity-20 object-cover"
+                      className="h-full w-full object-cover opacity-20"
                     />
                   </div>
                 </label>
-                <div className="h-full flex-grow ml-3 flex flex-col items-center justify-center gap-2">
+                <div className="ml-3 flex h-full flex-grow flex-col items-center justify-center gap-2">
                   <FormInput
                     styles="w-56 h-10 bg-gray-50 rounded-full focus:outline-none pl-6"
                     error={errors?.fullName?.message}
@@ -181,7 +181,7 @@ function ProfileContainer() {
               error={errors?.bio?.message}
             />
           </div>
-          <div className=" w-3/4">
+          <div className="w-3/4">
             <FormInput
               label="Phone Number"
               styles="w-full"
@@ -194,7 +194,7 @@ function ProfileContainer() {
               disabled={!isEditting}
             />
           </div>
-          <div className="w-full flex gap-2 items-center justify-center">
+          <div className="flex w-full items-center justify-center gap-2">
             {isEditting && (
               <>
                 <Button

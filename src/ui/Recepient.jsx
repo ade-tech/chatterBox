@@ -1,15 +1,15 @@
 function Recepient({ name, status }) {
   return (
     <div className="flex flex-col">
-      <h2 className="p-0 m-0 text-md md:text-lg dark:text-white font-semibold">
+      <h2 className="text-md m-0 p-0 font-semibold md:text-lg dark:text-white">
         {name}
       </h2>
       <p
         className={`${
           status === "Online"
-            ? "font-bold dark:text-primary-dark"
+            ? "dark:text-primary-dark font-bold"
             : "dark:text-gray-400"
-        } p-0 m-0 text-xs md:text-sm`}
+        } m-0 p-0 text-xs md:text-sm`}
       >
         {status}
       </p>

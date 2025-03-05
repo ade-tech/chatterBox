@@ -1,23 +1,23 @@
 function ChatPreloader() {
   return (
-    <div className="w-full gap-4 mb-2 flex justify-start pl-4 py-2 items-center cursor-pointer animate-pulse">
-      <div className="w-12 h-12 bg-gray-200 dark:bg-surface-dark rounded-full"></div>
+    <div className="mb-2 flex w-full animate-pulse cursor-pointer items-center justify-start gap-4 py-2 pl-4">
+      <div className="dark:bg-surface-dark h-12 w-12 rounded-full bg-gray-200"></div>
       <div className="flex flex-col gap-2">
-        <div className="w-60 h-5 rounded-3xl bg-gray-200 dark:bg-surface-dark  "></div>
-        <div className="w-54 h-4 rounded-2xl bg-gray-200 dark:bg-surface-dark "></div>
+        <div className="dark:bg-surface-dark h-5 w-60 rounded-3xl bg-gray-200"></div>
+        <div className="dark:bg-surface-dark h-4 w-54 rounded-2xl bg-gray-200"></div>
       </div>
-      <div className="w-12 h-4 rounded-2xl bg-gray-200 dark:bg-surface-dark "></div>
+      <div className="dark:bg-surface-dark h-4 w-12 rounded-2xl bg-gray-200"></div>
     </div>
   );
 }
 
 export function ChatHeaderpreloader() {
   return (
-    <div className="w-full gap-3 mb-2 flex justify-start pl-4 py-2 items-center cursor-pointer animate-pulse">
-      <div className="w-12 h-12 bg-gray-200 dark:bg-surface-dark rounded-full"></div>
+    <div className="mb-2 flex w-full animate-pulse cursor-pointer items-center justify-start gap-3 py-2 pl-4">
+      <div className="dark:bg-surface-dark h-12 w-12 rounded-full bg-gray-200"></div>
       <div className="flex flex-col gap-2">
-        <div className="w-60 h-5 rounded-3xl bg-gray-200 dark:bg-surface-dark  "></div>
-        <div className="w-54 h-4 rounded-2xl bg-gray-200 dark:bg-surface-dark "></div>
+        <div className="dark:bg-surface-dark h-5 w-60 rounded-3xl bg-gray-200"></div>
+        <div className="dark:bg-surface-dark h-4 w-54 rounded-2xl bg-gray-200"></div>
       </div>
     </div>
   );
@@ -28,14 +28,14 @@ export function MessagePreLoader() {
   return (
     <>
       <div className="w-full animate-pulse">
-        <div className="w-full mb-3">
-          <div className={`${basicStyles} ml-auto bg-primary-light`}></div>
+        <div className="mb-3 w-full">
+          <div className={`${basicStyles} bg-primary-light ml-auto`}></div>
         </div>
       </div>
       <div className="w-full">
-        <div className="w-full mb-3">
+        <div className="mb-3 w-full">
           <div
-            className={`${basicStyles} mr-auto bg-gray-100 dark:bg-bg-dark dark:border-transparent`}
+            className={`${basicStyles} dark:bg-bg-dark mr-auto bg-gray-100 dark:border-transparent`}
           ></div>
         </div>
       </div>

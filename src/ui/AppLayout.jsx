@@ -12,12 +12,12 @@ function AppLayout() {
   return (
     <ChatProvider>
       <OnlineProvider>
-        <div className="md:grid w-full h-[100dvh] transition-all duration-700 md:grid-cols-[0.5fr_3fr_6fr] relative  dark:bg-dark">
+        <div className="dark:bg-dark relative h-[100dvh] w-full transition-all duration-700 md:grid md:grid-cols-[0.5fr_3fr_6fr]">
           <div>
             <MobileMenu mobileState={setIsMobile} />
             <Menus styles="hidden md:flex" />
           </div>
-          <main className="border-r border-r-gray-100 dark:border-r-bg-dark ">
+          <main className="dark:border-r-bg-dark border-r border-r-gray-100">
             <Outlet />
           </main>
 

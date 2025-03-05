@@ -13,7 +13,7 @@ function UserList() {
 
   if (error) return <h1> Could not get Users</h1>;
   return (
-    <ul className="flex-grow pr-2 overflow-hidden overflow-y-scroll scrollbar-custom">
+    <ul className="scrollbar-custom flex-grow overflow-hidden overflow-y-scroll pr-2">
       {data.map((curUser) => (
         <UserItem user={curUser} key={curUser.id} />
       ))}

@@ -81,20 +81,20 @@ function SignupForm() {
           }
         },
         onError: () => toast.error("Code entered is not correct"),
-      }
+      },
     );
   }
 
   return (
-    <div className="basis-full justify-self-center px-8 md:basis-1/2 mx-auto py-5 flex flex-col justify-between overflow-hidden">
-      <div className="logo-side flex gap-2 items-center">
+    <div className="mx-auto flex basis-full flex-col justify-between justify-self-center overflow-hidden px-8 py-5 md:basis-1/2">
+      <div className="logo-side flex items-center gap-2">
         <img src="/Asset 1.svg" className="w-10" />
         <h1 className="text-2xl font-bold dark:text-white">ChatterBox</h1>
       </div>
 
-      <div className="flex flex-col gap-6 max-w-128">
+      <div className="flex max-w-128 flex-col gap-6">
         <div>
-          <h1 className="text-2xl font-extrabold mb-2 dark:text-accent-dark">
+          <h1 className="dark:text-accent-dark mb-2 text-2xl font-extrabold">
             Welcome
           </h1>
           <p className="dark:text-accent-light">
@@ -137,7 +137,7 @@ function SignupForm() {
             </div>
           )}
           {page === "2" && (
-            <div className="animate-fadeInRight duration-200 bg-white dark:bg-dark">
+            <div className="animate-fadeInRight dark:bg-dark bg-white duration-200">
               <div className="flex flex-col gap-2">
                 <div className="flex gap-3">
                   {inputRefs.map((ref, index) => (
@@ -146,7 +146,7 @@ function SignupForm() {
                       ref={ref}
                       {...register(`code_${index}`)}
                       type="text"
-                      className="w-1/7 h-14 md:h-16 text-3xl text-center rounded-lg bg-surface-dark focus:outline-0 focus:ring-1 focus:ring-accent-light text-primary-dark"
+                      className="bg-surface-dark focus:ring-accent-light text-primary-dark h-14 w-1/7 rounded-lg text-center text-3xl focus:ring-1 focus:outline-0 md:h-16"
                       onPaste={handlePaste}
                       onChange={(e) => {
                         if (e.target.value && index < 5) {
@@ -183,11 +183,11 @@ function SignupForm() {
         </form>
       </div>
       <div className="w-full pb-4">
-        <p className="text-center dark:text-accent-dark">
+        <p className="dark:text-accent-dark text-center">
           Already have an account?
           <Link
             to="/login"
-            className="font-semibold underline text-secondary-dark"
+            className="text-secondary-dark font-semibold underline"
           >
             Sign In
           </Link>

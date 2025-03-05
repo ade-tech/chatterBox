@@ -4,7 +4,7 @@ import { useTheme } from "../contexts/ThemeContext";
 function Typing() {
   const { mode } = useTheme();
   return (
-    <div className="w-16 h-12 flex items-center justify-center rounded-3xl bg-gray-200 dark:bg-bg-dark ">
+    <div className="dark:bg-bg-dark flex h-12 w-16 items-center justify-center rounded-3xl bg-gray-200">
       <SyncLoader
         speedMultiplier={0.7}
         size={7}

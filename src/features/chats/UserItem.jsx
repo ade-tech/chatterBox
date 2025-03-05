@@ -20,7 +20,7 @@ function UserItem({ user }) {
 
   return (
     <li
-      className="px-2 py-1 flex gap-3 items-center  cursor-pointer hover:dark:bg-surface-dark hover:bg-gray-100 transition-all duration-500  rounded-md"
+      className="hover:dark:bg-surface-dark flex cursor-pointer items-center gap-3 rounded-md px-2 py-1 transition-all duration-500 hover:bg-gray-100"
       onClick={() => {
         if (data.data.length > 0) {
           navigate(`/chats/${user_id}`);
@@ -33,11 +33,11 @@ function UserItem({ user }) {
       }}
     >
       <ProfileImage width="w-10" height="h-10" image={user.avatar_url} />
-      <div className="flex-grow h-full flex flex-col justify-center border-b border-b-gray-100 py-2 dark:border-b-bg-dark">
+      <div className="dark:border-b-bg-dark flex h-full flex-grow flex-col justify-center border-b border-b-gray-100 py-2">
         <h1 className="p-0 leading-4 font-bold dark:text-white">
           {user.fullName}
         </h1>
-        <p className="p-0 m-0 text-xs text-gray-500">{user.bio}</p>
+        <p className="m-0 p-0 text-xs text-gray-500">{user.bio}</p>
       </div>
     </li>
   );

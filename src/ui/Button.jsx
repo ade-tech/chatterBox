@@ -17,8 +17,8 @@ function Button({
     return (
       <button
         className={`${styles} ${
-          disabled ? "opacity-50 cursor-not-allowed" : ""
-        } ${commonStyles} text-white bg-secondary-dark hover:bg-accent-light`}
+          disabled ? "cursor-not-allowed opacity-50" : ""
+        } ${commonStyles} bg-secondary-dark hover:bg-accent-light text-white`}
         onClick={!disabled ? onClick : undefined}
         disabled={disabled}
         type={type}
@@ -34,8 +34,8 @@ function Button({
           isLoading
             ? `bg-accent-light`
             : `${styles} ${commonStyles} ${
-                disabled ? "opacity-50 cursor-not-allowed" : ""
-              } text-dark bg-white border border-gray-400 hover:bg-gray-50`
+                disabled ? "cursor-not-allowed opacity-50" : ""
+              } text-dark border border-gray-400 bg-white hover:bg-gray-50`
         }
         onClick={!disabled ? onClick : undefined}
         disabled={disabled}

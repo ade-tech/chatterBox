@@ -36,10 +36,10 @@ function Window({ children }) {
   if (!isOpen) return null;
 
   return (
-    <div className="w-screen h-screen left-0 flex justify-center fixed top-0  bg-transparent">
+    <div className="fixed top-0 left-0 flex h-screen w-screen justify-center bg-transparent">
       <div
         ref={ref}
-        className="w-52 h-45 dark:bg-surface-dark rounded-xl bg-gray-100 absolute bottom-18 left-5 md:left-[38%] drop-shadow-xl pt-2"
+        className="dark:bg-surface-dark absolute bottom-18 left-5 h-45 w-52 rounded-xl bg-gray-100 pt-2 drop-shadow-xl md:left-[38%]"
       >
         {React.Children.map(children, (child) => {
           return cloneElement(child, { onClose: CloseFn });

@@ -10,19 +10,19 @@ function Logout({ type }) {
       disabled={isLoggingOut}
       className={`${
         type === "long" &&
-        "flex bg-red-500 gap-1 items-center justify-center px-4 rounded-2xl mt-3 md:mt-10 py-2 cursor-pointer"
+        "mt-3 flex cursor-pointer items-center justify-center gap-1 rounded-2xl bg-red-500 px-4 py-2 md:mt-10"
       }`}
     >
       <HiOutlineLogout
         size={30}
         className={` ${
           type !== "long"
-            ? "mb-4 stroke-current cursor-pointer text-dark dark:text-accent-light"
+            ? "text-dark dark:text-accent-light mb-4 cursor-pointer stroke-current"
             : "text-white"
-        } stroke-current cursor-pointer`}
+        } cursor-pointer stroke-current`}
       />
       {type === "long" && (
-        <span className="text-white font-semibold">Sign Out</span>
+        <span className="font-semibold text-white">Sign Out</span>
       )}
     </button>
   );

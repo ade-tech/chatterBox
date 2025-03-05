@@ -20,7 +20,7 @@ function ChatModal() {
 
   const { data: chat, isLoading: isCheckingChat } = useChatCheck(
     user_id,
-    data?.user_id
+    data?.user_id,
   );
 
   const { data: initalMessages } = useGetMessages(chat?.data?.at(0)?.id);
@@ -44,7 +44,7 @@ function ChatModal() {
         },
         (payload) => {
           setMessages((curMessages) => [...curMessages, payload.new]);
-        }
+        },
       )
       .subscribe();
 
@@ -55,12 +55,12 @@ function ChatModal() {
 
   if (isLoading || isGettingUser || isCheckingChat || !chat?.data?.at(0)?.id)
     return (
-      <div className="fixed top-0 w-full  md:hidden z-[100] flex flex-col h-[100dvh] bg-white dark:bg-dark ">
+      <div className="dark:bg-dark fixed top-0 z-[100] flex h-[100dvh] w-full flex-col bg-white md:hidden">
         <MessagePreLoader />
       </div>
     );
   return (
-    <div className="fixed top-0 w-full  md:hidden z-[100] flex flex-col h-[100dvh] bg-white dark:bg-dark ">
+    <div className="dark:bg-dark fixed top-0 z-[100] flex h-[100dvh] w-full flex-col bg-white md:hidden">
       <ChatHeader recepient={data} isLoading={isCheckingChat} />
       <ConversationContent messages={messages} key={chat?.data?.at(0).id} />
       <ChatInputForm chatID={chat?.data?.at(0)?.id} currentID={user_id} />

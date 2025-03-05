@@ -11,7 +11,7 @@ function ChatsMain({ isMobile }) {
   console.log(isMobile);
   if (!activeChat)
     return (
-      <div className="hidden h-[100dvh] md:h-screen w-full md:flex items-center justify-center">
+      <div className="hidden h-[100dvh] w-full items-center justify-center md:flex md:h-screen">
         <Empty
           context="Conversation"
           info="There is no active conversation Selected"
@@ -25,7 +25,7 @@ function ChatsMain({ isMobile }) {
               strokeLinecap="round"
               strokeWidth="2"
               strokeLinejoin="round"
-              className="stroke-1 stroke-bg-dark dark:stroke-accent-dark"
+              className="stroke-bg-dark dark:stroke-accent-dark stroke-1"
             >
               <path
                 d="M59.3197 70.7797V90.7797L2.38965 57.9097V37.9097L7.38965 40.7897L30.4197 54.0897L39.0997 59.1097L53.0997 67.1897L59.3197 70.7797Z"
@@ -70,8 +70,8 @@ function ChatsMain({ isMobile }) {
   return (
     <div
       className={`${
-        isMobile ? "absolute z-[1000] top-0 bg-white dark:bg-dark" : "relative"
-      } flex flex-col h-[100dvh] w-full px-4`}
+        isMobile ? "dark:bg-dark absolute top-0 z-[1000] bg-white" : "relative"
+      } flex h-[100dvh] w-full flex-col px-4`}
     >
       <Conversation />
     </div>

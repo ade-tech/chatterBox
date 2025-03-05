@@ -12,7 +12,7 @@ function NavigationButton({ ActiveIcon, staleIcon, linkTo }) {
   return (
     <NavLink
       to={linkTo}
-      className="w-full flex flex-col items-center"
+      className="flex w-full flex-col items-center"
       role="li"
     >
       {({ isActive }) => (
@@ -21,8 +21,8 @@ function NavigationButton({ ActiveIcon, staleIcon, linkTo }) {
           <span
             className={
               isActive
-                ? "font-bold text-sm text-dark dark:text-accent-light text-primary"
-                : "text-dark text-sm font-medium dark:text-accent-light"
+                ? "text-dark dark:text-accent-light text-primary text-sm font-bold"
+                : "text-dark dark:text-accent-light text-sm font-medium"
             }
           >
             {linkTo}
