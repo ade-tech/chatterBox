@@ -2,17 +2,16 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { CiCircleInfo } from "react-icons/ci";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import FormInput from "../../ui/FormInput";
 import Button from "../../ui/Button";
 import supabase from "../../services/supabase";
-import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 import { useCreateProfile } from "./useSignup";
 import { toast } from "react-toastify";
+import { useUser } from "../../hooks/useUser";
 
 function OnbordingForm() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { user_id, user_email } = UseCurrentUserData();
+  const { userData } = useUser();
   const [preview, setPreview] = useState(null);
   const page = searchParams.get("step") || "1";
   const { handleSubmit, register, trigger, watch, formState, control } =
@@ -28,8 +27,8 @@ function OnbordingForm() {
     console.log(data);
     createUserProfile(
       {
-        user_id,
-        email: user_email,
+        user_id: userData?.id,
+        email: userData?.email,
         fullName: data.fullname,
         username: data.username,
         phoneNumber: data.PhoneNumber,
@@ -81,8 +80,8 @@ function OnbordingForm() {
             to be addressed?
           </p>
           <p className="text-xs text-gray-500">
-            How do you want <br />
-            to be addressed?
+            Your personal <br />
+            information.
           </p>
         </div>
       </div>
@@ -220,7 +219,7 @@ function OnbordingForm() {
               <input
                 type="email"
                 disabled
-                value={user_email}
+                value={userData?.email}
                 placeholder="Choose a preferred username "
                 className={`${errors?.username?.message && "border-1 border-red-500"} dark:bg-surface-dark dark:text-primary-dark placeholder:dark:text-primary-dark mt-7 h-12 w-full rounded-full bg-gray-200 pl-8 text-sm opacity-50 drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
               />
