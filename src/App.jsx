@@ -1,5 +1,4 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import Chats from "./pages/Chats";
@@ -10,10 +9,10 @@ import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Onboarding from "./pages/Onboarding";
-import Signup from "./pages/Signup";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { Bounce, ToastContainer } from "react-toastify";
 import { CurrentUserProvider } from "./contexts/CurrentUserContext";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 /**
  * Query client configuration for React Query.
@@ -49,7 +48,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <CurrentUserProvider>
           <Analytics />
-          {/* <ReactQueryDevtools initialIsOpen={false} buttonPosition="top-left" /> */}
+          <ReactQueryDevtools initialIsOpen={false} buttonPosition="top-left" />
           <Routes>
             <Route
               element={
@@ -67,8 +66,7 @@ function App() {
             </Route>
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="*" element={<PageNotFound />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/get-in" element={<Login />} />
           </Routes>
         </CurrentUserProvider>
       </QueryClientProvider>

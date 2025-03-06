@@ -1,24 +1,26 @@
 import { BounceLoader } from "react-spinners";
 import { useCurrentUser } from "../features/Authentication/useCurrentUser";
 import { Navigate } from "react-router-dom";
-import { checkUserExistence } from "../services/SignupApi";
+import { GetRecepientProfile } from "../features/profile/useProfile";
 
 function ProtectedRoute({ children }) {
   const { data, isLoading, error } = useCurrentUser();
-  const { data: profile } = checkUserExistence(data?.user?.id);
+  const { data: profile, isLoading: isChecking } = GetRecepientProfile(
+    data?.id,
+  );
 
-  const hasProfile = data?.length > 0;
+  const hasProfile = profile?.email;
 
-  if (isLoading)
+  if (isLoading || isChecking)
     return (
       <div className="dark:bg-dark flex h-screen w-screen items-center justify-center">
         <BounceLoader color="#9e7ffb" size={120} />
       </div>
     );
-  if (error) return <Navigate to="/login" replace />;
+  if (error) return <Navigate to="/get-in" replace />;
 
   if (!data || data.role !== "authenticated") {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/get-in" replace />;
   }
 
   if (data.role === "authenticated" && hasProfile) return children;

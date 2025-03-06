@@ -9,27 +9,18 @@ import supabase, { supabaseUrl } from "./supabase";
  * @returns {Object} The signup response data.
  * @throws {Error} If there is an error during signup.
  */
-export async function emailSignup({
+export async function createProfile({
   email,
-  password,
+  user_id,
+  bio,
   username,
   fullName,
   phoneNumber,
   avatar,
 }) {
   try {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
     const fileName = `${crypto.randomUUID()}`;
     const filePath = `${supabaseUrl}/storage/v1/object/public/userProfile/${fileName}`;
-
-    if (error) throw new Error(error.message);
-    const userId = data?.user?.id;
-
-    if (!userId) throw new Error("User ID not found");
 
     const { error: uploadError } = await supabase.storage
       .from("userProfile")
@@ -37,21 +28,25 @@ export async function emailSignup({
 
     if (uploadError) throw new Error("could not upload image");
 
-    const { error: profileError } = await supabase.from("profiles").insert([
-      {
-        user_id: userId,
-        username,
-        fullName,
-        phoneNumber,
-        avatar_url: filePath,
-      },
-    ]);
+    const { data, error: profileError } = await supabase
+      .from("profiles")
+      .insert([
+        {
+          user_id,
+          bio,
+          email,
+          username,
+          fullName,
+          phoneNumber,
+          avatar_url: filePath,
+        },
+      ]);
 
     if (profileError) throw new Error(profileError.message);
 
     const { error: settingsError } = await supabase
       .from("settings")
-      .insert([{ user_id: userId }]);
+      .insert([{ user_id }]);
 
     if (settingsError) return;
     return data;
@@ -61,7 +56,7 @@ export async function emailSignup({
 }
 
 export async function sendOTP(email) {
-  const { data, error } = await supabase.auth.signInWithOtp({
+  const { error } = await supabase.auth.signInWithOtp({
     email,
   });
 

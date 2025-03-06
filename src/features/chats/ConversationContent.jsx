@@ -31,6 +31,19 @@ function ConversationContent({
       </div>
     );
 
+  if (messages?.length === 0) {
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <div className="bg-bg-dark h-fit basis-2/6 rounded-3xl p-4 text-center">
+          <p className="mt-2 dark:text-white">
+            No messages here yet! <br /> Send a messages to get started
+          </p>
+          <img src="/empty.webp" alt="No chats" className="mt-2 pr-10" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="scroll-snap-y-container scrollbar-custom h-[100vh] overflow-auto px-4 pt-3">
       {messages?.map((curMessage, i) => {

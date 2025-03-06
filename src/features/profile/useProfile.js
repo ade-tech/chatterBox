@@ -7,16 +7,13 @@ import {
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 
 export function GetProfileData() {
-  const { user_id: currentUserID, isGettingUser } = UseCurrentUserData();
-
-  let searchID = currentUserID;
+  const { user_id, isGettingUser } = UseCurrentUserData();
   const { data, isLoading } = useQuery({
-    queryKey: [`userProfile--{${searchID}}`, searchID],
-    queryFn: ({ queryKey }) => {
-      const [, searchUser] = queryKey.at(0).split("--");
-      return getUserProfile(searchUser);
+    queryKey: [`userProfile--{${user_id}}`, user_id],
+    queryFn: () => {
+      return getUserProfile(user_id);
     },
-    enabled: !!searchID,
+    enabled: !!user_id,
   });
 
   return { data, isLoading, isGettingUser };

@@ -6,17 +6,18 @@ import {
   getMessages,
 } from "../../services/ChatApi";
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
+import { useUser } from "../../hooks/useUser";
 
 /**
  * Custom hook to get all chats for the current user.
  * @returns {Object} The chat data, loading state, and error state.
  */
 export function useAllChats() {
-  const { user_id: currentUserID } = UseCurrentUserData();
+  const { userData } = useUser();
   const { data, isLoading, error } = useQuery({
-    queryFn: () => getAllChats(currentUserID),
+    queryFn: () => getAllChats(userData?.id),
     queryKey: ["AllChats"],
-    enabled: !!currentUserID,
+    enabled: !!userData,
   });
 
   return { data, isLoading, error };

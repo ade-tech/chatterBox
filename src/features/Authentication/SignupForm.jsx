@@ -7,6 +7,7 @@ import { useGetIn } from "./useSignup";
 import { toast } from "react-toastify";
 import { sendOTP } from "../../services/SignupApi";
 import { checkUserExistence } from "../../services/SignupApi";
+import supabase from "../../services/supabase";
 
 /**
  * SignupForm component handles user registration.
@@ -69,15 +70,15 @@ function SignupForm() {
     getIn(
       { email: data.email, token: code },
       {
-        onSuccess: async (userData) => {
-          toast.success("Welcome");
-          const hasProfile = await checkUserExistence(userData.user.id);
-          if (hasProfile.length > 0) {
-            console.log("tiggered cha");
-            navigate("/chats");
-          } else {
-            console.log("tiggered by onb");
+        onSuccess: async (data) => {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("user_id")
+            .eq("user_id", data.user.id);
+          if (profile == null) {
             navigate("/onboarding");
+          } else {
+            navigate("/");
           }
         },
         onError: () => toast.error("Code entered is not correct"),
@@ -146,7 +147,7 @@ function SignupForm() {
                       ref={ref}
                       {...register(`code_${index}`)}
                       type="text"
-                      className="bg-surface-dark focus:ring-accent-light text-primary-dark h-14 w-1/7 rounded-lg text-center text-3xl focus:ring-1 focus:outline-0 md:h-16"
+                      className="dark:bg-surface-dark dark:text-primary-dark dark:focus:ring-accent-light darK:text-primary-dark h-14 w-1/7 rounded-lg bg-gray-200 text-center text-3xl focus:ring-1 focus:outline-0 md:h-16"
                       onPaste={handlePaste}
                       onChange={(e) => {
                         if (e.target.value && index < 5) {

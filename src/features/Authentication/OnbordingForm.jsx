@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { CiCircleInfo } from "react-icons/ci";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import FormInput from "../../ui/FormInput";
 import Button from "../../ui/Button";
 import supabase from "../../services/supabase";
+import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
+import { useCreateProfile } from "./useSignup";
+import { toast } from "react-toastify";
 
 function OnbordingForm() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { user_id, user_email } = UseCurrentUserData();
   const [preview, setPreview] = useState(null);
   const page = searchParams.get("step") || "1";
   const { handleSubmit, register, trigger, watch, formState, control } =
@@ -17,6 +22,29 @@ function OnbordingForm() {
 
   const { errors, isValidating } = formState;
   const selectedFile = watch("avatar_url");
+  const { createUserProfile, isCreatingProfile } = useCreateProfile();
+
+  function handleSubmitSuccessFn(data) {
+    console.log(data);
+    createUserProfile(
+      {
+        user_id,
+        email: user_email,
+        fullName: data.fullname,
+        username: data.username,
+        phoneNumber: data.PhoneNumber,
+        avatar: data.avatar_url,
+        bio: data.bio,
+      },
+      {
+        onSuccess: () => {
+          toast.success("Welcome to chatterBox");
+          navigate("/");
+        },
+        onError: () => toast.error("could not create the profile"),
+      },
+    );
+  }
 
   async function handleNext(e) {
     e.preventDefault();
@@ -60,7 +88,7 @@ function OnbordingForm() {
       </div>
       <form
         className="md:dark:bg-bg-dark mt-12 flex flex-col items-center justify-center overflow-hidden px-6 py-4 md:mt-4 md:rounded-2xl md:bg-gray-50 md:px-10 md:py-8"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(handleSubmitSuccessFn)}
       >
         {page === "1" && (
           <>
@@ -155,7 +183,7 @@ function OnbordingForm() {
                   },
                 })}
                 placeholder="Choose a preferred username "
-                className={`${errors?.username?.message && "border-1 border-red-500"} dark:bg-bg-dark dark:text-primary-dark placeholder:dark:text-primary-dark h-12 w-full rounded-full bg-gray-100 pl-8 text-sm drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
+                className={`${errors?.username?.message && "border-1 border-red-500"} dark:bg-surface-dark dark:text-primary-dark placeholder:dark:text-primary-dark h-12 w-full rounded-full bg-gray-100 pl-8 text-sm drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
               />
 
               <span
@@ -173,7 +201,7 @@ function OnbordingForm() {
                   required: "Enter your government name",
                 })}
                 placeholder="Enter your full name"
-                className={`${errors?.fullname?.message && "border-1 border-red-500"} dark:bg-bg-dark dark:text-primary-dark placeholder:dark:text-primary-dark h-12 w-full rounded-full bg-gray-100 pl-8 text-sm drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
+                className={`${errors?.fullname?.message && "border-1 border-red-500"} dark:bg-surface-dark dark:text-primary-dark placeholder:dark:text-primary-dark h-12 w-full rounded-full bg-gray-100 pl-8 text-sm drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
               />
               <span
                 className={`${errors?.fullname?.message ? "text-red-500" : isValidating ? "text-green-500" : ""} ml-4 text-xs`}
@@ -189,19 +217,9 @@ function OnbordingForm() {
               <input
                 type="email"
                 disabled
-                value={"adede"}
-                {...register("username", {
-                  required: "Enter a unique username",
-                  validate: async (value) => {
-                    const { data } = await supabase
-                      .from("profiles")
-                      .select("username")
-                      .eq("username", value);
-                    if (data.length) return "Username has been taken";
-                  },
-                })}
+                value={user_email}
                 placeholder="Choose a preferred username "
-                className={`${errors?.username?.message && "border-1 border-red-500"} dark:bg-bg-dark dark:text-primary-dark placeholder:dark:text-primary-dark mt-7 h-12 w-full rounded-full bg-gray-200 pl-8 text-sm opacity-50 drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
+                className={`${errors?.username?.message && "border-1 border-red-500"} dark:bg-surface-dark dark:text-primary-dark placeholder:dark:text-primary-dark mt-7 h-12 w-full rounded-full bg-gray-200 pl-8 text-sm opacity-50 drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
               />
 
               <span
@@ -219,7 +237,7 @@ function OnbordingForm() {
                   required: "Enter your Phone Number",
                 })}
                 placeholder="Enter your Phone Number"
-                className={`${errors?.PhoneNumber?.message && "border-1 border-red-500"} dark:bg-bg-dark dark:text-primary-dark placeholder:dark:text-primary-dark h-12 w-full rounded-full bg-gray-100 pl-8 text-sm drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
+                className={`${errors?.PhoneNumber?.message && "border-1 border-red-500"} dark:bg-surface-dark dark:text-primary-dark placeholder:dark:text-primary-dark h-12 w-full rounded-full bg-gray-100 pl-8 text-sm drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
               />
               <span
                 className={`${errors?.PhoneNumber?.message && "text-red-500"} ml-4 text-xs`}
@@ -233,9 +251,9 @@ function OnbordingForm() {
                 {...register("bio", {
                   required: "Enter your A bio",
                 })}
-                value="i'm using chatterbox by Abdone"
+                defaultValue="i'm using chatterbox by Abdone"
                 placeholder="Enter your Bio"
-                className={`${errors?.bio?.message && "border-1 border-red-500"} dark:bg-bg-dark dark:text-primary-dark placeholder:dark:text-primary-dark h-12 w-full rounded-full bg-gray-100 pl-8 text-sm drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
+                className={`${errors?.bio?.message && "border-1 border-red-500"} dark:bg-surface-dark dark:text-primary-dark placeholder:dark:text-primary-dark h-12 w-full rounded-full bg-gray-100 pl-8 text-sm drop-shadow-xs placeholder:text-sm focus:outline-0 dark:drop-shadow-none`}
               />
               <span
                 className={`${errors?.bio?.message && "text-red-500"} ml-4 text-xs`}
@@ -256,9 +274,12 @@ function OnbordingForm() {
           )}
           <Button
             styles="w-24 h-12 ml-auto"
-            type={page === "2" && "submit"}
+            type={page === "2" ? "submit" : ""}
             name={`${page === "1" ? "Next \u2192" : "Submit"}`}
-            onClick={page === "1" && handleNext}
+            onClick={
+              page === "1" ? handleNext : handleSubmit(handleSubmitSuccessFn)
+            }
+            disabled={isCreatingProfile}
           />
         </div>
       </form>

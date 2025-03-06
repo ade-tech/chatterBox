@@ -54,7 +54,7 @@ const FormInput = React.forwardRef(
       );
     }
     return (
-      <div className="flex w-full flex-col gap-3 dark:text-white">
+      <div className="flex w-full flex-col dark:text-white">
         {label && (
           <label className="text-md font-medium" htmlFor={id}>
             {label}
@@ -80,10 +80,10 @@ const FormInput = React.forwardRef(
           {icon}
         </div>
         {error ? (
-          <p className="mt-2 mb-2 text-sm text-red-500">{error}</p>
+          <p className="mt-[-5px] mb-2 text-sm text-red-500">{error}</p>
         ) : (
           validating && (
-            <p className="mt-2 mb-2 text-sm text-green-500">Validating...</p>
+            <p className="mb-2 text-sm text-green-500">Validating...</p>
           )
         )}
         {type === "password" && label && (

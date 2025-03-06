@@ -4,16 +4,18 @@ import FormInput from "../../ui/FormInput";
 import Button from "../../ui/Button";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { GetProfileData, useUpdateUSerProfile } from "./useProfile";
+import { GetRecepientProfile, useUpdateUSerProfile } from "./useProfile";
 import Spinner from "../../ui/Spinner";
 import Logout from "../../ui/Logout";
 
 import { toast } from "react-toastify";
+import { useCurrentUser } from "../Authentication/useCurrentUser";
 
 function ProfileContainer() {
   const [preview, setPreview] = useState(null);
+  const { data: user, isLoading: isGettingUser, error } = useCurrentUser();
+  const { data, isLoading } = GetRecepientProfile(user?.id);
   const [isEditting, setIsEditting] = useState(false);
-  const { data, isLoading, isGettingUser } = GetProfileData();
   const { bio, avatar_url, username, fullName, phoneNumber, user_id } =
     data || {};
   const { control, watch, formState, handleSubmit, register, reset } = useForm({

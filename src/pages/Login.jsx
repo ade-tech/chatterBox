@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import LoginForm from "../features/Authentication/LoginForm";
+import SignupForm from "../features/Authentication/SignupForm";
 import { useCurrentUser } from "../features/Authentication/useCurrentUser";
 import OnBoardingSide from "../ui/onBoardingSide";
 import Spinner from "../ui/Spinner";
@@ -21,7 +21,7 @@ function Login() {
   return (
     <div className="dark:bg-dark flex h-[100dvh] w-full">
       <OnBoardingSide />
-      <LoginForm />
+      <SignupForm />
     </div>
   );
 }

@@ -22,8 +22,9 @@ function ChatsContainer() {
     );
 
   const chats = data;
+  const hasChatContent = chats?.filter((curChat) => curChat.lastChat !== "");
 
-  if (!chats || error || chats.length === 0)
+  if (!chats || error || hasChatContent.length === 0)
     return (
       <Empty
         icon={
