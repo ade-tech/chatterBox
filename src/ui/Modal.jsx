@@ -51,7 +51,7 @@ function Content({ children, name }) {
   if (curOpened !== name) return null;
 
   return (
-    <div className="absolute top-0 left-0 flex h-full w-full justify-center backdrop-blur-xs">
+    <div className="absolute top-0 left-0 z-[200] flex h-[100dvh] w-full justify-center backdrop-blur-xs">
       {cloneElement(children, { onClose: () => CloseModal() })}
     </div>
   );

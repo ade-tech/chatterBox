@@ -129,6 +129,9 @@ function OnbordingForm() {
                     max. Image size is <b>5MB</b>
                   </i>
                 </p>
+                {errors?.avatar_url?.message && (
+                  <p>{errors?.avatar_url?.message}</p>
+                )}
               </div>
               <Controller
                 control={control}

@@ -29,7 +29,7 @@ function UserModalDetails({ onClose }) {
       ref={ref}
       className={`${
         isClosing ? "animate-fadeOutDownAnimation" : "animate-fadeInUpAnimation"
-      } dark:bg-dark rounded-x-2xl fixed bottom-0 mx-auto flex h-3/4 w-full flex-col rounded-t-3xl bg-white px-5 py-5 duration-1000`}
+      } dark:bg-dark rounded-x-2xl fixed bottom-0 z-[250] mx-auto flex h-3/4 w-full flex-col rounded-t-3xl bg-white px-5 py-5 duration-1000`}
     >
       <div className="mb-4 flex items-center justify-between">
         <h1 className="dark:text-accent-dark ml-4 inline-block text-xl font-bold">

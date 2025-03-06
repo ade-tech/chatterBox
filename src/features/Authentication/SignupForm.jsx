@@ -183,17 +183,7 @@ function SignupForm() {
           )}
         </form>
       </div>
-      <div className="w-full pb-4">
-        <p className="dark:text-accent-dark text-center">
-          Already have an account?
-          <Link
-            to="/login"
-            className="text-secondary-dark font-semibold underline"
-          >
-            Sign In
-          </Link>
-        </p>
-      </div>
+      <div className="w-full pb-4"></div>
     </div>
   );
 }
