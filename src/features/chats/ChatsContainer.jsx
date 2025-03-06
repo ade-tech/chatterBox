@@ -34,7 +34,7 @@ function ChatsContainer() {
               height="150px"
               viewBox="0 0 129 98"
               fill="none"
-              className="stroke-bg-dark dark:stroke-accent-dark stroke-1"
+              className="stroke-bg-dark dark:stroke-accent-dark mt-3 stroke-1"
               xmlns="http://www.w3.org/2000/svg"
               strokeWidth="2"
               strokeLinecap="round"

@@ -17,16 +17,16 @@ function SettingContainer() {
   return (
     <div className="mt-8">
       {isLoading && isUpdatingSttings && (
-        <p className="text-center mx-auto dark:text-white">
+        <p className="mx-auto text-center dark:text-white">
           {isLoading ? "Loading..." : "Updating..."}
         </p>
       )}
       <div className="Profile mb-8">
-        <h1 className="text-2xl font-medium mb-3 dark:text-accent-light">
+        <h1 className="dark:text-accent-light mb-3 text-2xl font-medium">
           Privacy
         </h1>
-        <div className="w-full bg-gray-100 py-2.5 rounded-lg px-4 dark:bg-bg-dark flex justify-between items-center">
-          <p className="text-gray-600 text-sm dark:text-white">
+        <div className="dark:bg-bg-dark flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-2.5">
+          <p className="text-sm text-gray-600 dark:text-white">
             Nobody see that your online status
           </p>
           <ToggleButton
@@ -39,11 +39,11 @@ function SettingContainer() {
         </div>
       </div>
       <div className="Profile mb-24">
-        <h1 className="text-2xl font-medium mb-3 dark:text-accent-light">
+        <h1 className="dark:text-accent-light mb-3 text-2xl font-medium">
           Notifications
         </h1>
-        <div className="w-full bg-gray-100 py-2.5 rounded-lg px-4 dark:bg-bg-dark flex justify-between items-center">
-          <p className="text-gray-600 text-sm dark:text-white">
+        <div className="dark:bg-bg-dark flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-2.5">
+          <p className="text-sm text-gray-600 dark:text-white">
             Receive notifications
           </p>
           <ToggleButton
@@ -56,24 +56,11 @@ function SettingContainer() {
         </div>
       </div>
       <div className="Profile">
-        <h1 className="text-2xl font-medium mb-3 dark:text-accent-light">
+        <h1 className="dark:text-accent-light mb-3 text-2xl font-medium">
           Advanced
         </h1>
-        <div className="w-full mb-4 bg-gray-100 py-2.5 rounded-lg px-4 dark:bg-bg-dark flex justify-between items-center">
-          {isLoading && (
-            <div className="w-52 h-6 animate-pulse bg-gray-200 duration-300 dark:bg-surface-dark"></div>
-          )}
-          {!isLoading && (
-            <p className="text-gray-600 text-sm dark:text-white">{`${username.slice(
-              0,
-              3
-            )}****${username.slice(-1)}@${domain}`}</p>
-          )}
-          <button className="text-sm text-red-600 cursor-pointer focus:outline-0">
-            Change my Email
-          </button>
-        </div>
-        <button className="ml-1 mt-3 text-sm font-semibold dark:bg-red-900/30  text-red-600 bg-red-100 py-2 px-4 rounded-full focus:outline-0">
+
+        <button className="mt-3 ml-1 rounded-full bg-red-100 px-4 py-2 text-sm font-semibold text-red-600 focus:outline-0 dark:bg-red-900/30">
           Delete my Account
         </button>
       </div>
