@@ -1,12 +1,11 @@
 import Button from "../../ui/Button";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import FormInput from "../../ui/FormInput";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useGetIn } from "./useSignup";
 import { toast } from "react-toastify";
 import { sendOTP } from "../../services/SignupApi";
-import { checkUserExistence } from "../../services/SignupApi";
 import supabase from "../../services/supabase";
 
 /**
@@ -15,6 +14,7 @@ import supabase from "../../services/supabase";
  */
 function SignupForm() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isClickable, setIsClickable] = useState(false);
 
   const page = searchParams.get("page") || "1";
   const inputRefs = [
@@ -41,6 +41,14 @@ function SignupForm() {
   const email = watch("email");
 
   const { getIn, isGettingIn } = useGetIn();
+
+  useEffect(() => {
+    if (page === "2") {
+      setIsClickable(false);
+      const timer = setTimeout(() => setIsClickable(true), 150000);
+      return () => clearTimeout(timer); // Cleanup on unmount
+    }
+  }, [page]);
 
   const handlePaste = (e) => {
     e.preventDefault();
@@ -159,11 +167,23 @@ function SignupForm() {
                     />
                   ))}
                 </div>
+                <button
+                  disabled={!isClickable}
+                  className={` ${isClickable ? "dark:text-primary-dark cursor-pointer" : "dark:text-primary-dark/50 cursor-not-allowed"} text-bold dark:text-primary-light mr-4 self-end font-bold`}
+                  onClick={() => {
+                    if (isClickable) {
+                      sendOTP(email);
+                    }
+                  }}
+                >
+                  Resend Code
+                </button>
                 <div className="flex gap-2">
                   <Button
                     isLoading={isGettingIn}
                     styles="h-12 w-full basis-1/3"
                     ButtonStyletype="secondary"
+                    type="next"
                     name={"Back"}
                     disabled={isGettingIn}
                     onClick={(e) => {
