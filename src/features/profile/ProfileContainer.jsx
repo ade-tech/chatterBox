@@ -200,9 +200,9 @@ function ProfileContainer() {
             {isEditting && (
               <>
                 <Button
-                  name={isGettingUser ? "Editing..." : "Save Edits"}
+                  name={isUpdatingUser ? "Editing..." : "Save Edits"}
                   disabled={!formState.isDirty || isUpdatingUser}
-                  styles="w-2/6 px-4 py-2"
+                  styles={`${isUpdatingUser && "cursor-not-allowed"} w-2/6 px-4 py-2`}
                   type="submit"
                 />
 

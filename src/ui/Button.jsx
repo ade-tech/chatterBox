@@ -19,7 +19,7 @@ function Button({
         className={`${styles} ${
           disabled ? "cursor-not-allowed opacity-50" : ""
         } ${commonStyles} bg-secondary-dark hover:bg-accent-light text-white`}
-        onClick={!disabled ? onClick : undefined}
+        onClick={!disabled && onClick}
         disabled={disabled}
         type={type}
       >

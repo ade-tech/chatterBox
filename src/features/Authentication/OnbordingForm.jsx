@@ -275,7 +275,7 @@ function OnbordingForm() {
             />
           )}
           <Button
-            styles="w-24 h-12 ml-auto"
+            styles={`${isCreatingProfile && "cursor-not-allowed opacity-50"} w-24 h-12 ml-auto`}
             type={page === "2" ? "submit" : ""}
             name={`${page === "1" ? "Next \u2192" : "Submit"}`}
             onClick={

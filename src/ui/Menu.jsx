@@ -36,7 +36,7 @@ function Window({ children }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed top-0 left-0 flex h-screen w-screen justify-center bg-transparent">
+    <div className="fixed top-0 left-0 flex h-[100dvh] w-screen justify-center bg-transparent">
       <div
         ref={ref}
         className="dark:bg-surface-dark absolute bottom-18 left-5 h-45 w-52 rounded-xl bg-gray-100 pt-2 drop-shadow-xl md:left-[38%]"
