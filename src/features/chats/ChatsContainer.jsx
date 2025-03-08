@@ -10,6 +10,9 @@ import ChatPreloader from "../../ui/ChatPreloader";
 function ChatsContainer() {
   const { data, isLoading: isFetchingChats, error } = useAllChats();
 
+  const chats = data;
+  const hasChatContent = chats?.filter((curChat) => curChat.lastChat !== "");
+
   if (isFetchingChats)
     return (
       <>
@@ -20,9 +23,6 @@ function ChatsContainer() {
         ))}
       </>
     );
-
-  const chats = data;
-  const hasChatContent = chats?.filter((curChat) => curChat.lastChat !== "");
 
   if (!chats || error || hasChatContent.length === 0)
     return (

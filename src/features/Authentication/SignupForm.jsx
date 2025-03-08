@@ -46,7 +46,7 @@ function SignupForm() {
     if (page === "2") {
       setIsClickable(false);
       const timer = setTimeout(() => setIsClickable(true), 150000);
-      return () => clearTimeout(timer); // Cleanup on unmount
+      return () => clearTimeout(timer);
     }
   }, [page]);
 
@@ -112,38 +112,63 @@ function SignupForm() {
         </div>
         <form onSubmit={handleSubmit(submitSuccessFn)}>
           {page === "1" && (
-            <div className="animate-fadeInLeft duration-300">
-              <FormInput
-                id="email"
-                styles="w-full"
-                error={errors?.email?.message}
-                {...register("email", {
-                  required: "Enter a valid Email Address",
-                })}
-                placeholder="Enter your Email"
-                inputMode="email"
-                name="email"
-                autoComplete="email"
-                type="email"
-                disabled={isGettingIn}
-              />
+            <>
+              <div className="animate-fadeInLeft duration-300">
+                <FormInput
+                  id="email"
+                  styles="w-full"
+                  error={errors?.email?.message}
+                  {...register("email", {
+                    required: "Enter a valid Email Address",
+                  })}
+                  placeholder="Enter your Email"
+                  inputMode="email"
+                  name="email"
+                  autoComplete="email"
+                  type="email"
+                  disabled={isGettingIn}
+                />
 
-              <Button
-                isLoading={isGettingIn}
-                type="next"
-                name={"Next"}
-                disabled={isGettingIn}
-                onClick={async (e) => {
-                  e.preventDefault();
-                  const isValid = await trigger(["email"]);
+                <Button
+                  isLoading={isGettingIn}
+                  type="next"
+                  name={"Next"}
+                  disabled={isGettingIn}
+                  onClick={async (e) => {
+                    e.preventDefault();
+                    const isValid = await trigger(["email"]);
 
-                  if (isValid) {
-                    setSearchParams({ page: String(Number(page) + 1) });
-                    sendOTP(email);
-                  }
-                }}
-              />
-            </div>
+                    if (isValid) {
+                      setSearchParams({ page: String(Number(page) + 1) });
+                      sendOTP(email);
+                    }
+                  }}
+                />
+              </div>
+              <div className="mt-12">
+                <div className="mb-12 flex items-center justify-center px-1">
+                  <hr className="dark:bg-primary-light inline-block h-0.5 flex-1" />
+                  <p className="dark:text-primary-dark mx-2">
+                    or continue with
+                  </p>
+                  <hr className="dark:bg-primary-light inline-block h-0.5 flex-1" />
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toast.success("Something is happening");
+                  }}
+                  className="flex h-12 w-full cursor-pointer items-center rounded-full bg-white font-semibold"
+                >
+                  <img
+                    src="/googleIcon.svg"
+                    width={25}
+                    className="mr-auto ml-3"
+                  />
+                  <span className="mr-auto">Sign in with Google</span>
+                </button>
+              </div>
+            </>
           )}
           {page === "2" && (
             <div className="animate-fadeInRight dark:bg-dark bg-white duration-200">
