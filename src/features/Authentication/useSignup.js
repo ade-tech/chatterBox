@@ -1,5 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createProfile, GetInWithOTP } from "../../services/SignupApi";
+import {
+  createProfile,
+  GetInWithOTP,
+  GetInWithGoogle as GetInWithGoogleApi,
+} from "../../services/SignupApi";
+import { toast } from "react-toastify";
 
 /**
  * Custom hook to handle user signup.
@@ -41,4 +46,12 @@ export function useGetIn() {
   });
 
   return { getIn, isGettingIn };
+}
+
+export function GetInWithGoogleFn() {
+  const { mutate: GetInWithGoogle, isLoading } = useMutation({
+    mutationFn: () => GetInWithGoogleApi(),
+    onSuccess: () => toast.success("Done"),
+  });
+  return { GetInWithGoogle, isLoading };
 }

@@ -86,3 +86,12 @@ export async function checkUserExistence(id) {
 
   return data;
 }
+
+export async function GetInWithGoogle() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+  });
+
+  if (error) throw new Error(error.message);
+  return data;
+}

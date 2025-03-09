@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import FormInput from "../../ui/FormInput";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useGetIn } from "./useSignup";
+import { GetInWithGoogleFn, useGetIn } from "./useSignup";
 import { toast } from "react-toastify";
 import { sendOTP } from "../../services/SignupApi";
 import supabase from "../../services/supabase";
@@ -41,6 +41,7 @@ function SignupForm() {
   const email = watch("email");
 
   const { getIn, isGettingIn } = useGetIn();
+  const { GetInWithGoogle, isLoading } = GetInWithGoogleFn();
 
   useEffect(() => {
     if (page === "2") {
@@ -147,18 +148,19 @@ function SignupForm() {
               </div>
               <div className="mt-12">
                 <div className="mb-12 flex items-center justify-center px-1">
-                  <hr className="dark:bg-primary-light inline-block h-0.5 flex-1" />
+                  <hr className="dark:bg-primary-light h-[1px] flex-1 border-0 bg-gray-300" />
                   <p className="dark:text-primary-dark mx-2">
                     or continue with
                   </p>
-                  <hr className="dark:bg-primary-light inline-block h-0.5 flex-1" />
+                  <hr className="dark:bg-primary-light h-[1px] flex-1 border-0 bg-gray-300" />
                 </div>
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    toast.success("Something is happening");
+                    GetInWithGoogle();
                   }}
-                  className="flex h-12 w-full cursor-pointer items-center rounded-full bg-white font-semibold"
+                  disabled={isLoading}
+                  className="flex h-12 w-full cursor-pointer items-center rounded-full border-1 border-gray-200 font-semibold dark:border-0 dark:bg-white"
                 >
                   <img
                     src="/googleIcon.svg"
