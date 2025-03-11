@@ -17,7 +17,6 @@ import { getTime } from "../../utils/gettime.js";
  * @returns {JSX.Element} The rendered ChatRow component.
  */
 function ChatRow({ chatDetails }) {
-  console.log(chatDetails);
   const navigate = useNavigate();
   const { lastChat } = useLastChat();
 

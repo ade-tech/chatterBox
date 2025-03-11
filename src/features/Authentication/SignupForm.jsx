@@ -144,15 +144,16 @@ function SignupForm() {
                       getOTP(email, {
                         onSuccess: () =>
                           setSearchParams({ page: String(Number(page) + 1) }),
-                        onError: () =>
+                        onError: () => {
                           toast.info(
                             "Your Account is connect with Social Authentication, Kindly Sign in with Google",
                             {
                               autoClose: 6000,
                             },
-                          ),
+                          );
+                          setValue("email", "");
+                        },
                       });
-                      setValue("email", "");
                     }
                   }}
                 />

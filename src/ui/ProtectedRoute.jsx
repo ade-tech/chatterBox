@@ -11,7 +11,6 @@ function ProtectedRoute({ children }) {
 
   const hasProfile = profile?.email;
 
-  console.log(data);
   if (isLoading || isChecking)
     return (
       <div className="dark:bg-dark flex h-screen w-screen items-center justify-center">

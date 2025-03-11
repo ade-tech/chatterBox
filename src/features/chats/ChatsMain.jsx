@@ -8,7 +8,6 @@ function ChatsMain({ isMobile }) {
   const { id } = useParams() || null;
   const activeChat = isMobile ? id : lastChat;
 
-  console.log(isMobile);
   if (!activeChat)
     return (
       <div className="hidden h-[100dvh] w-full items-center justify-center md:flex md:h-screen">

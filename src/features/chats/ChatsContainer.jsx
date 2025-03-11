@@ -2,16 +2,43 @@ import Empty from "../../ui/Empty";
 import ChatRow from "./ChatRow";
 import { useAllChats } from "./useChat";
 import ChatPreloader from "../../ui/ChatPreloader";
+import { useEffect } from "react";
+import supabase from "../../services/supabase";
+import { useUser } from "../../hooks/useUser";
+import { useQueryClient } from "@tanstack/react-query";
 
 /**
  * ChatsContainer component fetches and displays a list of chats.
  * @returns {JSX.Element} The rendered ChatsContainer component.
  */
 function ChatsContainer() {
+  const { userData } = useUser();
+  const queryClient = useQueryClient();
   const { data, isLoading: isFetchingChats, error } = useAllChats();
 
-  const chats = data;
+  let chats = data;
   const hasChatContent = chats?.filter((curChat) => curChat.lastChat !== "");
+
+  useEffect(() => {
+    const newMessagesChannel = supabase.channel("chatterBox-newMessages", {
+      config: {
+        presence: {
+          key: userData?.id,
+        },
+      },
+    });
+    newMessagesChannel
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "messages" },
+        () => {
+          queryClient.invalidateQueries(["AllChats"]);
+        },
+      )
+      .subscribe();
+
+    return () => supabase.removeChannel(newMessagesChannel);
+  }, [userData, queryClient]);
 
   if (isFetchingChats)
     return (
@@ -97,9 +124,9 @@ function ChatsContainer() {
     <div className="scrollbar-custom w-full flex-grow overflow-hidden hover:overflow-y-scroll">
       {chats
         ?.filter((curChat) => curChat.lastChat !== "")
-        .map((chat) => (
-          <ChatRow key={chat.profile.user_id} chatDetails={chat} />
-        ))}
+        .map((chat) => {
+          return <ChatRow key={chat.profile.user_id} chatDetails={chat} />;
+        })}
     </div>
   );
 }
