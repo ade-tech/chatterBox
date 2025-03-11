@@ -30,7 +30,7 @@ function ChatsContainer() {
     newMessagesChannel
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "messages" },
+        { event: "INSERT", schema: "public", table: "last" },
         () => {
           queryClient.invalidateQueries(["AllChats"]);
         },

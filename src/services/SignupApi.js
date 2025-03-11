@@ -109,7 +109,7 @@ async function checkUserAuthMethod(email) {
   if (error) throw new Error(error.message);
   console.log(data);
 
-  if (data.at(0).auth_type === "email") {
+  if (data.at(0).auth_type === "email" || data.length === 0) {
     return 1;
   } else {
     return 0;

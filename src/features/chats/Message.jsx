@@ -4,6 +4,8 @@ import { getTimeSent } from "../../utils/gettime";
 import { HiOutlineDocumentDownload } from "react-icons/hi";
 import { BiCheck, BiCheckDouble } from "react-icons/bi";
 import useSize from "../../utils/useSize";
+import { useEffect } from "react";
+import supabase from "../../services/supabase";
 
 /**
  * ReceiverChat component for displaying a chat message.
@@ -17,6 +19,7 @@ function ReceiverChat({ message, otherUser }) {
 
   const {
     content,
+    id,
     type,
     sender_id,
     isReadby,

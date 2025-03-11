@@ -1,9 +1,10 @@
 import Message from "./Message";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { MessagePreLoader } from "../../ui/ChatPreloader";
 import Typing from "../../ui/Typing";
 import { format, isSameDay, isToday, isYesterday } from "date-fns";
 import { markAsRead } from "../../services/ChatApi";
+import supabase from "../../services/supabase";
 
 function ConversationContent({
   messages,
@@ -14,11 +15,50 @@ function ConversationContent({
   user_id,
 }) {
   const ref = useRef(null);
+  const [realMessages, setRealMessages] = useState();
+
+  useEffect(() => {
+    if (!messages) return;
+    setRealMessages(messages);
+  }, [messages]);
+
+  useEffect(() => {
+    const eachMessageChannel = supabase.channel(
+      `${user_id}--${otherUser}message`,
+      {
+        config: {
+          presence: {
+            key: user_id,
+          },
+        },
+      },
+    );
+
+    eachMessageChannel
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "messages",
+        },
+        (payload) => {
+          setRealMessages((curMessage) =>
+            curMessage.map((message) =>
+              message.content === payload.new.content ? payload.new : message,
+            ),
+          );
+        },
+      )
+      .subscribe();
+
+    return () => supabase.removeChannel(eachMessageChannel);
+  }, [user_id, otherUser]);
 
   useEffect(() => {
     if (!ref.current) return;
     setTimeout(() => {
-      ref.current.scrollIntoView({ behavior: "smooth", block: "end" });
+      ref?.current?.scrollIntoView({ behavior: "smooth", block: "end" });
     }, 300);
     markAsRead(chat, user_id);
   }, [messages, chat, user_id, typingState]);
@@ -46,7 +86,7 @@ function ConversationContent({
 
   return (
     <div className="scroll-snap-y-container scrollbar-custom h-[100vh] overflow-auto px-4 pt-3">
-      {messages?.map((curMessage, i) => {
+      {realMessages?.map((curMessage, i) => {
         const curmessageTIme = new Date(curMessage?.created_at);
         const prevmessageTIme = new Date(messages[i - 1]?.created_at);
 
