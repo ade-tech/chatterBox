@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import FormInput from "../../ui/FormInput";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { GetInWithGoogleFn, useGetIn } from "./useSignup";
+import { GetInWithGoogleFn, useGetIn, useOTP } from "./useSignup";
 import { toast } from "react-toastify";
 import { sendOTP } from "../../services/SignupApi";
 import supabase from "../../services/supabase";
@@ -15,6 +15,7 @@ import supabase from "../../services/supabase";
 function SignupForm() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isClickable, setIsClickable] = useState(false);
+  const { getOTP, isGettingOTP } = useOTP();
 
   const page = searchParams.get("page") || "1";
   const inputRefs = [
@@ -134,14 +135,24 @@ function SignupForm() {
                   isLoading={isGettingIn}
                   type="next"
                   name={"Next"}
-                  disabled={isGettingIn}
+                  disabled={isGettingOTP}
                   onClick={async (e) => {
                     e.preventDefault();
                     const isValid = await trigger(["email"]);
 
                     if (isValid) {
-                      setSearchParams({ page: String(Number(page) + 1) });
-                      sendOTP(email);
+                      getOTP(email, {
+                        onSuccess: () =>
+                          setSearchParams({ page: String(Number(page) + 1) }),
+                        onError: () =>
+                          toast.info(
+                            "Your Account is connect with Social Authentication, Kindly Sign in with Google",
+                            {
+                              autoClose: 6000,
+                            },
+                          ),
+                      });
+                      setValue("email", "");
                     }
                   }}
                 />

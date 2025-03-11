@@ -23,7 +23,7 @@ function OnBoardingSide() {
         </svg>
 
         <div className="bg-primary-dark animate-fadeInUp z-20 flex h-24 w-96 rotate-[-3.14deg] items-center gap-3 rounded-4xl pl-4 drop-shadow-[0_15px_10px_#33275e75]">
-          <ProfileImage image="001.png" width="w-16" height="h-16" />
+          <ProfileImage image="/001.png" width="w-16" height="h-16" />
           <div>
             <h2 className="m-0 p-0 text-2xl font-bold text-white">
               Abdone 💘💘
@@ -34,7 +34,7 @@ function OnBoardingSide() {
           </div>
         </div>
         <div className="animate-fadeInUp mt-2 mb-4 flex h-24 w-md rotate-[3.14deg] items-center gap-3 rounded-4xl bg-white pl-4">
-          <ProfileImage image="002.png" width="w-16" height="h-16" />
+          <ProfileImage image="/002.png" width="w-16" height="h-16" />
           <div>
             <h2 className="text-bg-dark m-0 p-0 text-2xl font-bold">
               My Wife 🔒💖
@@ -45,7 +45,7 @@ function OnBoardingSide() {
           </div>
         </div>
         <div className="animate-fadeInUp bg-accent-dark flex h-24 w-96 rotate-[-1.15deg] items-center gap-3 rounded-4xl pl-4">
-          <ProfileImage image="003.png" width="w-16" height="h-16" />
+          <ProfileImage image="/003.png" width="w-16" height="h-16" />
           <div>
             <h2 className="text-dark m-0 p-0 text-2xl font-bold">
               Captain 🫡🫡

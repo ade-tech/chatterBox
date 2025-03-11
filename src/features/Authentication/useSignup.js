@@ -3,6 +3,7 @@ import {
   createProfile,
   GetInWithOTP,
   GetInWithGoogle as GetInWithGoogleApi,
+  sendOTP,
 } from "../../services/SignupApi";
 import { toast } from "react-toastify";
 
@@ -51,7 +52,14 @@ export function useGetIn() {
 export function GetInWithGoogleFn() {
   const { mutate: GetInWithGoogle, isLoading } = useMutation({
     mutationFn: () => GetInWithGoogleApi(),
-    onSuccess: () => toast.success("Done"),
   });
   return { GetInWithGoogle, isLoading };
 }
+
+export const useOTP = () => {
+  const { mutate: getOTP, isLoading: isGettingOTP } = useMutation({
+    mutationFn: (email) => sendOTP(email),
+  });
+
+  return { getOTP, isGettingOTP };
+};

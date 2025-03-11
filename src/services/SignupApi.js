@@ -56,11 +56,17 @@ export async function createProfile({
 }
 
 export async function sendOTP(email) {
-  const { error } = await supabase.auth.signInWithOtp({
-    email,
-  });
+  const userCheck = await checkUserAuthMethod(email);
+  console.log(userCheck);
 
-  return { error };
+  if (userCheck) {
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+    });
+    if (error) throw new Error(error.message);
+  } else if (!userCheck) {
+    throw new Error("User already sign in with Social OAuth");
+  }
 }
 
 export async function GetInWithOTP({ email, token }) {
@@ -88,10 +94,24 @@ export async function checkUserExistence(id) {
 }
 
 export async function GetInWithGoogle() {
-  const { data, error } = await supabase.auth.signInWithOAuth({
+  const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
   });
 
   if (error) throw new Error(error.message);
-  return data;
+}
+
+async function checkUserAuthMethod(email) {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("auth_type")
+    .eq("email", email);
+  if (error) throw new Error(error.message);
+  console.log(data);
+
+  if (data.at(0).auth_type === "email") {
+    return 1;
+  } else {
+    return 0;
+  }
 }
