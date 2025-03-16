@@ -74,7 +74,7 @@ function ConversationContent({
   if (messages?.length === 0) {
     return (
       <div className="flex h-full w-full items-center justify-center">
-        <div className="bg-bg-dark h-fit basis-2/6 rounded-3xl p-4 text-center">
+        <div className="dark:bg-bg-dark h-fit basis-1/2 rounded-3xl bg-gray-100 p-4 text-center md:basis-2/6">
           <p className="mt-2 dark:text-white">
             No messages here yet! <br /> Send a messages to get started
           </p>
