@@ -13,7 +13,7 @@ function ErrorFallBack({ resetErrorBoundary }) {
           right away!
         </p>
         <Button
-          styles="w-32 h-10"
+          styles="w-42 h-10"
           name="Back to Home &rarr;"
           onClick={resetErrorBoundary}
         />
