@@ -46,7 +46,7 @@ function ConversationContent({
 
   return (
     <div className="scroll-snap-y-container scrollbar-custom h-[100vh] overflow-auto px-4 pt-3">
-      {messages.map((curMessage, i) => {
+      {messages?.map((curMessage, i) => {
         const curmessageTIme = new Date(curMessage?.created_at);
         const prevmessageTIme = new Date(messages[i - 1]?.created_at);
 

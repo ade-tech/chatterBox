@@ -52,7 +52,6 @@
     stroke-dasharray: 1000, 0;
   }
 }
-/* Define your animation */
 @keyframes fadeInUp {
   0% {
     opacity: 0;
