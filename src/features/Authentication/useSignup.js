@@ -5,7 +5,6 @@ import {
   GetInWithGoogle as GetInWithGoogleApi,
   sendOTP,
 } from "../../services/SignupApi";
-import { toast } from "react-toastify";
 
 /**
  * Custom hook to handle user signup.

@@ -57,8 +57,8 @@ export async function createProfile({
 
 export async function sendOTP(email) {
   const userCheck = await checkUserAuthMethod(email);
-  console.log(userCheck);
 
+  console.log("ran this fn", userCheck, email);
   if (userCheck) {
     const { error } = await supabase.auth.signInWithOtp({
       email,
@@ -70,7 +70,6 @@ export async function sendOTP(email) {
 }
 
 export async function GetInWithOTP({ email, token }) {
-  console.log(token);
   const { data, error: verifyError } = await supabase.auth.verifyOtp({
     email,
     token,
@@ -102,16 +101,15 @@ export async function GetInWithGoogle() {
 }
 
 async function checkUserAuthMethod(email) {
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("profiles")
     .select("auth_type")
     .eq("email", email);
-  if (error) throw new Error(error.message);
-  console.log(data);
 
-  if (data.at(0).auth_type === "email" || data.length === 0) {
-    return 1;
-  } else {
-    return 0;
-  }
+  console.log("checkUserAuthMethod data:", data);
+
+  if (!data.length) return true;
+  if (data[0].auth_type === "email") return true;
+
+  return false;
 }

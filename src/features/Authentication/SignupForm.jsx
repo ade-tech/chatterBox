@@ -1,5 +1,5 @@
 import Button from "../../ui/Button";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import FormInput from "../../ui/FormInput";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -139,19 +139,21 @@ function SignupForm() {
                   onClick={async (e) => {
                     e.preventDefault();
                     const isValid = await trigger(["email"]);
+                    console.log(isValid);
 
                     if (isValid) {
                       getOTP(email, {
                         onSuccess: () =>
                           setSearchParams({ page: String(Number(page) + 1) }),
                         onError: () => {
+                          console.log("ran");
                           toast.info(
                             "Your Account is connect with Social Authentication, Kindly Sign in with Google",
                             {
                               autoClose: 6000,
                             },
                           );
-                          setValue("email", "");
+                          // setValue("email", "");
                         },
                       });
                     }
