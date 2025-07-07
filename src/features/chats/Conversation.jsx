@@ -1,5 +1,6 @@
 import ChatHeader from "./ChatHeader";
 import ChatInputForm from "./ChatInputForm";
+import { useSearchParams } from "react-router-dom";
 import ConversationContent from "./ConversationContent";
 import { GetRecepientProfile } from "../profile/useProfile";
 import { useLastChat } from "../../hooks/useLastChat";
@@ -7,6 +8,7 @@ import { useChatCheck, useGetMessages } from "./useChat";
 import { UseCurrentUserData } from "../../contexts/CurrentUserContext";
 import { useState, useEffect } from "react";
 import supabase from "../../services/supabase";
+import ReceipientProfile from "../../ui/ReceipientProfile";
 
 /**
  * Conversation component for displaying the chat conversation.
@@ -18,11 +20,14 @@ function Conversation() {
   const { data, isLoading } = GetRecepientProfile(lastChat);
   const [isTyping, setIsTyping] = useState(false);
   const [lastSeen, setLastSeen] = useState(null);
-
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("profile");
   const { data: chat, isLoading: isCheckingChat } = useChatCheck(
     user_id,
     data?.user_id,
   );
+
+  console.log(id);
 
   useEffect(() => {
     setLastSeen(data?.last_seen);
@@ -31,6 +36,9 @@ function Conversation() {
     chat?.data?.at(0)?.id,
   );
   const [messages, setMessages] = useState(initalMessages || []);
+  const imageMessages = messages?.filter(
+    (curMessage) => curMessage.type !== "text",
+  );
 
   useEffect(() => {
     setMessages(initalMessages);
@@ -73,31 +81,34 @@ function Conversation() {
   }, [messages, chat, data]);
 
   return (
-    <div className="flex h-[100dvh] flex-col">
-      <ChatHeader
-        lastSeen={lastSeen}
-        recepient={data}
-        isLoading={isCheckingChat || isLoading || isGettingUser}
-      />
-      <ConversationContent
-        isLoading={
-          isGettingMessages || isCheckingChat || isLoading || isGettingUser
-        }
-        otherUser={data?.user_id}
-        typingState={isTyping}
-        messages={messages}
-        key={chat?.data?.at(0)?.id}
-        chat={chat?.data?.at(0)?.id}
-        user_id={user_id}
-      />
-      {data?.user_id && (
-        <ChatInputForm
-          chatID={chat?.data?.at(0)?.id}
-          currentID={user_id}
-          otherUserID={data.user_id}
-          typingState={setIsTyping}
+    <div className="flex h-[100dvh]">
+      <div className="flex h-[100dvh] flex-1 basis-2/3 flex-col">
+        <ChatHeader
+          lastSeen={lastSeen}
+          recepient={data}
+          isLoading={isCheckingChat || isLoading || isGettingUser}
         />
-      )}
+        <ConversationContent
+          isLoading={
+            isGettingMessages || isCheckingChat || isLoading || isGettingUser
+          }
+          otherUser={data?.user_id}
+          typingState={isTyping}
+          messages={messages}
+          key={chat?.data?.at(0)?.id}
+          chat={chat?.data?.at(0)?.id}
+          user_id={user_id}
+        />
+        {data?.user_id && (
+          <ChatInputForm
+            chatID={chat?.data?.at(0)?.id}
+            currentID={user_id}
+            otherUserID={data.user_id}
+            typingState={setIsTyping}
+          />
+        )}
+      </div>
+      {id && <ReceipientProfile id={id} imageData={imageMessages} />}
     </div>
   );
 }

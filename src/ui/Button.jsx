@@ -1,4 +1,4 @@
-import { MoonLoader } from "react-spinners";
+import SpinnerMini from "./SpinnerMini";
 
 function Button({
   name,
@@ -9,21 +9,22 @@ function Button({
   type,
   ButtonStyletype = "default",
 }) {
+  console.log(isLoading)
   const commonStyles = `rounded-full font-medium mt-6 transition-all ${
-    disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+    disabled ? " cursor-not-allowed" : "cursor-pointer"
   }`;
 
   if (ButtonStyletype === "default")
     return (
       <button
         className={`${styles} ${
-          disabled ? "cursor-not-allowed opacity-50" : ""
+          disabled ? "cursor-not-allowed hover:bg-secondary-dark flex items-center justify-center text-white" : ""
         } ${commonStyles} bg-secondary-dark hover:bg-accent-light text-white`}
-        onClick={!disabled && onClick}
+        onClick={!disabled ? onClick : undefined}
         disabled={disabled}
         type={type}
       >
-        {isLoading ? <MoonLoader size={30} color="#9e7ffb" /> : name}
+        {isLoading ? <SpinnerMini/> : name}
       </button>
     );
 
@@ -34,7 +35,7 @@ function Button({
           isLoading
             ? `bg-accent-light`
             : `${styles} ${commonStyles} ${
-                disabled ? "cursor-not-allowed opacity-50" : ""
+                disabled ? "cursor-not-allowed" : ""
               } text-dark border border-gray-400 bg-white hover:bg-gray-50`
         }
         onClick={!disabled ? onClick : undefined}

@@ -11,7 +11,7 @@ import {
  * @returns {Object} The signup function and loading state.
  */
 export function useCreateProfile() {
-  const { mutate: createUserProfile, isLoading: isCreatingProfile } =
+  const { mutate: createUserProfile, isPending: isCreatingProfile } =
     useMutation({
       mutationFn: ({
         email,
@@ -38,7 +38,7 @@ export function useCreateProfile() {
 
 export function useGetIn() {
   const queryClient = useQueryClient();
-  const { mutate: getIn, isLoading: isGettingIn } = useMutation({
+  const { mutate: getIn, isPending: isGettingIn } = useMutation({
     mutationFn: ({ email, token }) => GetInWithOTP({ email, token }),
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data.user);
@@ -49,14 +49,14 @@ export function useGetIn() {
 }
 
 export function GetInWithGoogleFn() {
-  const { mutate: GetInWithGoogle, isLoading } = useMutation({
+  const { mutate: GetInWithGoogle, isPending } = useMutation({
     mutationFn: () => GetInWithGoogleApi(),
   });
-  return { GetInWithGoogle, isLoading };
+  return { GetInWithGoogle, isPending };
 }
 
 export const useOTP = () => {
-  const { mutate: getOTP, isLoading: isGettingOTP } = useMutation({
+  const { mutate: getOTP, isPending: isGettingOTP } = useMutation({
     mutationFn: (email) => sendOTP(email),
   });
 

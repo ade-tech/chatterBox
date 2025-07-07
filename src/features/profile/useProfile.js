@@ -20,11 +20,8 @@ export function GetProfileData() {
 }
 export function GetRecepientProfile(id) {
   const { data, isLoading } = useQuery({
-    queryKey: [`userProfile--{${id}}`, id],
-    queryFn: ({ queryKey }) => {
-      const [, searchUser] = queryKey.at(0).split("--");
-      return getUserProfile(searchUser);
-    },
+    queryKey: ["userProfile", id],
+    queryFn: ({ queryKey }) => getUserProfile(queryKey[1]),
     enabled: !!id,
   });
   return { data, isLoading };

@@ -10,7 +10,7 @@ export function useLogin() {
   const queryClient = useQueryClient();
   const {
     mutate: login,
-    isLoading: isLoggingIn,
+    isPending: isLoggingIn,
     error,
     isError,
   } = useMutation({

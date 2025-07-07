@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
  */
 export function useLogout() {
   const queryClient = useQueryClient();
-  const { mutate: logoutUser, isLoading: isLogginOut } = useMutation({
+  const { mutate: logoutUser, isPending: isLogginOut } = useMutation({
     mutationFn: logout,
     onSuccess: () => {
       queryClient.invalidateQueries();

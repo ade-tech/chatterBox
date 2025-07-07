@@ -44,6 +44,7 @@ function SignupForm() {
   const { getIn, isGettingIn } = useGetIn();
   const { GetInWithGoogle, isLoading } = GetInWithGoogleFn();
 
+
   useEffect(() => {
     if (page === "2") {
       setIsClickable(false);
@@ -139,7 +140,6 @@ function SignupForm() {
                   onClick={async (e) => {
                     e.preventDefault();
                     const isValid = await trigger(["email"]);
-                    console.log(isValid);
 
                     if (isValid) {
                       getOTP(email, {
@@ -221,7 +221,6 @@ function SignupForm() {
                 </button>
                 <div className="flex gap-2">
                   <Button
-                    isLoading={isGettingIn}
                     styles="h-12 w-full basis-1/3"
                     ButtonStyletype="secondary"
                     type="next"
