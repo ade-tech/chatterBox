@@ -29,11 +29,11 @@ export default function ReceipientProfile({ id, imageData }) {
         <h1 className="text-lg font-bold dark:text-white">{data.fullName}</h1>
         <p className="dark:text-accent-light text-sm">@{data.username}</p>
       </div>
-      <div className="bg-bg-dark mx-3 mb-4 rounded-md px-4 py-3">
+      <div className="dark:bg-bg-dark mx-3 mb-4 rounded-md bg-gray-100 px-4 py-3">
         <p className="dark:text-accent-dark text-xs">About</p>
         <h2 className="text-md font-semibold dark:text-white">{data.bio}</h2>
       </div>
-      <div className="bg-bg-dark mx-3 mb-4 rounded-md px-4 py-3">
+      <div className="dark:bg-bg-dark mx-3 mb-4 rounded-md bg-gray-100 px-4 py-3">
         <p className="dark:text-accent-dark text-xs">Joined</p>
         <h2 className="text-md font-semibold dark:text-white">
           {Intl.DateTimeFormat(undefined, {
@@ -42,7 +42,7 @@ export default function ReceipientProfile({ id, imageData }) {
         </h2>
       </div>
       {imageData && (
-        <div className="bg-bg-dark mx-3 rounded-md px-4 py-3">
+        <div className="dark:bg-bg-dark mx-3 rounded-md bg-gray-100 px-4 py-3">
           <p className="dark:text-accent-dark text-xs">Media and Files</p>
           <div className="grid h-22 grid-cols-4 gap-2 py-3">
             {imageData?.map((curImage) => (
